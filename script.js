@@ -7,6 +7,7 @@ let dangerMatrixChart = null;
 let goalTimeChart = null;
 let ipoDiffChart = null;
 let keyPassDiffChart = null;
+let selectedMatchKey = null; // Track the currently selected match
 let selectedCompetition = 'Campionato';
 let selectedPeriod = 'Tutta';
 
@@ -58,12 +59,20 @@ function init() {
 
         document.getElementById('match-selector').addEventListener('change', (e) => {
             if (e.target.value) {
+                selectedMatchKey = e.target.value;
                 renderMatchDetails(e.target.value);
+                renderSeasonCharts(); // Refresh to highlight
+                renderPerformanceByMatchday(); // Refresh to highlight
+                renderDangerMatrix(); // Refresh to highlight
             } else {
+                selectedMatchKey = null;
                 document.getElementById('match-details').classList.add('hidden');
                 if (document.getElementById('match-placeholder')) {
                     document.getElementById('match-placeholder').classList.remove('hidden');
                 }
+                renderSeasonCharts();
+                renderPerformanceByMatchday();
+                renderDangerMatrix();
             }
         });
 
@@ -72,6 +81,7 @@ function init() {
         if (seasonData.length > 0) {
             const lastMatch = seasonData[seasonData.length - 1];
             const lastMatchValue = `${lastMatch.Data}|${lastMatch.Avversario}`;
+            selectedMatchKey = lastMatchValue;
             
             // Populate the selector and render details
             setTimeout(() => {
@@ -79,6 +89,9 @@ function init() {
                 if (selector) {
                     selector.value = lastMatchValue;
                     renderMatchDetails(lastMatchValue);
+                    renderSeasonCharts();
+                    renderPerformanceByMatchday();
+                    renderDangerMatrix();
                 }
             }, 100);
         }
@@ -114,18 +127,24 @@ function renderLastResults() {
         const resultDiv = document.createElement('div');
         const matchValue = `${match.Data}|${match.Avversario}`;
         
-        // Add cursor-pointer and click event
-        resultDiv.className = 'flex items-center justify-between p-2 rounded bg-gray-50 border-l-4 cursor-pointer hover:bg-gray-100 transition-colors ' + getResultBorderColor(match);
+        // Add highlight class if selected
+        const isSelected = selectedMatchKey === matchValue;
+        const bgClass = isSelected ? 'bg-blue-100' : 'bg-gray-50';
+        const borderColor = getResultBorderColor(match);
+
+        resultDiv.className = `flex items-center justify-between p-2 rounded ${bgClass} border-l-4 cursor-pointer hover:bg-white hover:shadow-sm transition-all ${borderColor}`;
         
         const date = match.Data.replace(' 00:00:00', '').substring(0, 10);
         const score = `${match["GOL fatti"]} - ${match["GOL Subiti"]}`;
         const opponent = match.Avversario;
         
         resultDiv.onclick = () => {
+            selectedMatchKey = matchValue;
             const selector = document.getElementById('match-selector');
             if (selector) {
                 selector.value = matchValue;
                 renderMatchDetails(matchValue);
+                updateDashboard(); // Refresh all highlights
             }
         };
 
@@ -307,12 +326,37 @@ function renderSeasonCharts() {
                 borderColor: 'rgb(30, 58, 138)',
                 backgroundColor: 'rgba(30, 58, 138, 0.1)',
                 fill: true,
-                tension: 0.1
+                tension: 0.1,
+                pointBackgroundColor: seasonData.map(d => {
+                    const matchKey = `${d.Data}|${d.Avversario}`;
+                    if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.2)';
+                    return 'rgb(30, 58, 138)';
+                }),
+                pointBorderColor: seasonData.map(d => {
+                    const matchKey = `${d.Data}|${d.Avversario}`;
+                    if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.3)';
+                    return 'rgb(30, 58, 138)';
+                }),
+                pointRadius: seasonData.map(d => {
+                    const matchKey = `${d.Data}|${d.Avversario}`;
+                    return matchKey === selectedMatchKey ? 8 : 4;
+                })
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            onClick: (event, elements) => {
+                if (elements.length > 0) {
+                    const index = elements[0].index;
+                    const match = seasonData[index];
+                    const matchKey = `${match.Data}|${match.Avversario}`;
+                    selectedMatchKey = matchKey;
+                    document.getElementById('match-selector').value = matchKey;
+                    renderMatchDetails(matchKey);
+                    updateDashboard();
+                }
+            },
             plugins: {
                 datalabels: { display: false }
             }
@@ -330,7 +374,16 @@ function renderSeasonCharts() {
                     borderColor: 'rgb(30, 58, 138)',
                     backgroundColor: 'rgba(30, 58, 138, 0.1)',
                     fill: true,
-                    tension: 0.3
+                    tension: 0.3,
+                    pointBackgroundColor: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.2)';
+                        return 'rgb(30, 58, 138)';
+                    }),
+                    pointRadius: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        return matchKey === selectedMatchKey ? 8 : 4;
+                    })
                 },
                 {
                     label: 'IPO Avversario',
@@ -361,13 +414,33 @@ function renderSeasonCharts() {
                     borderColor: 'rgb(239, 68, 68)',
                     backgroundColor: 'rgba(239, 68, 68, 0.1)',
                     fill: true,
-                    tension: 0.3
+                    tension: 0.3,
+                    pointBackgroundColor: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.2)';
+                        return 'rgb(239, 68, 68)';
+                    }),
+                    pointRadius: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        return matchKey === selectedMatchKey ? 4 : 0; // Show point only for selected match on opponent line
+                    })
                 }
             ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            onClick: (event, elements) => {
+                if (elements.length > 0) {
+                    const index = elements[0].index;
+                    const match = seasonData[index];
+                    const matchKey = `${match.Data}|${match.Avversario}`;
+                    selectedMatchKey = matchKey;
+                    document.getElementById('match-selector').value = matchKey;
+                    renderMatchDetails(matchKey);
+                    updateDashboard();
+                }
+            },
             scales: { y: { beginAtZero: true } },
             plugins: {
                 datalabels: { display: false }
@@ -385,20 +458,56 @@ function renderSeasonCharts() {
                     data: goalsMade,
                     borderColor: 'rgb(34, 197, 94)',
                     backgroundColor: 'transparent',
-                    tension: 0.1
+                    tension: 0.1,
+                    pointBackgroundColor: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.2)';
+                        return 'rgb(34, 197, 94)';
+                    }),
+                    pointRadius: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        return matchKey === selectedMatchKey ? 8 : 4;
+                    }),
+                    pointBorderColor: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'transparent';
+                        return 'white';
+                    }),
+                    borderWidth: 2
                 },
                 {
                     label: 'Gol Subiti',
                     data: goalsAgainst,
                     borderColor: 'rgb(239, 68, 68)',
                     backgroundColor: 'transparent',
-                    tension: 0.1
+                    tension: 0.1,
+                    pointBackgroundColor: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.2)';
+                        return 'rgb(239, 68, 68)';
+                    }),
+                    pointRadius: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        return matchKey === selectedMatchKey ? 8 : 4;
+                    }),
+                    borderWidth: 2
                 }
             ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            onClick: (event, elements) => {
+                if (elements.length > 0) {
+                    const index = elements[0].index;
+                    const match = seasonData[index];
+                    const matchKey = `${match.Data}|${match.Avversario}`;
+                    selectedMatchKey = matchKey;
+                    document.getElementById('match-selector').value = matchKey;
+                    renderMatchDetails(matchKey);
+                    updateDashboard();
+                }
+            },
             plugins: {
                 datalabels: { display: false }
             }
@@ -511,14 +620,33 @@ function renderPerformanceByMatchday() {
                 datasets: [{
                     label: label,
                     data: data,
-                    backgroundColor: data.map(v => v >= 0 ? 'rgba(30, 58, 138, 0.7)' : 'rgba(239, 68, 68, 0.7)'),
-                    borderColor: data.map(v => v >= 0 ? 'rgb(30, 58, 138)' : 'rgb(239, 68, 68)'),
+                    backgroundColor: seasonData.map((d, i) => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.2)'; // Faded gray
+                        return data[i] >= 0 ? 'rgba(30, 58, 138, 0.8)' : 'rgba(239, 68, 68, 0.8)';
+                    }),
+                    borderColor: seasonData.map((d, i) => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.4)';
+                        return data[i] >= 0 ? 'rgb(30, 58, 138)' : 'rgb(239, 68, 68)';
+                    }),
                     borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        const match = seasonData[index];
+                        const matchKey = `${match.Data}|${match.Avversario}`;
+                        selectedMatchKey = matchKey;
+                        document.getElementById('match-selector').value = matchKey;
+                        renderMatchDetails(matchKey);
+                        updateDashboard();
+                    }
+                },
                 scales: {
                     y: { 
                         beginAtZero: true,
@@ -683,7 +811,8 @@ function renderDangerMatrix() {
             scatterData.push({
                 x: passDiff,
                 y: ipoDiff,
-                match: `${d.Data.split(' ')[0]} vs ${d.Avversario}`
+                match: `${d.Data.split(' ')[0]} vs ${d.Avversario}`,
+                matchKey: `${d.Data}|${d.Avversario}`
             });
         }
     });
@@ -694,14 +823,30 @@ function renderDangerMatrix() {
             datasets: [{
                 label: 'Partite',
                 data: scatterData,
-                backgroundColor: 'rgba(30, 58, 138, 0.7)',
-                pointRadius: 6,
-                pointHoverRadius: 8
+                backgroundColor: scatterData.map(d => 
+                    selectedMatchKey && d.matchKey !== selectedMatchKey ? 'rgba(200, 200, 200, 0.2)' : 'rgba(30, 58, 138, 0.8)'
+                ),
+                pointRadius: scatterData.map(d => d.matchKey === selectedMatchKey ? 10 : 6),
+                pointHoverRadius: 12,
+                borderColor: scatterData.map(d => 
+                    selectedMatchKey && d.matchKey !== selectedMatchKey ? 'rgba(200, 200, 200, 0.3)' : 'rgb(30, 58, 138)'
+                ),
+                borderWidth: scatterData.map(d => d.matchKey === selectedMatchKey ? 3 : 0)
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            onClick: (event, elements) => {
+                if (elements.length > 0) {
+                    const index = elements[0].index;
+                    const matchKey = scatterData[index].matchKey;
+                    selectedMatchKey = matchKey;
+                    document.getElementById('match-selector').value = matchKey;
+                    renderMatchDetails(matchKey);
+                    updateDashboard();
+                }
+            },
             scales: {
                 x: {
                     title: { display: true, text: 'Diff. Passaggi Chiave (Me - Avv)' },
