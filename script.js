@@ -24,11 +24,11 @@ function init() {
             return;
         }
 
-        updateDashboard();
+        updateDashboard(true);
         
         document.getElementById('competition-selector').addEventListener('change', (e) => {
             selectedCompetition = e.target.value;
-            updateDashboard();
+            updateDashboard(true);
             // Hide details when filtering competition
             document.getElementById('match-details').classList.add('hidden');
             if (document.getElementById('match-placeholder')) {
@@ -52,7 +52,7 @@ function init() {
 
                 const matchValue = document.getElementById('match-selector').value;
                 if (matchValue) {
-                    renderMatchDetails(matchValue);
+                    renderMatchDetails(matchValue, false);
                 }
             });
         });
@@ -60,16 +60,15 @@ function init() {
         document.getElementById('match-selector').addEventListener('change', (e) => {
             if (e.target.value) {
                 selectedMatchKey = e.target.value;
-                renderMatchDetails(e.target.value);
+                renderMatchDetails(e.target.value, true); // Scroll when selecting from dropdown
                 renderSeasonCharts(); // Refresh to highlight
                 renderPerformanceByMatchday(); // Refresh to highlight
                 renderDangerMatrix(); // Refresh to highlight
             } else {
                 selectedMatchKey = null;
                 document.getElementById('match-details').classList.add('hidden');
-                if (document.getElementById('match-placeholder')) {
-                    document.getElementById('match-placeholder').classList.remove('hidden');
-                }
+                const placeholder = document.getElementById('match-placeholder');
+                if (placeholder) placeholder.classList.remove('hidden');
                 renderSeasonCharts();
                 renderPerformanceByMatchday();
                 renderDangerMatrix();
@@ -88,26 +87,57 @@ function init() {
                 const selector = document.getElementById('match-selector');
                 if (selector) {
                     selector.value = lastMatchValue;
-                    renderMatchDetails(lastMatchValue);
+                    renderMatchDetails(lastMatchValue, false); // Don't scroll on init
                     renderSeasonCharts();
                     renderPerformanceByMatchday();
                     renderDangerMatrix();
                 }
             }, 100);
         }
+
+        // Add double-click to reset filters on ALL chart containers and boxes
+        document.querySelectorAll('.bg-white.p-6.rounded-lg.shadow-md, .bg-white.p-4.rounded-lg.shadow-md').forEach(box => {
+            box.addEventListener('dblclick', (e) => {
+                // Prevent reset if clicking inside a filter/selector if any existed inside boxes
+                if (e.target.tagName === 'SELECT' || e.target.tagName === 'BUTTON') return;
+                resetFilters();
+            });
+            box.style.cursor = 'pointer';
+        });
     } catch (error) {
         console.error('Errore nell\'inizializzazione della dashboard:', error);
     }
 }
 
-function updateDashboard() {
+function resetFilters() {
+    selectedMatchKey = null;
+    const selector = document.getElementById('match-selector');
+    if (selector) selector.value = "";
+    
+    document.getElementById('match-details').classList.add('hidden');
+    const placeholder = document.getElementById('match-placeholder');
+    if (placeholder) placeholder.classList.remove('hidden');
+    
+    updateDashboard();
+}
+
+function updateDashboard(repopulateSelector = false) {
+    // Preserve scroll position across updates to prevent jumping
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+
     updateSummaryHeader();
-    populateMatchSelector();
+    if (repopulateSelector) {
+        populateMatchSelector();
+    }
     renderSeasonCharts();
     renderLastResults();
     renderDangerMatrix();
     renderGoalTimeChart();
     renderPerformanceByMatchday();
+
+    // Restore scroll position
+    window.scrollTo(scrollX, scrollY);
 }
 
 function renderLastResults() {
@@ -143,7 +173,7 @@ function renderLastResults() {
             const selector = document.getElementById('match-selector');
             if (selector) {
                 selector.value = matchValue;
-                renderMatchDetails(matchValue);
+                renderMatchDetails(matchValue, true); // Scroll when clicking result
                 updateDashboard(); // Refresh all highlights
             }
         };
@@ -353,7 +383,7 @@ function renderSeasonCharts() {
                     const matchKey = `${match.Data}|${match.Avversario}`;
                     selectedMatchKey = matchKey;
                     document.getElementById('match-selector').value = matchKey;
-                    renderMatchDetails(matchKey);
+                    renderMatchDetails(matchKey, false); // Don't scroll when clicking diagram
                     updateDashboard();
                 }
             },
@@ -364,26 +394,24 @@ function renderSeasonCharts() {
     });
 
     ipoTrendChart = new Chart(ctxIpoTrend, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: labels,
             datasets: [
                 {
                     label: 'IPO Acc. Frosinone',
                     data: ipoValues,
-                    borderColor: 'rgb(30, 58, 138)',
-                    backgroundColor: 'rgba(30, 58, 138, 0.1)',
-                    fill: true,
-                    tension: 0.3,
-                    pointBackgroundColor: seasonData.map(d => {
+                    backgroundColor: seasonData.map(d => {
                         const matchKey = `${d.Data}|${d.Avversario}`;
                         if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.2)';
+                        return 'rgba(30, 58, 138, 0.8)';
+                    }),
+                    borderColor: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.4)';
                         return 'rgb(30, 58, 138)';
                     }),
-                    pointRadius: seasonData.map(d => {
-                        const matchKey = `${d.Data}|${d.Avversario}`;
-                        return matchKey === selectedMatchKey ? 8 : 4;
-                    })
+                    borderWidth: 1
                 },
                 {
                     label: 'IPO Avversario',
@@ -411,19 +439,17 @@ function renderSeasonCharts() {
                         }
                         return 0;
                     }),
-                    borderColor: 'rgb(239, 68, 68)',
-                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                    fill: true,
-                    tension: 0.3,
-                    pointBackgroundColor: seasonData.map(d => {
+                    backgroundColor: seasonData.map(d => {
                         const matchKey = `${d.Data}|${d.Avversario}`;
                         if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.2)';
+                        return 'rgba(239, 68, 68, 0.8)';
+                    }),
+                    borderColor: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.4)';
                         return 'rgb(239, 68, 68)';
                     }),
-                    pointRadius: seasonData.map(d => {
-                        const matchKey = `${d.Data}|${d.Avversario}`;
-                        return matchKey === selectedMatchKey ? 4 : 0; // Show point only for selected match on opponent line
-                    })
+                    borderWidth: 1
                 }
             ]
         },
@@ -437,7 +463,7 @@ function renderSeasonCharts() {
                     const matchKey = `${match.Data}|${match.Avversario}`;
                     selectedMatchKey = matchKey;
                     document.getElementById('match-selector').value = matchKey;
-                    renderMatchDetails(matchKey);
+                    renderMatchDetails(matchKey, false); // Don't scroll when clicking diagram
                     updateDashboard();
                 }
             },
@@ -504,7 +530,7 @@ function renderSeasonCharts() {
                     const matchKey = `${match.Data}|${match.Avversario}`;
                     selectedMatchKey = matchKey;
                     document.getElementById('match-selector').value = matchKey;
-                    renderMatchDetails(matchKey);
+                    renderMatchDetails(matchKey, false); // Don't scroll when clicking diagram
                     updateDashboard();
                 }
             },
@@ -643,7 +669,7 @@ function renderPerformanceByMatchday() {
                         const matchKey = `${match.Data}|${match.Avversario}`;
                         selectedMatchKey = matchKey;
                         document.getElementById('match-selector').value = matchKey;
-                        renderMatchDetails(matchKey);
+                        renderMatchDetails(matchKey, false); // Don't scroll when clicking diagram
                         updateDashboard();
                     }
                 },
@@ -741,14 +767,14 @@ function renderGoalTimeChart() {
                     title: { display: true, text: 'Numero di Gol' }
                 },
                 x: {
-                    title: { display: true, text: 'Minuto di gioco' },
+                    title: { display: false, text: 'Minuto di gioco' },
                     grid: {
                         drawOnChartArea: false
                     }
                 }
             },
             plugins: {
-                legend: { position: 'top' },
+                legend: { display: false },
                 datalabels: {
                     anchor: 'end',
                     align: 'top',
@@ -843,13 +869,13 @@ function renderDangerMatrix() {
                     const matchKey = scatterData[index].matchKey;
                     selectedMatchKey = matchKey;
                     document.getElementById('match-selector').value = matchKey;
-                    renderMatchDetails(matchKey);
+                    renderMatchDetails(matchKey, false); // Don't scroll when clicking diagram
                     updateDashboard();
                 }
             },
             scales: {
                 x: {
-                    title: { display: true, text: 'Diff. Passaggi Chiave (Me - Avv)' },
+                    title: { display: false, text: 'Diff. Passaggi Chiave (Me - Avv)' },
                     grid: {
                         color: (context) => context.tick.value === 0 ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.1)',
                         lineWidth: (context) => context.tick.value === 0 ? 2 : 1
@@ -864,6 +890,7 @@ function renderDangerMatrix() {
                 }
             },
             plugins: {
+                legend: { display: false },
                 tooltip: {
                     callbacks: {
                         label: function(context) {
@@ -888,12 +915,16 @@ function renderDangerMatrix() {
     });
 }
 
-function renderMatchDetails(matchValue) {
+function renderMatchDetails(matchValue, shouldScroll = true) {
     const detailsSection = document.getElementById('match-details');
     const placeholder = document.getElementById('match-placeholder');
     
     detailsSection.classList.remove('hidden');
     if (placeholder) placeholder.classList.add('hidden');
+
+    if (shouldScroll) {
+        detailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
     
     const [date, opponent] = matchValue.split('|');
     const rawStats = findMatchStats(date, opponent);
@@ -1023,7 +1054,7 @@ function renderMatchDetails(matchValue) {
                     stacked: true,
                     beginAtZero: true,
                     max: 100,
-                    title: { display: true, text: '% Incidenza' },
+                    title: { display: false, text: '% Incidenza' },
                     grid: { display: true }
                 },
                 y: {
