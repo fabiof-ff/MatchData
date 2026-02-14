@@ -1,0 +1,3180 @@
+const DASHBOARD_DATA = {
+    "generale": [
+        {
+            "Competizione": "Amichevole",
+            "Giornata": 1,
+            "Data": "2025-08-23 00:00:00",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Avellino",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 0,
+            "Gol Subiti (tot)": 0
+        },
+        {
+            "Competizione": "Amichevole",
+            "Giornata": 1,
+            "Data": "2025-08-23 00:00:00",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Avellino",
+            "Frazione": "2° T",
+            "Punti": 0.0,
+            "Punti (tot)": 0.0,
+            "GOL fatti": 0,
+            "GOL Subiti": 2,
+            "Gol Fatti (tot)": 0,
+            "Gol Subiti (tot)": 2
+        },
+        {
+            "Competizione": "Amichevole",
+            "Giornata": 2,
+            "Data": "2025-08-28 00:00:00",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Juve Stabia",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 1,
+            "GOL Subiti": 3,
+            "Gol Fatti (tot)": 1,
+            "Gol Subiti (tot)": 5
+        },
+        {
+            "Competizione": "Amichevole",
+            "Giornata": 2,
+            "Data": "2025-08-28 00:00:00",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Juve Stabia",
+            "Frazione": "2° T",
+            "Punti": 0.0,
+            "Punti (tot)": 0.0,
+            "GOL fatti": 1,
+            "GOL Subiti": 4,
+            "Gol Fatti (tot)": 2,
+            "Gol Subiti (tot)": 9
+        },
+        {
+            "Competizione": "Amichevole",
+            "Giornata": 3,
+            "Data": "2025-08-30 00:00:00",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Latina",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 2,
+            "Gol Subiti (tot)": 9
+        },
+        {
+            "Competizione": "Amichevole",
+            "Giornata": 3,
+            "Data": "2025-08-30 00:00:00",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Latina",
+            "Frazione": "2° T",
+            "Punti": 1.0,
+            "Punti (tot)": 1.0,
+            "GOL fatti": 1,
+            "GOL Subiti": 1,
+            "Gol Fatti (tot)": 3,
+            "Gol Subiti (tot)": 10
+        },
+        {
+            "Competizione": "Amichevole",
+            "Giornata": 4,
+            "Data": "2025-09-06 00:00:00",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "ASD Formia",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 2,
+            "GOL Subiti": 1,
+            "Gol Fatti (tot)": 5,
+            "Gol Subiti (tot)": 11
+        },
+        {
+            "Competizione": "Amichevole",
+            "Giornata": 4,
+            "Data": "2025-09-06 00:00:00",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "ASD Formia",
+            "Frazione": "2° T",
+            "Punti": 3.0,
+            "Punti (tot)": 4.0,
+            "GOL fatti": 5,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 10,
+            "Gol Subiti (tot)": 11
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 1,
+            "Data": "2025-09-20 00:00:00",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Atletico Lodigiani",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 1,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 1,
+            "Gol Subiti (tot)": 0
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 1,
+            "Data": "2025-09-20 00:00:00",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Atletico Lodigiani",
+            "Frazione": "2° T",
+            "Punti": 3.0,
+            "Punti (tot)": 3.0,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 1,
+            "Gol Subiti (tot)": 0
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 2,
+            "Data": "2025-09-27 00:00:00",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Grifone Calcio",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 1,
+            "GOL Subiti": 3,
+            "Gol Fatti (tot)": 2,
+            "Gol Subiti (tot)": 3
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 2,
+            "Data": "2025-09-27 00:00:00",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Grifone Calcio",
+            "Frazione": "2° T",
+            "Punti": 0.0,
+            "Punti (tot)": 3.0,
+            "GOL fatti": 1,
+            "GOL Subiti": 1,
+            "Gol Fatti (tot)": 3,
+            "Gol Subiti (tot)": 4
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 3,
+            "Data": "04/10/2025",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Fondi Calcio",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 1,
+            "GOL Subiti": 2,
+            "Gol Fatti (tot)": 4,
+            "Gol Subiti (tot)": 6
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 3,
+            "Data": "04/10/2025",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Fondi Calcio",
+            "Frazione": "2° T",
+            "Punti": 3.0,
+            "Punti (tot)": 6.0,
+            "GOL fatti": 6,
+            "GOL Subiti": 1,
+            "Gol Fatti (tot)": 10,
+            "Gol Subiti (tot)": 7
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 4,
+            "Data": "11/10/2025",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "San Lorenzo Calcio",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 0,
+            "GOL Subiti": 1,
+            "Gol Fatti (tot)": 10,
+            "Gol Subiti (tot)": 8
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 4,
+            "Data": "11/10/2025",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "San Lorenzo Calcio",
+            "Frazione": "2° T",
+            "Punti": 3.0,
+            "Punti (tot)": 9.0,
+            "GOL fatti": 3,
+            "GOL Subiti": 1,
+            "Gol Fatti (tot)": 13,
+            "Gol Subiti (tot)": 9
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 5,
+            "Data": "18/10/2025",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Savio",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 1,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 14,
+            "Gol Subiti (tot)": 9
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 5,
+            "Data": "18/10/2025",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Savio",
+            "Frazione": "2° T",
+            "Punti": 3.0,
+            "Punti (tot)": 12.0,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 14,
+            "Gol Subiti (tot)": 9
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 6,
+            "Data": "25/10/2025",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Pomezia Calcio",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 14,
+            "Gol Subiti (tot)": 9
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 6,
+            "Data": "25/10/2025",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Pomezia Calcio",
+            "Frazione": "2° T",
+            "Punti": 3.0,
+            "Punti (tot)": 15.0,
+            "GOL fatti": 2,
+            "GOL Subiti": 1,
+            "Gol Fatti (tot)": 16,
+            "Gol Subiti (tot)": 10
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 7,
+            "Data": "01/11/2025",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Vigor Perconti",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 1,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 17,
+            "Gol Subiti (tot)": 10
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 7,
+            "Data": "01/11/2025",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Vigor Perconti",
+            "Frazione": "2° T",
+            "Punti": 0.0,
+            "Punti (tot)": 15.0,
+            "GOL fatti": 1,
+            "GOL Subiti": 3,
+            "Gol Fatti (tot)": 18,
+            "Gol Subiti (tot)": 13
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 8,
+            "Data": "08/11/2025",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Colleferro",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 1,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 19,
+            "Gol Subiti (tot)": 13
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 8,
+            "Data": "08/11/2025",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Colleferro",
+            "Frazione": "2° T",
+            "Punti": 3.0,
+            "Punti (tot)": 18.0,
+            "GOL fatti": 1,
+            "GOL Subiti": 1,
+            "Gol Fatti (tot)": 20,
+            "Gol Subiti (tot)": 14
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 9,
+            "Data": "15/11/2025",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Ciampino",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 0,
+            "GOL Subiti": 1,
+            "Gol Fatti (tot)": 20,
+            "Gol Subiti (tot)": 15
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 9,
+            "Data": "15/11/2025",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Ciampino",
+            "Frazione": "2° T",
+            "Punti": 0.0,
+            "Punti (tot)": 18.0,
+            "GOL fatti": 1,
+            "GOL Subiti": 1,
+            "Gol Fatti (tot)": 21,
+            "Gol Subiti (tot)": 16
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 10,
+            "Data": "22/11/2025",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Polisportiva De Rossi",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 2,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 23,
+            "Gol Subiti (tot)": 16
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 10,
+            "Data": "22/11/2025",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Polisportiva De Rossi",
+            "Frazione": "2° T",
+            "Punti": 3.0,
+            "Punti (tot)": 21.0,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 23,
+            "Gol Subiti (tot)": 16
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 11,
+            "Data": "29/11/2025",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Atletico 2000",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 23,
+            "Gol Subiti (tot)": 16
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 11,
+            "Data": "29/11/2025",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Atletico 2000",
+            "Frazione": "2° T",
+            "Punti": 1.0,
+            "Punti (tot)": 22.0,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 23,
+            "Gol Subiti (tot)": 16
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 12,
+            "Data": "06/12/2025",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Albalonga",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 23,
+            "Gol Subiti (tot)": 16
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 12,
+            "Data": "06/12/2025",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Albalonga",
+            "Frazione": "2° T",
+            "Punti": 3.0,
+            "Punti (tot)": 25.0,
+            "GOL fatti": 1,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 24,
+            "Gol Subiti (tot)": 16
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 13,
+            "Data": "2025-12-13 00:00:00",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Spes Montesacro",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 24,
+            "Gol Subiti (tot)": 16
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 13,
+            "Data": "2025-12-13 00:00:00",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Spes Montesacro",
+            "Frazione": "2° T",
+            "Punti": 3.0,
+            "Punti (tot)": 28.0,
+            "GOL fatti": 2,
+            "GOL Subiti": 1,
+            "Gol Fatti (tot)": 26,
+            "Gol Subiti (tot)": 17
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 14,
+            "Data": "16/12/2025",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "SS Romulea",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 0,
+            "GOL Subiti": 2,
+            "Gol Fatti (tot)": 26,
+            "Gol Subiti (tot)": 19
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 14,
+            "Data": "16/12/2025",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "SS Romulea",
+            "Frazione": "2° T",
+            "Punti": 0.0,
+            "Punti (tot)": 28.0,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 26,
+            "Gol Subiti (tot)": 19
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 15,
+            "Data": "20/12/2025",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Real Latina",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 26,
+            "Gol Subiti (tot)": 19
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 15,
+            "Data": "20/12/2025",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Real Latina",
+            "Frazione": "2° T",
+            "Punti": 1.0,
+            "Punti (tot)": 29.0,
+            "GOL fatti": 1,
+            "GOL Subiti": 1,
+            "Gol Fatti (tot)": 27,
+            "Gol Subiti (tot)": 20
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 16,
+            "Data": "10/01/2026",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Atletico Lodigiani",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 4,
+            "GOL Subiti": 2,
+            "Gol Fatti (tot)": 31,
+            "Gol Subiti (tot)": 22
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 16,
+            "Data": "10/01/2026",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Atletico Lodigiani",
+            "Frazione": "2° T",
+            "Punti": 3.0,
+            "Punti (tot)": 32.0,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 31,
+            "Gol Subiti (tot)": 22
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 17,
+            "Data": "17/01/2026",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Grifone Calcio",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 31,
+            "Gol Subiti (tot)": 22
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 17,
+            "Data": "17/01/2026",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Grifone Calcio",
+            "Frazione": "2° T",
+            "Punti": 1.0,
+            "Punti (tot)": 33.0,
+            "GOL fatti": 1,
+            "GOL Subiti": 1,
+            "Gol Fatti (tot)": 32,
+            "Gol Subiti (tot)": 23
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 18,
+            "Data": "2026-01-24 00:00:00",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Fondi Calcio",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 1,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 33,
+            "Gol Subiti (tot)": 23
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 18,
+            "Data": "2026-01-24 00:00:00",
+            "Casa / Trasferta": "Trasferta",
+            "Avversario": "Fondi Calcio",
+            "Frazione": "2° T",
+            "Punti": 0.0,
+            "Punti (tot)": 33.0,
+            "GOL fatti": 0,
+            "GOL Subiti": 2,
+            "Gol Fatti (tot)": 33,
+            "Gol Subiti (tot)": 25
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 19,
+            "Data": "2026-01-31 00:00:00",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "San Lorenzo Calcio",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 2,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 35,
+            "Gol Subiti (tot)": 25
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 19,
+            "Data": "2026-01-31 00:00:00",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "San Lorenzo Calcio",
+            "Frazione": "2° T",
+            "Punti": 3.0,
+            "Punti (tot)": 36.0,
+            "GOL fatti": 4,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 39,
+            "Gol Subiti (tot)": 25
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 20,
+            "Data": "2026-02-07 00:00:00",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Savio",
+            "Frazione": "1° T",
+            "Punti": null,
+            "Punti (tot)": null,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 39,
+            "Gol Subiti (tot)": 25
+        },
+        {
+            "Competizione": "Campionato",
+            "Giornata": 20,
+            "Data": "2026-02-07 00:00:00",
+            "Casa / Trasferta": "Casa",
+            "Avversario": "Savio",
+            "Frazione": "2° T",
+            "Punti": 1.0,
+            "Punti (tot)": 37.0,
+            "GOL fatti": 0,
+            "GOL Subiti": 0,
+            "Gol Fatti (tot)": 39,
+            "Gol Subiti (tot)": 25
+        }
+    ],
+    "partite_dettagli": {
+        "2025-08-23 00:00:00_Avellino": {
+            "IPO": {
+                "Avellino": 48.5,
+                "Accademia Frosinone": 18.2
+            },
+            "Poss(min)": {
+                "Avellino": 29.3,
+                "Accademia Frosinone": 15.0
+            },
+            "Poss(%)": {
+                "Avellino": 66.0,
+                "Accademia Frosinone": 34.0
+            },
+            "GOL": {
+                "Avellino": 2.0,
+                "Accademia Frosinone": 0.0
+            },
+            "OccGol": {
+                "Avellino": 2.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Az Prom": {
+                "Avellino": 2.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Rigore": {
+                "Avellino": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "TiroPiedeArea": {
+                "Avellino": 6.0,
+                "Accademia Frosinone": 1.0
+            },
+            "TiroTestaArea": {
+                "Avellino": 1.0,
+                "Accademia Frosinone": 3.0
+            },
+            "TiroDaFuori": {
+                "Avellino": 8.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Cross": {
+                "Avellino": 10.0,
+                "Accademia Frosinone": 3.0
+            },
+            "Corner": {
+                "Avellino": 2.0,
+                "Accademia Frosinone": 2.0
+            },
+            "PunLat": {
+                "Avellino": 3.0,
+                "Accademia Frosinone": 2.0
+            },
+            "PunCentr": {
+                "Avellino": 0.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Espulsione": {
+                "Avellino": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Pass. Chiave": {
+                "Avellino": 24.0,
+                "Accademia Frosinone": 14.0
+            },
+            "Fuorigioco": {
+                "Avellino": 0.0,
+                "Accademia Frosinone": 0.0
+            }
+        },
+        "2025-08-28 00:00:00_Juve Stabia": {
+            "IPO": {
+                "Juve Stabia": 124.3,
+                "Accademia Frosinone": 33.3
+            },
+            "Poss(min)": {
+                "Juve Stabia": 30.699999999999996,
+                "Accademia Frosinone": 20.0
+            },
+            "Poss(%)": {
+                "Juve Stabia": 61.0,
+                "Accademia Frosinone": 39.0
+            },
+            "GOL": {
+                "Juve Stabia": 7.0,
+                "Accademia Frosinone": 2.0
+            },
+            "OccGol": {
+                "Juve Stabia": 4.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Az Prom": {
+                "Juve Stabia": 9.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Rigore": {
+                "Juve Stabia": 0.0,
+                "Accademia Frosinone": 1.0
+            },
+            "TiroPiedeArea": {
+                "Juve Stabia": 17.0,
+                "Accademia Frosinone": 2.0
+            },
+            "TiroTestaArea": {
+                "Juve Stabia": 4.0,
+                "Accademia Frosinone": 0.0
+            },
+            "TiroDaFuori": {
+                "Juve Stabia": 14.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Cross": {
+                "Juve Stabia": 13.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Corner": {
+                "Juve Stabia": 6.0,
+                "Accademia Frosinone": 1.0
+            },
+            "PunLat": {
+                "Juve Stabia": 3.0,
+                "Accademia Frosinone": 0.0
+            },
+            "PunCentr": {
+                "Juve Stabia": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Espulsione": {
+                "Juve Stabia": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Pass. Chiave": {
+                "Juve Stabia": 32.0,
+                "Accademia Frosinone": 11.0
+            },
+            "Fuorigioco": {
+                "Juve Stabia": 0.0,
+                "Accademia Frosinone": 0.0
+            }
+        },
+        "2025-08-30 00:00:00_Latina": {
+            "IPO": {
+                "Latina": 81.5,
+                "Accademia Frosinone": 131.1
+            },
+            "Poss(min)": {
+                "Latina": 23.7,
+                "Accademia Frosinone": 19.8
+            },
+            "Poss(%)": {
+                "Latina": 54.0,
+                "Accademia Frosinone": 46.0
+            },
+            "GOL": {
+                "Latina": 2.0,
+                "Accademia Frosinone": 3.0
+            },
+            "OccGol": {
+                "Latina": 4.0,
+                "Accademia Frosinone": 5.0
+            },
+            "Az Prom": {
+                "Latina": 2.0,
+                "Accademia Frosinone": 6.0
+            },
+            "Rigore": {
+                "Latina": 0.0,
+                "Accademia Frosinone": 1.0
+            },
+            "TiroPiedeArea": {
+                "Latina": 8.0,
+                "Accademia Frosinone": 9.0
+            },
+            "TiroTestaArea": {
+                "Latina": 2.0,
+                "Accademia Frosinone": 6.0
+            },
+            "TiroDaFuori": {
+                "Latina": 13.0,
+                "Accademia Frosinone": 6.0
+            },
+            "Cross": {
+                "Latina": 13.0,
+                "Accademia Frosinone": 17.0
+            },
+            "Corner": {
+                "Latina": 6.0,
+                "Accademia Frosinone": 10.0
+            },
+            "PunLat": {
+                "Latina": 6.0,
+                "Accademia Frosinone": 1.0
+            },
+            "PunCentr": {
+                "Latina": 0.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Espulsione": {
+                "Latina": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Pass. Chiave": {
+                "Latina": 24.0,
+                "Accademia Frosinone": 21.0
+            },
+            "Fuorigioco": {
+                "Latina": 0.0,
+                "Accademia Frosinone": 2.0
+            }
+        },
+        "2025-09-06 00:00:00_ASD Formia": {
+            "IPO": {
+                "Accademia Frosinone": 177.9,
+                "ASD Formia": 29.9
+            },
+            "Poss(min)": {
+                "Accademia Frosinone": 22.500000000000004,
+                "ASD Formia": 22.1
+            },
+            "Poss(%)": {
+                "Accademia Frosinone": 50.0,
+                "ASD Formia": 50.0
+            },
+            "GOL": {
+                "Accademia Frosinone": 7.0,
+                "ASD Formia": 1.0
+            },
+            "OccGol": {
+                "Accademia Frosinone": 10.0,
+                "ASD Formia": 0.0
+            },
+            "Az Prom": {
+                "Accademia Frosinone": 8.0,
+                "ASD Formia": 2.0
+            },
+            "Rigore": {
+                "Accademia Frosinone": 0.0,
+                "ASD Formia": 1.0
+            },
+            "TiroPiedeArea": {
+                "Accademia Frosinone": 16.0,
+                "ASD Formia": 1.0
+            },
+            "TiroTestaArea": {
+                "Accademia Frosinone": 4.0,
+                "ASD Formia": 0.0
+            },
+            "TiroDaFuori": {
+                "Accademia Frosinone": 13.0,
+                "ASD Formia": 2.0
+            },
+            "Cross": {
+                "Accademia Frosinone": 14.0,
+                "ASD Formia": 0.0
+            },
+            "Corner": {
+                "Accademia Frosinone": 5.0,
+                "ASD Formia": 2.0
+            },
+            "PunLat": {
+                "Accademia Frosinone": 0.0,
+                "ASD Formia": 2.0
+            },
+            "PunCentr": {
+                "Accademia Frosinone": 1.0,
+                "ASD Formia": 1.0
+            },
+            "Espulsione": {
+                "Accademia Frosinone": 0.0,
+                "ASD Formia": 0.0
+            },
+            "Pass. Chiave": {
+                "Accademia Frosinone": 0.0,
+                "ASD Formia": 0.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 0.0,
+                "ASD Formia": 0.0
+            }
+        },
+        "2025-09-20 00:00:00_Atletico Lodigiani": {
+            "IPO": {
+                "Accademia Frosinone": 45.3,
+                "Atletico Lodigiani": 38.4
+            },
+            "Poss(min)": {
+                "Accademia Frosinone": 17.5,
+                "Atletico Lodigiani": 18.4
+            },
+            "Poss(%)": {
+                "Accademia Frosinone": 49.0,
+                "Atletico Lodigiani": 51.0
+            },
+            "GOL": {
+                "Accademia Frosinone": 1.0,
+                "Atletico Lodigiani": 0.0
+            },
+            "OccGol": {
+                "Accademia Frosinone": 1.0,
+                "Atletico Lodigiani": 1.0
+            },
+            "Az Prom": {
+                "Accademia Frosinone": 4.0,
+                "Atletico Lodigiani": 1.0
+            },
+            "Rigore": {
+                "Accademia Frosinone": 0.0,
+                "Atletico Lodigiani": 0.0
+            },
+            "TiroPiedeArea": {
+                "Accademia Frosinone": 6.0,
+                "Atletico Lodigiani": 4.0
+            },
+            "TiroTestaArea": {
+                "Accademia Frosinone": 3.0,
+                "Atletico Lodigiani": 3.0
+            },
+            "TiroDaFuori": {
+                "Accademia Frosinone": 2.0,
+                "Atletico Lodigiani": 5.0
+            },
+            "Cross": {
+                "Accademia Frosinone": 7.0,
+                "Atletico Lodigiani": 11.0
+            },
+            "Corner": {
+                "Accademia Frosinone": 2.0,
+                "Atletico Lodigiani": 6.0
+            },
+            "PunLat": {
+                "Accademia Frosinone": 2.0,
+                "Atletico Lodigiani": 3.0
+            },
+            "PunCentr": {
+                "Accademia Frosinone": 0.0,
+                "Atletico Lodigiani": 1.0
+            },
+            "Espulsione": {
+                "Accademia Frosinone": 0.0,
+                "Atletico Lodigiani": 0.0
+            },
+            "Pass. Chiave": {
+                "Accademia Frosinone": 21.0,
+                "Atletico Lodigiani": 18.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 1.0,
+                "Atletico Lodigiani": 0.0
+            }
+        },
+        "2025-09-27 00:00:00_Grifone Calcio": {
+            "Press.din.centr.": {
+                "Accademia Frosinone": 12.0
+            },
+            "Prima press.alta": {
+                "Accademia Frosinone": 4.0
+            },
+            "Pass. Chiave": {
+                "Grifone Calcio": 40.0,
+                "Accademia Frosinone": 28.0
+            },
+            "Costr.Centr.": {
+                "Accademia Frosinone": 7.0
+            },
+            "Tran.dif": {
+                "Accademia Frosinone": 4.0
+            },
+            "Cross": {
+                "Grifone Calcio": 13.0,
+                "Accademia Frosinone": 9.0
+            },
+            "TiroPiedeArea": {
+                "Grifone Calcio": 8.0,
+                "Accademia Frosinone": 9.0
+            },
+            "GOL": {
+                "Grifone Calcio": 4.0,
+                "Accademia Frosinone": 2.0
+            },
+            "OccGol": {
+                "Grifone Calcio": 6.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Az Prom": {
+                "Accademia Frosinone": 3.0,
+                "Grifone Calcio": 1.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 3.0,
+                "Grifone Calcio": 3.0
+            },
+            "Dif.bassa": {
+                "Accademia Frosinone": 3.0
+            },
+            "TiroDaFuori": {
+                "Grifone Calcio": 5.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Costr.  fondo": {
+                "Accademia Frosinone": 7.0
+            },
+            "Tran.Offen.": {
+                "Accademia Frosinone": 6.0
+            },
+            "Corner": {
+                "Accademia Frosinone": 7.0,
+                "Grifone Calcio": 2.0
+            },
+            "PunLat": {
+                "Accademia Frosinone": 3.0,
+                "Grifone Calcio": 0.0
+            },
+            "TiroTestaArea": {
+                "Grifone Calcio": 2.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Press. Rimessa": {
+                "Accademia Frosinone": 5.0
+            },
+            "Costr.din.basso": {
+                "Accademia Frosinone": 5.0
+            },
+            "Costr.din.att.": {
+                "Accademia Frosinone": 2.0
+            },
+            "IPO": {
+                "Grifone Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(min)": {
+                "Grifone Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(%)": {
+                "Grifone Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Rigore": {
+                "Grifone Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "PunCentr": {
+                "Grifone Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Espulsione": {
+                "Grifone Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            }
+        },
+        "2025-12-13 00:00:00_Spes Montesacro": {
+            "GOL": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 1.0,
+                "Accademia Frosinone": 2.0
+            },
+            "IPO": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(min)": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(%)": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "OccGol": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Az Prom": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Pass. Chiave": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "TiroPiedeArea": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "TiroTestaArea": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "TiroDaFuori": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Cross": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Corner": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "PunLat": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "PunCentr": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Espulsione": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Rigore": {
+                "Albalonga": 0.0,
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Fuorigioco": {
+                "Spes Montesacro": 0.0,
+                "Accademia Frosinone": 0.0
+            }
+        },
+        "2026-01-24 00:00:00_Fondi Calcio": {
+            "Costr.din.basso": {
+                "NaN": 9.0
+            },
+            "Cross": {
+                "Fondi Calcio": 6.0,
+                "Accademia Frosinone": 10.0
+            },
+            "TiroDaFuori": {
+                "Fondi Calcio": 3.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Costr. fondo": {
+                "NaN": 9.0
+            },
+            "Pass. Chiave": {
+                "Fondi Calcio": 11.0,
+                "Accademia Frosinone": 17.0
+            },
+            "Dif.bassa": {
+                "NaN": 9.0
+            },
+            "PunLat": {
+                "Fondi Calcio": 3.0,
+                "Accademia Frosinone": 3.0
+            },
+            "TiroTestaArea": {
+                "Fondi Calcio": 1.0,
+                "Accademia Frosinone": 6.0
+            },
+            "Costr.Centr.": {
+                "NaN": 7.0
+            },
+            "Costr.din.att.": {
+                "NaN": 11.0
+            },
+            "Prima press.alta": {
+                "NaN": 3.0
+            },
+            "Gol": {
+                "Accademia Frosinone": 1.0,
+                "Fondi Calcio": 2.0
+            },
+            "Az Prom": {
+                "Accademia Frosinone": 4.0,
+                "Fondi Calcio": 1.0
+            },
+            "TiroPiedeArea": {
+                "Accademia Frosinone": 2.0,
+                "Fondi Calcio": 1.0
+            },
+            "Tran.Dif.": {
+                "NaN": 4.0
+            },
+            "Press.din.centr.": {
+                "NaN": 2.0
+            },
+            "Tran.Offen.": {
+                "NaN": 5.0
+            },
+            "Corner": {
+                "Fondi Calcio": 1.0,
+                "Accademia Frosinone": 3.0
+            },
+            "PunCentr": {
+                "Fondi Calcio": 1.0
+            }
+        },
+        "2026-01-31 00:00:00_San Lorenzo Calcio": {
+            "Costr.Centr.": {
+                "NaN": 8.0
+            },
+            "Pass. Chiave": {
+                "Accademia Frosinone": 21.0,
+                "San Lorenzo Calcio": 11.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 4.0
+            },
+            "Prima press.alta": {
+                "NaN": 8.0
+            },
+            "Costr.din.att.": {
+                "NaN": 11.0
+            },
+            "Dif.bassa": {
+                "NaN": 12.0
+            },
+            "Costr.din.basso": {
+                "NaN": 10.0
+            },
+            "Corner": {
+                "San Lorenzo Calcio": 8.0,
+                "Accademia Frosinone": 6.0
+            },
+            "Cross": {
+                "San Lorenzo Calcio": 9.0,
+                "Accademia Frosinone": 10.0
+            },
+            "Costr. fondo": {
+                "NaN": 9.0
+            },
+            "TiroPiedeArea": {
+                "Accademia Frosinone": 12.0,
+                "San Lorenzo Calcio": 2.0
+            },
+            "Az Prom": {
+                "Accademia Frosinone": 6.0,
+                "San Lorenzo Calcio": 2.0
+            },
+            "Press. Rimessa": {
+                "NaN": 3.0
+            },
+            "OccGol": {
+                "Accademia Frosinone": 4.0
+            },
+            "TiroDaFuori": {
+                "Accademia Frosinone": 3.0,
+                "San Lorenzo Calcio": 1.0
+            },
+            "PunLat": {
+                "San Lorenzo Calcio": 1.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Rigore": {
+                "Accademia Frosinone": 1.0
+            },
+            "Gol": {
+                "Accademia Frosinone": 6.0
+            },
+            "Tran.Offen.": {
+                "NaN": 2.0
+            },
+            "Press.din.centr.": {
+                "NaN": 4.0
+            },
+            "Tran.Dif.": {
+                "NaN": 1.0
+            },
+            "TiroTestaArea": {
+                "San Lorenzo Calcio": 1.0,
+                "Accademia Frosinone": 1.0
+            },
+            "PunCentr": {
+                "San Lorenzo Calcio": 1.0
+            }
+        },
+        "2026-02-07 00:00:00_Savio": {
+            "Prima press.alta": {
+                "NaN": 9.0
+            },
+            "Corner": {
+                "Savio": 8.0,
+                "Accademia Frosinone": 4.0
+            },
+            "Costr. fondo": {
+                "NaN": 7.0
+            },
+            "TiroDaFuori": {
+                "Savio": 6.0
+            },
+            "Tran.Offen.": {
+                "NaN": 8.0
+            },
+            "Pass. Chiave": {
+                "Savio": 9.0,
+                "Accademia Frosinone": 15.0
+            },
+            "Costr.din.basso": {
+                "NaN": 7.0
+            },
+            "Dif.bassa": {
+                "NaN": 10.0
+            },
+            "TiroPiedeArea": {
+                "Savio": 1.0
+            },
+            "Az Prom": {
+                "Accademia Frosinone": 1.0,
+                "Savio": 2.0
+            },
+            "Cross": {
+                "Savio": 12.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Costr.Centr.": {
+                "NaN": 8.0
+            },
+            "Press. Rimessa": {
+                "NaN": 4.0
+            },
+            "TiroTestaArea": {
+                "Savio": 2.0,
+                "Accademia Frosinone": 2.0
+            },
+            "PunLat": {
+                "Savio": 2.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Press.din.centr.": {
+                "NaN": 3.0
+            },
+            "Tran.Dif.": {
+                "NaN": 2.0
+            },
+            "Costr.din.att.": {
+                "NaN": 5.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 1.0
+            }
+        },
+        "01/11/2025_Vigor Perconti": {
+            "Pass. Chiave": {
+                "Accademia Frosinone": 16.0,
+                "Vigor Perconti": 20.0
+            },
+            "TiroPiedeArea": {
+                "Accademia Frosinone": 9.0,
+                "Vigor Perconti": 3.0
+            },
+            "Az Prom": {
+                "Accademia Frosinone": 7.0,
+                "Vigor Perconti": 1.0
+            },
+            "Costr.din.att.": {
+                "NaN": 3.0
+            },
+            "TiroDaFuori": {
+                "Accademia Frosinone": 4.0,
+                "Vigor Perconti": 3.0
+            },
+            "Prima press.alta": {
+                "NaN": 4.0
+            },
+            "Costr.din.basso": {
+                "NaN": 6.0
+            },
+            "TiroTestaArea": {
+                "Vigor Perconti": 2.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Corner": {
+                "Vigor Perconti": 3.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Costr.  fondo": {
+                "NaN": 5.0
+            },
+            "Costr.Centr.": {
+                "NaN": 3.0
+            },
+            "Dif.bassa": {
+                "NaN": 9.0
+            },
+            "PunCentr": {
+                "Accademia Frosinone": 3.0,
+                "Vigor Perconti": 2.0
+            },
+            "Press. Rimessa": {
+                "NaN": 4.0
+            },
+            "Cross": {
+                "Vigor Perconti": 11.0,
+                "Accademia Frosinone": 4.0
+            },
+            "Press.din.centr.": {
+                "NaN": 2.0
+            },
+            "Tran.Offen.": {
+                "NaN": 3.0
+            },
+            "Dif.Fasce": {
+                "NaN": 1.0
+            },
+            "PunLat": {
+                "Vigor Perconti": 3.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Fuorigioco": {
+                "Vigor Perconti": 1.0,
+                "Accademia Frosinone": 0.0
+            },
+            "GOL": {
+                "Accademia Frosinone": 2.0,
+                "Vigor Perconti": 3.0
+            },
+            "Rigore": {
+                "Vigor Perconti": 1.0,
+                "Accademia Frosinone": 0.0
+            },
+            "OccGol": {
+                "Accademia Frosinone": 1.0,
+                "Vigor Perconti": 0.0
+            },
+            "IPO": {
+                "Accademia Frosinone": 0.0,
+                "Vigor Perconti": 0.0
+            },
+            "Poss(min)": {
+                "Accademia Frosinone": 0.0,
+                "Vigor Perconti": 0.0
+            },
+            "Poss(%)": {
+                "Accademia Frosinone": 0.0,
+                "Vigor Perconti": 0.0
+            },
+            "Espulsione": {
+                "Accademia Frosinone": 0.0,
+                "Vigor Perconti": 0.0
+            }
+        },
+        "04/10/2025_Fondi Calcio": {
+            "Pass. Chiave": {
+                "Fondi Calcio": 19.0,
+                "Accademia Frosinone": 31.0
+            },
+            "Dif.bassa": {
+                "Accademia Frosinone": 8.0
+            },
+            "TiroDaFuori": {
+                "Fondi Calcio": 4.0,
+                "Accademia Frosinone": 6.0
+            },
+            "Tran.Offen.": {
+                "Accademia Frosinone": 10.0
+            },
+            "Costr.Centr.": {
+                "Accademia Frosinone": 10.0
+            },
+            "Cross": {
+                "Accademia Frosinone": 10.0,
+                "Fondi Calcio": 4.0
+            },
+            "Press. Rimessa": {
+                "Accademia Frosinone": 7.0
+            },
+            "Costr.din.basso": {
+                "Accademia Frosinone": 8.0
+            },
+            "PunLat": {
+                "Fondi Calcio": 2.0,
+                "Accademia Frosinone": 1.0
+            },
+            "TiroPiedeArea": {
+                "Fondi Calcio": 3.0,
+                "Accademia Frosinone": 7.0
+            },
+            "OccGol": {
+                "Fondi Calcio": 1.0,
+                "Accademia Frosinone": 3.0
+            },
+            "Costr.  fondo": {
+                "Accademia Frosinone": 5.0
+            },
+            "Az Prom": {
+                "Fondi Calcio": 2.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Corner": {
+                "Fondi Calcio": 6.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Costr.din.att.": {
+                "Accademia Frosinone": 4.0
+            },
+            "Press.din.centr.": {
+                "Accademia Frosinone": 9.0
+            },
+            "TiroTestaArea": {
+                "Fondi Calcio": 1.0,
+                "Accademia Frosinone": 1.0
+            },
+            "GOL": {
+                "Fondi Calcio": 3.0,
+                "Accademia Frosinone": 7.0
+            },
+            "Tran.dif": {
+                "Accademia Frosinone": 5.0
+            },
+            "PunCentr": {
+                "Fondi Calcio": 2.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 1.0,
+                "Fondi Calcio": 2.0
+            },
+            "Rigore": {
+                "Accademia Frosinone": 2.0,
+                "Fondi Calcio": 0.0
+            },
+            "Prima press.alta": {
+                "Accademia Frosinone": 1.0
+            },
+            "IPO": {
+                "Fondi Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(min)": {
+                "Fondi Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(%)": {
+                "Fondi Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Espulsione": {
+                "Fondi Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            }
+        },
+        "06/12/2025_Albalonga": {
+            "Pass. Chiave": {
+                "Albalonga": 10.0,
+                "Accademia Frosinone": 21.0
+            },
+            "Costr.Centr.": {
+                "Accademia Frosinone": 10.0
+            },
+            "Costr.din.basso": {
+                "Accademia Frosinone": 7.0
+            },
+            "Costr.din.att.": {
+                "Accademia Frosinone": 16.0
+            },
+            "Prima press.alta": {
+                "Accademia Frosinone": 3.0
+            },
+            "Press.din.centr.": {
+                "Accademia Frosinone": 2.0
+            },
+            "PunLat": {
+                "Accademia Frosinone": 4.0,
+                "Albalonga": 0.0
+            },
+            "Az Prom": {
+                "Accademia Frosinone": 4.0,
+                "Albalonga": 1.0
+            },
+            "TiroPiedeArea": {
+                "Accademia Frosinone": 10.0,
+                "Albalonga": 0.0
+            },
+            "Corner": {
+                "Accademia Frosinone": 6.0,
+                "Albalonga": 3.0
+            },
+            "TiroDaFuori": {
+                "Albalonga": 5.0,
+                "Accademia Frosinone": 4.0
+            },
+            "Costr.  fondo": {
+                "Accademia Frosinone": 4.0
+            },
+            "Dif.bassa": {
+                "Accademia Frosinone": 10.0
+            },
+            "Cross": {
+                "Albalonga": 4.0,
+                "Accademia Frosinone": 12.0
+            },
+            "Tran.Offen.": {
+                "Accademia Frosinone": 6.0
+            },
+            "Dif.Fasce": {
+                "Accademia Frosinone": 1.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 2.0,
+                "Albalonga": 2.0
+            },
+            "Tran.dif": {
+                "Accademia Frosinone": 1.0
+            },
+            "OccGol": {
+                "Accademia Frosinone": 3.0,
+                "Albalonga": 0.0
+            },
+            "TiroTestaArea": {
+                "Accademia Frosinone": 2.0,
+                "Albalonga": 0.0
+            },
+            "Rigore": {
+                "Accademia Frosinone": 1.0,
+                "Albalonga": 0.0
+            },
+            "GOL": {
+                "Albalonga": 0.0,
+                "Accademia Frosinone": 1.0
+            },
+            "IPO": {
+                "Albalonga": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(min)": {
+                "Albalonga": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(%)": {
+                "Albalonga": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "PunCentr": {
+                "Albalonga": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Espulsione": {
+                "Albalonga": 0.0,
+                "Accademia Frosinone": 0.0
+            }
+        },
+        "08/11/2025_Colleferro": {
+            "Pass. Chiave": {
+                "Colleferro": 4.0,
+                "Accademia Frosinone": 17.0
+            },
+            "Tran.Offen.": {
+                "NaN": 6.0
+            },
+            "Cross": {
+                "Accademia Frosinone": 12.0,
+                "Colleferro": 5.0
+            },
+            "Press. Rimessa": {
+                "NaN": 3.0
+            },
+            "Dif.bassa": {
+                "NaN": 10.0
+            },
+            "PunCentr": {
+                "Accademia Frosinone": 1.0,
+                "Colleferro": 0.0
+            },
+            "Press.din.centr.": {
+                "NaN": 1.0
+            },
+            "TiroDaFuori": {
+                "Colleferro": 3.0,
+                "Accademia Frosinone": 4.0
+            },
+            "Costr.din.basso": {
+                "Accademia Frosinone": 1.0,
+                "NaN": 3.0
+            },
+            "Costr.din.att.": {
+                "NaN": 7.0
+            },
+            "Tran.dif": {
+                "NaN": 1.0
+            },
+            "Prima press.alta": {
+                "NaN": 5.0
+            },
+            "Az Prom": {
+                "Accademia Frosinone": 1.0,
+                "Colleferro": 1.0
+            },
+            "Corner": {
+                "Colleferro": 4.0,
+                "Accademia Frosinone": 3.0
+            },
+            "Costr.Centr.": {
+                "NaN": 3.0
+            },
+            "Costr.  fondo": {
+                "NaN": 2.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 2.0,
+                "Colleferro": 0.0
+            },
+            "GOL": {
+                "Accademia Frosinone": 2.0,
+                "Colleferro": 1.0
+            },
+            "TiroPiedeArea": {
+                "Accademia Frosinone": 5.0,
+                "Colleferro": 1.0
+            },
+            "TiroTestaArea": {
+                "Accademia Frosinone": 2.0,
+                "Colleferro": 1.0
+            },
+            "PunLat": {
+                "Colleferro": 4.0,
+                "Accademia Frosinone": 1.0
+            },
+            "OccGol": {
+                "Accademia Frosinone": 2.0,
+                "Colleferro": 1.0
+            },
+            "IPO": {
+                "Colleferro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(min)": {
+                "Colleferro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(%)": {
+                "Colleferro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Espulsione": {
+                "Colleferro": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Rigore": {
+                "Colleferro": 0.0,
+                "Accademia Frosinone": 0.0
+            }
+        },
+        "10/01/2026_Atletico Lodigiani": {
+            "Press.din.centr.": {
+                "Accademia Frosinone": 5.0
+            },
+            "Costr.din.att.": {
+                "Accademia Frosinone": 9.0
+            },
+            "Pass. Chiave": {
+                "Accademia Frosinone": 16.0,
+                "Atletico Lodigiani": 11.0
+            },
+            "PunCentr": {
+                "Atletico Lodigiani": 2.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Costr.din.basso": {
+                "Accademia Frosinone": 5.0
+            },
+            "Cross": {
+                "Atletico Lodigiani": 13.0,
+                "Accademia Frosinone": 9.0
+            },
+            "Prima press.alta": {
+                "Accademia Frosinone": 3.0
+            },
+            "Corner": {
+                "Accademia Frosinone": 6.0,
+                "Atletico Lodigiani": 5.0
+            },
+            "TiroPiedeArea": {
+                "Accademia Frosinone": 7.0,
+                "Atletico Lodigiani": 2.0
+            },
+            "GOL": {
+                "Accademia Frosinone": 4.0,
+                "Atletico Lodigiani": 2.0
+            },
+            "OccGol": {
+                "Accademia Frosinone": 3.0,
+                "Atletico Lodigiani": 0.0
+            },
+            "Dif.bassa": {
+                "Accademia Frosinone": 12.0
+            },
+            "Tran.Offen.": {
+                "Accademia Frosinone": 6.0
+            },
+            "Costr.  fondo": {
+                "Accademia Frosinone": 5.0
+            },
+            "TiroTestaArea": {
+                "Atletico Lodigiani": 1.0,
+                "Accademia Frosinone": 2.0
+            },
+            "PunLat": {
+                "Atletico Lodigiani": 3.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Costr.Centr.": {
+                "Accademia Frosinone": 8.0
+            },
+            "TiroDaFuori": {
+                "Atletico Lodigiani": 4.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Az Prom": {
+                "Accademia Frosinone": 2.0,
+                "Atletico Lodigiani": 0.0
+            },
+            "Press. Rimessa": {
+                "Accademia Frosinone": 3.0
+            },
+            "Rigore": {
+                "Accademia Frosinone": 1.0,
+                "Atletico Lodigiani": 0.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 3.0,
+                "Atletico Lodigiani": 0.0
+            },
+            "IPO": {
+                "Accademia Frosinone": 0.0,
+                "Atletico Lodigiani": 0.0
+            },
+            "Poss(min)": {
+                "Accademia Frosinone": 0.0,
+                "Atletico Lodigiani": 0.0
+            },
+            "Poss(%)": {
+                "Accademia Frosinone": 0.0,
+                "Atletico Lodigiani": 0.0
+            },
+            "Espulsione": {
+                "Accademia Frosinone": 0.0,
+                "Atletico Lodigiani": 0.0
+            }
+        },
+        "11/10/2025_San Lorenzo Calcio": {
+            "Pass. Chiave": {
+                "San Lorenzo Calcio": 10.0,
+                "Accademia Frosinone": 33.0
+            },
+            "Fuorigioco": {
+                "San Lorenzo Calcio": 1.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Costr.din.basso": {
+                "Accademia Frosinone": 8.0,
+                "NaN": 2.0
+            },
+            "Costr.  fondo": {
+                "Accademia Frosinone": 6.0
+            },
+            "Press.din.centr.": {
+                "Accademia Frosinone": 4.0,
+                "NaN": 1.0
+            },
+            "Press. Rimessa": {
+                "Accademia Frosinone": 1.0
+            },
+            "Dif.bassa": {
+                "Accademia Frosinone": 4.0
+            },
+            "Cross": {
+                "San Lorenzo Calcio": 5.0,
+                "Accademia Frosinone": 12.0
+            },
+            "Costr.Centr.": {
+                "Accademia Frosinone": 4.0
+            },
+            "TiroPiedeArea": {
+                "Accademia Frosinone": 5.0,
+                "San Lorenzo Calcio": 1.0
+            },
+            "Corner": {
+                "Accademia Frosinone": 8.0,
+                "San Lorenzo Calcio": 0.0
+            },
+            "TiroTestaArea": {
+                "Accademia Frosinone": 3.0,
+                "San Lorenzo Calcio": 2.0
+            },
+            "GOL": {
+                "San Lorenzo Calcio": 2.0,
+                "Accademia Frosinone": 3.0
+            },
+            "Rigore": {
+                "San Lorenzo Calcio": 1.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Prima press.alta": {
+                "Accademia Frosinone": 2.0
+            },
+            "Tran.Offen.": {
+                "Accademia Frosinone": 3.0
+            },
+            "TiroDaFuori": {
+                "Accademia Frosinone": 3.0,
+                "San Lorenzo Calcio": 3.0
+            },
+            "Costr.din.att.": {
+                "NaN": 2.0,
+                "Accademia Frosinone": 5.0
+            },
+            "PunCentr": {
+                "Accademia Frosinone": 2.0,
+                "San Lorenzo Calcio": 0.0
+            },
+            "PunLat": {
+                "Accademia Frosinone": 2.0,
+                "San Lorenzo Calcio": 1.0
+            },
+            "Tran.dif": {
+                "Accademia Frosinone": 1.0
+            },
+            "Az Prom": {
+                "San Lorenzo Calcio": 1.0,
+                "Accademia Frosinone": 1.0
+            },
+            "OccGol": {
+                "Accademia Frosinone": 1.0,
+                "San Lorenzo Calcio": 0.0
+            },
+            "IPO": {
+                "San Lorenzo Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(min)": {
+                "San Lorenzo Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(%)": {
+                "San Lorenzo Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Espulsione": {
+                "San Lorenzo Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            }
+        },
+        "15/11/2025_Ciampino": {
+            "Dif.bassa": {
+                "NaN": 5.0,
+                "Accademia Frosinone": 3.0
+            },
+            "Pass. Chiave": {
+                "Ciampino": 15.0,
+                "Accademia Frosinone": 16.0
+            },
+            "Costr.  fondo": {
+                "NaN": 5.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Cross": {
+                "Accademia Frosinone": 6.0,
+                "Ciampino": 7.0
+            },
+            "TiroDaFuori": {
+                "Accademia Frosinone": 5.0,
+                "Ciampino": 4.0
+            },
+            "Press. Rimessa": {
+                "NaN": 1.0
+            },
+            "Costr.Centr.": {
+                "NaN": 7.0,
+                "Accademia Frosinone": 4.0
+            },
+            "Tran.dif": {
+                "NaN": 1.0
+            },
+            "OccGol": {
+                "Ciampino": 2.0,
+                "Accademia Frosinone": 0.0
+            },
+            "GOL": {
+                "Ciampino": 2.0,
+                "Accademia Frosinone": 1.0
+            },
+            "TiroPiedeArea": {
+                "Ciampino": 6.0,
+                "Accademia Frosinone": 5.0
+            },
+            "Corner": {
+                "Accademia Frosinone": 4.0,
+                "Ciampino": 5.0
+            },
+            "TiroTestaArea": {
+                "Accademia Frosinone": 1.0,
+                "Ciampino": 2.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 2.0,
+                "Ciampino": 1.0
+            },
+            "Costr.din.att.": {
+                "NaN": 1.0,
+                "Accademia Frosinone": 5.0
+            },
+            "PunLat": {
+                "Ciampino": 5.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Press.din.centr.": {
+                "NaN": 1.0
+            },
+            "Costr.din.basso": {
+                "NaN": 2.0,
+                "Accademia Frosinone": 3.0
+            },
+            "Rigore": {
+                "Accademia Frosinone": 1.0,
+                "Ciampino": 0.0
+            },
+            "Az Prom": {
+                "Ciampino": 3.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Dif.Fasce": {
+                "NaN": 2.0
+            },
+            "PunCentr": {
+                "Ciampino": 1.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Tran.Offen.": {
+                "Accademia Frosinone": 3.0
+            },
+            "IPO": {
+                "Ciampino": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(min)": {
+                "Ciampino": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(%)": {
+                "Ciampino": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Espulsione": {
+                "Ciampino": 0.0,
+                "Accademia Frosinone": 0.0
+            }
+        },
+        "16/12/2025_SS Romulea": {
+            "Corner": {
+                "SS Romulea": 3.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Costr.din.basso": {
+                "Accademia Frosinone": 16.0
+            },
+            "Prima press.alta": {
+                "Accademia Frosinone": 9.0
+            },
+            "Pass. Chiave": {
+                "Accademia Frosinone": 16.0,
+                "SS Romulea": 20.0
+            },
+            "Dif.bassa": {
+                "Accademia Frosinone": 16.0
+            },
+            "Cross": {
+                "SS Romulea": 5.0,
+                "Accademia Frosinone": 4.0
+            },
+            "TiroDaFuori": {
+                "SS Romulea": 7.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Costr.din.att.": {
+                "Accademia Frosinone": 5.0
+            },
+            "Tran.dif": {
+                "Accademia Frosinone": 3.0
+            },
+            "Costr.  fondo": {
+                "Accademia Frosinone": 5.0
+            },
+            "OccGol": {
+                "SS Romulea": 3.0,
+                "Accademia Frosinone": 0.0
+            },
+            "TiroPiedeArea": {
+                "SS Romulea": 6.0,
+                "Accademia Frosinone": 2.0
+            },
+            "GOL": {
+                "SS Romulea": 2.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Press.din.centr.": {
+                "Accademia Frosinone": 5.0
+            },
+            "Az Prom": {
+                "SS Romulea": 3.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Tran.Offen.": {
+                "Accademia Frosinone": 2.0
+            },
+            "Costr.Centr.": {
+                "Accademia Frosinone": 10.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 2.0,
+                "SS Romulea": 1.0
+            },
+            "Espulsione": {
+                "Accademia Frosinone": 3.0,
+                "SS Romulea": 0.0
+            },
+            "PunLat": {
+                "Accademia Frosinone": 1.0,
+                "SS Romulea": 1.0
+            },
+            "TiroTestaArea": {
+                "Accademia Frosinone": 2.0,
+                "SS Romulea": 0.0
+            },
+            "PunCentr": {
+                "SS Romulea": 1.0,
+                "Accademia Frosinone": 0.0
+            },
+            "IPO": {
+                "SS Romulea": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(min)": {
+                "SS Romulea": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(%)": {
+                "SS Romulea": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Rigore": {
+                "SS Romulea": 0.0,
+                "Accademia Frosinone": 0.0
+            }
+        },
+        "17/01/2026_Grifone Calcio": {
+            "Pass. Chiave": {
+                "Grifone Calcio": 23.0,
+                "Accademia Frosinone": 14.0
+            },
+            "Dif.bassa": {
+                "Accademia Frosinone": 20.0
+            },
+            "Cross": {
+                "Grifone Calcio": 16.0,
+                "Accademia Frosinone": 7.0
+            },
+            "Corner": {
+                "Grifone Calcio": 3.0,
+                "Accademia Frosinone": 1.0
+            },
+            "TiroDaFuori": {
+                "Grifone Calcio": 5.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Costr.  fondo": {
+                "Accademia Frosinone": 8.0
+            },
+            "PunLat": {
+                "Grifone Calcio": 3.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Tran.Offen.": {
+                "Accademia Frosinone": 8.0
+            },
+            "Costr.Centr.": {
+                "Accademia Frosinone": 12.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 3.0,
+                "Grifone Calcio": 1.0
+            },
+            "Prima press.alta": {
+                "Accademia Frosinone": 4.0
+            },
+            "Costr.din.basso": {
+                "Accademia Frosinone": 10.0
+            },
+            "Press. Rimessa": {
+                "Accademia Frosinone": 6.0
+            },
+            "Costr.din.att.": {
+                "Accademia Frosinone": 5.0
+            },
+            "TiroPiedeArea": {
+                "Grifone Calcio": 7.0,
+                "Accademia Frosinone": 3.0
+            },
+            "OccGol": {
+                "Grifone Calcio": 2.0,
+                "Accademia Frosinone": 1.0
+            },
+            "TiroTestaArea": {
+                "Grifone Calcio": 3.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Az Prom": {
+                "Grifone Calcio": 4.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Press.din.centr.": {
+                "Accademia Frosinone": 3.0
+            },
+            "PunCentr": {
+                "Accademia Frosinone": 1.0,
+                "Grifone Calcio": 0.0
+            },
+            "Tran.dif": {
+                "Accademia Frosinone": 1.0
+            },
+            "GOL": {
+                "Grifone Calcio": 1.0,
+                "Accademia Frosinone": 1.0
+            },
+            "IPO": {
+                "Grifone Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(min)": {
+                "Grifone Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(%)": {
+                "Grifone Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Espulsione": {
+                "Grifone Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Rigore": {
+                "Grifone Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            }
+        },
+        "18/10/2025_Savio": {
+            "Prima press.alta": {
+                "NaN": 8.0
+            },
+            "Costr.din.basso": {
+                "NaN": 5.0
+            },
+            "POR - PTC": {
+                "NaN": 6.0
+            },
+            "POR - PRC": {
+                "NaN": 6.0
+            },
+            "Pass. Chiave": {
+                "Accademia Frosinone": 16.0,
+                "Savio": 26.0
+            },
+            "Costr.Centr.": {
+                "NaN": 2.0
+            },
+            "Dif.bassa": {
+                "NaN": 10.0
+            },
+            "Corner": {
+                "Savio": 6.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Costr.  fondo": {
+                "NaN": 1.0
+            },
+            "Press.din.centr.": {
+                "NaN": 9.0
+            },
+            "Tran.Offen.": {
+                "NaN": 6.0
+            },
+            "TiroDaFuori": {
+                "Accademia Frosinone": 3.0,
+                "Savio": 1.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 3.0,
+                "Savio": 2.0
+            },
+            "Az Prom": {
+                "Savio": 1.0,
+                "Accademia Frosinone": 2.0
+            },
+            "POR - UTB": {
+                "NaN": 4.0
+            },
+            "POR - URB": {
+                "NaN": 4.0
+            },
+            "Cross": {
+                "Accademia Frosinone": 1.0,
+                "Savio": 12.0
+            },
+            "Tran.dif": {
+                "NaN": 2.0
+            },
+            "POR - PTL": {
+                "NaN": 10.0
+            },
+            "POR - PRL": {
+                "NaN": 6.0
+            },
+            "PunLat": {
+                "Accademia Frosinone": 2.0,
+                "Savio": 4.0
+            },
+            "Press. Rimessa": {
+                "NaN": 3.0
+            },
+            "GOL": {
+                "Accademia Frosinone": 1.0,
+                "Savio": 0.0
+            },
+            "OccGol": {
+                "Accademia Frosinone": 1.0,
+                "Savio": 0.0
+            },
+            "TiroPiedeArea": {
+                "Accademia Frosinone": 2.0,
+                "Savio": 2.0
+            },
+            "POR - TS": {
+                "NaN": 3.0
+            },
+            "POR - PR": {
+                "NaN": 3.0
+            },
+            "POR - UTA": {
+                "NaN": 3.0
+            },
+            "POR - UAR": {
+                "NaN": 3.0
+            },
+            "POR - CR": {
+                "NaN": 5.0
+            },
+            "Costr.din.att.": {
+                "NaN": 2.0
+            },
+            "POR - IFA": {
+                "NaN": 1.0
+            },
+            "TiroTestaArea": {
+                "Savio": 2.0,
+                "Accademia Frosinone": 0.0
+            },
+            "POR - UST": {
+                "NaN": 2.0
+            },
+            "POR - PT": {
+                "NaN": 1.0
+            },
+            "IPO": {
+                "Accademia Frosinone": 0.0,
+                "Savio": 0.0
+            },
+            "Poss(min)": {
+                "Accademia Frosinone": 0.0,
+                "Savio": 0.0
+            },
+            "Poss(%)": {
+                "Accademia Frosinone": 0.0,
+                "Savio": 0.0
+            },
+            "PunCentr": {
+                "Accademia Frosinone": 0.0,
+                "Savio": 0.0
+            },
+            "Espulsione": {
+                "Accademia Frosinone": 0.0,
+                "Savio": 0.0
+            },
+            "Rigore": {
+                "Accademia Frosinone": 0.0,
+                "Savio": 0.0
+            }
+        },
+        "20/12/2025_Real Latina": {
+            "Press. Rimessa": {
+                "Accademia Frosinone": 2.0
+            },
+            "Cross": {
+                "Accademia Frosinone": 14.0,
+                "Real Latina": 4.0
+            },
+            "Tran.dif": {
+                "Accademia Frosinone": 4.0
+            },
+            "Az Prom": {
+                "Accademia Frosinone": 6.0,
+                "Real Latina": 2.0
+            },
+            "TiroPiedeArea": {
+                "Accademia Frosinone": 2.0,
+                "Real Latina": 3.0
+            },
+            "Costr.Centr.": {
+                "Accademia Frosinone": 13.0
+            },
+            "PunLat": {
+                "Real Latina": 5.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Dif.bassa": {
+                "Accademia Frosinone": 19.0
+            },
+            "Costr.  fondo": {
+                "Accademia Frosinone": 4.0
+            },
+            "Pass. Chiave": {
+                "Real Latina": 13.0,
+                "Accademia Frosinone": 32.0
+            },
+            "Costr.din.att.": {
+                "Accademia Frosinone": 14.0
+            },
+            "Tran.Offen.": {
+                "Accademia Frosinone": 2.0
+            },
+            "TiroTestaArea": {
+                "Real Latina": 2.0,
+                "Accademia Frosinone": 6.0
+            },
+            "Costr.din.basso": {
+                "Accademia Frosinone": 14.0
+            },
+            "Corner": {
+                "Accademia Frosinone": 6.0,
+                "Real Latina": 2.0
+            },
+            "Press.din.centr.": {
+                "Accademia Frosinone": 6.0
+            },
+            "Fuorigioco": {
+                "Real Latina": 1.0,
+                "Accademia Frosinone": 2.0
+            },
+            "TiroDaFuori": {
+                "Real Latina": 3.0,
+                "Accademia Frosinone": 3.0
+            },
+            "PunCentr": {
+                "Accademia Frosinone": 2.0,
+                "Real Latina": 0.0
+            },
+            "GOL": {
+                "Real Latina": 1.0,
+                "Accademia Frosinone": 1.0
+            },
+            "OccGol": {
+                "Accademia Frosinone": 1.0,
+                "Real Latina": 0.0
+            },
+            "IPO": {
+                "Accademia Frosinone": 0.0,
+                "Real Latina": 0.0
+            },
+            "Poss(min)": {
+                "Accademia Frosinone": 0.0,
+                "Real Latina": 0.0
+            },
+            "Poss(%)": {
+                "Accademia Frosinone": 0.0,
+                "Real Latina": 0.0
+            },
+            "Espulsione": {
+                "Accademia Frosinone": 0.0,
+                "Real Latina": 0.0
+            },
+            "Rigore": {
+                "Accademia Frosinone": 0.0,
+                "Real Latina": 0.0
+            }
+        },
+        "22/11/2025_Polisportiva De Rossi": {
+            "Pass. Chiave": {
+                "Accademia Frosinone": 28.0,
+                "Polisportiva De Rossi": 15.0
+            },
+            "Costr.  fondo": {
+                "NaN": 5.0
+            },
+            "Press.din.centr.": {
+                "NaN": 5.0
+            },
+            "Cross": {
+                "Polisportiva De Rossi": 6.0,
+                "Accademia Frosinone": 7.0
+            },
+            "Tran.dif": {
+                "NaN": 2.0
+            },
+            "Tran.Offen.": {
+                "NaN": 2.0
+            },
+            "GOL": {
+                "Accademia Frosinone": 2.0,
+                "Polisportiva De Rossi": 0.0
+            },
+            "Az Prom": {
+                "Accademia Frosinone": 3.0,
+                "Polisportiva De Rossi": 0.0
+            },
+            "TiroPiedeArea": {
+                "Accademia Frosinone": 5.0,
+                "Polisportiva De Rossi": 3.0
+            },
+            "Costr.din.basso": {
+                "NaN": 7.0
+            },
+            "Dif.bassa": {
+                "NaN": 6.0
+            },
+            "Prima press.alta": {
+                "NaN": 3.0
+            },
+            "Costr.din.att.": {
+                "NaN": 6.0
+            },
+            "TiroDaFuori": {
+                "Accademia Frosinone": 11.0,
+                "Polisportiva De Rossi": 8.0
+            },
+            "PunCentr": {
+                "Accademia Frosinone": 1.0,
+                "Polisportiva De Rossi": 0.0
+            },
+            "Press. Rimessa": {
+                "NaN": 5.0
+            },
+            "TiroTestaArea": {
+                "Accademia Frosinone": 2.0,
+                "Polisportiva De Rossi": 0.0
+            },
+            "Costr.Centr.": {
+                "NaN": 11.0
+            },
+            "Corner": {
+                "Accademia Frosinone": 1.0,
+                "Polisportiva De Rossi": 0.0
+            },
+            "OccGol": {
+                "Accademia Frosinone": 1.0,
+                "Polisportiva De Rossi": 0.0
+            },
+            "PunLat": {
+                "Polisportiva De Rossi": 3.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 1.0,
+                "Polisportiva De Rossi": 0.0
+            },
+            "IPO": {
+                "Accademia Frosinone": 0.0,
+                "Polisportiva De Rossi": 0.0
+            },
+            "Poss(min)": {
+                "Accademia Frosinone": 0.0,
+                "Polisportiva De Rossi": 0.0
+            },
+            "Poss(%)": {
+                "Accademia Frosinone": 0.0,
+                "Polisportiva De Rossi": 0.0
+            },
+            "Espulsione": {
+                "Accademia Frosinone": 0.0,
+                "Polisportiva De Rossi": 0.0
+            },
+            "Rigore": {
+                "Accademia Frosinone": 0.0,
+                "Polisportiva De Rossi": 0.0
+            }
+        },
+        "25/10/2025_Pomezia Calcio": {
+            "Pass. Chiave": {
+                "Pomezia Calcio": 17.0,
+                "Accademia Frosinone": 25.0
+            },
+            "PunCentr": {
+                "Accademia Frosinone": 3.0,
+                "Pomezia Calcio": 0.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 1.0,
+                "Pomezia Calcio": 0.0
+            },
+            "Prima press.alta": {
+                "NaN": 5.0
+            },
+            "Costr.din.basso": {
+                "NaN": 8.0
+            },
+            "Press.din.centr.": {
+                "NaN": 4.0
+            },
+            "Costr.  fondo": {
+                "NaN": 5.0
+            },
+            "TiroDaFuori": {
+                "Accademia Frosinone": 6.0,
+                "Pomezia Calcio": 2.0
+            },
+            "Press. Rimessa": {
+                "NaN": 5.0
+            },
+            "Tran.Offen.": {
+                "NaN": 4.0
+            },
+            "TiroTestaArea": {
+                "Pomezia Calcio": 1.0,
+                "Accademia Frosinone": 3.0
+            },
+            "Cross": {
+                "Accademia Frosinone": 6.0,
+                "Pomezia Calcio": 3.0
+            },
+            "OccGol": {
+                "Accademia Frosinone": 3.0,
+                "Pomezia Calcio": 2.0
+            },
+            "TiroPiedeArea": {
+                "Accademia Frosinone": 10.0,
+                "Pomezia Calcio": 5.0
+            },
+            "Costr.Centr.": {
+                "NaN": 7.0
+            },
+            "Dif.bassa": {
+                "NaN": 5.0
+            },
+            "Az Prom": {
+                "Accademia Frosinone": 6.0,
+                "Pomezia Calcio": 1.0
+            },
+            "Corner": {
+                "Accademia Frosinone": 6.0,
+                "Pomezia Calcio": 3.0
+            },
+            "Costr.din.att.": {
+                "NaN": 6.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Tran.dif": {
+                "NaN": 5.0
+            },
+            "GOL": {
+                "Pomezia Calcio": 1.0,
+                "Accademia Frosinone": 2.0
+            },
+            "PunLat": {
+                "Accademia Frosinone": 1.0,
+                "Pomezia Calcio": 0.0
+            },
+            "IPO": {
+                "Pomezia Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(min)": {
+                "Pomezia Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Poss(%)": {
+                "Pomezia Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Espulsione": {
+                "Pomezia Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            },
+            "Rigore": {
+                "Pomezia Calcio": 0.0,
+                "Accademia Frosinone": 0.0
+            }
+        },
+        "29/11/2025_Atletico 2000": {
+            "Pass. Chiave": {
+                "Accademia Frosinone": 21.0,
+                "Atletico 2000": 15.0
+            },
+            "Costr.din.basso": {
+                "Accademia Frosinone": 14.0
+            },
+            "Costr.Centr.": {
+                "Accademia Frosinone": 12.0
+            },
+            "Press.din.centr.": {
+                "Accademia Frosinone": 1.0
+            },
+            "Prima press.alta": {
+                "Accademia Frosinone": 4.0
+            },
+            "Costr.din.att.": {
+                "Accademia Frosinone": 8.0
+            },
+            "Cross": {
+                "Accademia Frosinone": 7.0,
+                "Atletico 2000": 4.0
+            },
+            "Dif.bassa": {
+                "Accademia Frosinone": 14.0
+            },
+            "TiroPiedeArea": {
+                "Atletico 2000": 7.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Az Prom": {
+                "Atletico 2000": 4.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Corner": {
+                "Atletico 2000": 4.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Tran.Offen.": {
+                "Accademia Frosinone": 7.0
+            },
+            "TiroDaFuori": {
+                "Atletico 2000": 3.0,
+                "Accademia Frosinone": 2.0
+            },
+            "Costr.  fondo": {
+                "Accademia Frosinone": 7.0
+            },
+            "Fuorigioco": {
+                "Accademia Frosinone": 1.0,
+                "Atletico 2000": 0.0
+            },
+            "OccGol": {
+                "Atletico 2000": 3.0,
+                "Accademia Frosinone": 0.0
+            },
+            "TiroTestaArea": {
+                "Atletico 2000": 3.0,
+                "Accademia Frosinone": 1.0
+            },
+            "Tran.dif": {
+                "Accademia Frosinone": 2.0
+            },
+            "GOL": {
+                "Accademia Frosinone": 0.0,
+                "Atletico 2000": 0.0
+            },
+            "IPO": {
+                "Accademia Frosinone": 0.0,
+                "Atletico 2000": 0.0
+            },
+            "Poss(min)": {
+                "Accademia Frosinone": 0.0,
+                "Atletico 2000": 0.0
+            },
+            "Poss(%)": {
+                "Accademia Frosinone": 0.0,
+                "Atletico 2000": 0.0
+            },
+            "PunLat": {
+                "Accademia Frosinone": 0.0,
+                "Atletico 2000": 0.0
+            },
+            "PunCentr": {
+                "Accademia Frosinone": 0.0,
+                "Atletico 2000": 0.0
+            },
+            "Espulsione": {
+                "Accademia Frosinone": 0.0,
+                "Atletico 2000": 0.0
+            },
+            "Rigore": {
+                "Accademia Frosinone": 0.0,
+                "Atletico 2000": 0.0
+            }
+        }
+    },
+    "giocatori": [
+        {
+            "GIOCATORE": "Franco",
+            "Unnamed: 1": "Prussiano",
+            "RUOLO": "POR",
+            "PRESENZE": 6.0,
+            "MIN GIOCATI": 480.0,
+            "GOAL": -7.0,
+            "ASSIST": 0.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Franco Prussiano"
+        },
+        {
+            "GIOCATORE": "Diego",
+            "Unnamed: 1": "Cerrone",
+            "RUOLO": "POR",
+            "PRESENZE": 3.0,
+            "MIN GIOCATI": 240.0,
+            "GOAL": -7.0,
+            "ASSIST": 0.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Diego Cerrone"
+        },
+        {
+            "GIOCATORE": "Flavio",
+            "Unnamed: 1": "Gottaldi",
+            "RUOLO": "POR",
+            "PRESENZE": 0.0,
+            "MIN GIOCATI": 0.0,
+            "GOAL": 0.0,
+            "ASSIST": 0.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Flavio Gottaldi"
+        },
+        {
+            "GIOCATORE": "Christian",
+            "Unnamed: 1": "Cardinali",
+            "RUOLO": "DIF",
+            "PRESENZE": 10.0,
+            "MIN GIOCATI": 551.0,
+            "GOAL": 0.0,
+            "ASSIST": 0.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Christian Cardinali"
+        },
+        {
+            "GIOCATORE": "Alessandro",
+            "Unnamed: 1": "Vozza",
+            "RUOLO": "DIF",
+            "PRESENZE": 11.0,
+            "MIN GIOCATI": 880.0,
+            "GOAL": 1.0,
+            "ASSIST": 0.0,
+            "GIALLO": 2.0,
+            "ROSSO": 0.0,
+            "Nome": "Alessandro Vozza"
+        },
+        {
+            "GIOCATORE": "Giovanni",
+            "Unnamed: 1": "Archilletti",
+            "RUOLO": "DIF",
+            "PRESENZE": 9.0,
+            "MIN GIOCATI": 636.0,
+            "GOAL": 0.0,
+            "ASSIST": 2.0,
+            "GIALLO": 3.0,
+            "ROSSO": 0.0,
+            "Nome": "Giovanni Archilletti"
+        },
+        {
+            "GIOCATORE": "Simone",
+            "Unnamed: 1": "Cappitelli",
+            "RUOLO": "DIF",
+            "PRESENZE": 10.0,
+            "MIN GIOCATI": 606.0,
+            "GOAL": 2.0,
+            "ASSIST": 0.0,
+            "GIALLO": 3.0,
+            "ROSSO": 0.0,
+            "Nome": "Simone Cappitelli"
+        },
+        {
+            "GIOCATORE": "Thomas Marco",
+            "Unnamed: 1": "Guinetti",
+            "RUOLO": "DIF",
+            "PRESENZE": 1.0,
+            "MIN GIOCATI": 6.0,
+            "GOAL": 0.0,
+            "ASSIST": 0.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Thomas Marco Guinetti"
+        },
+        {
+            "GIOCATORE": "Edoardo",
+            "Unnamed: 1": "Testa",
+            "RUOLO": "DIF",
+            "PRESENZE": 9.0,
+            "MIN GIOCATI": 290.0,
+            "GOAL": 0.0,
+            "ASSIST": 0.0,
+            "GIALLO": 2.0,
+            "ROSSO": 0.0,
+            "Nome": "Edoardo Testa"
+        },
+        {
+            "GIOCATORE": "Emanuele",
+            "Unnamed: 1": "Bruni",
+            "RUOLO": "DIF",
+            "PRESENZE": 0.0,
+            "MIN GIOCATI": 0.0,
+            "GOAL": 0.0,
+            "ASSIST": 0.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Emanuele Bruni"
+        },
+        {
+            "GIOCATORE": "Alessandro",
+            "Unnamed: 1": "Belli",
+            "RUOLO": "DIF",
+            "PRESENZE": 3.0,
+            "MIN GIOCATI": 176.0,
+            "GOAL": 0.0,
+            "ASSIST": 0.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Alessandro Belli"
+        },
+        {
+            "GIOCATORE": "Oualid",
+            "Unnamed: 1": "Zammour",
+            "RUOLO": "CENTR",
+            "PRESENZE": 10.0,
+            "MIN GIOCATI": 419.0,
+            "GOAL": 1.0,
+            "ASSIST": 0.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Oualid Zammour"
+        },
+        {
+            "GIOCATORE": "Stefano",
+            "Unnamed: 1": "Massa",
+            "RUOLO": "CENTR",
+            "PRESENZE": 8.0,
+            "MIN GIOCATI": 429.0,
+            "GOAL": 2.0,
+            "ASSIST": 1.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Stefano Massa"
+        },
+        {
+            "GIOCATORE": "Cristiano",
+            "Unnamed: 1": "D'Amico",
+            "RUOLO": "CENTR",
+            "PRESENZE": 10.0,
+            "MIN GIOCATI": 535.0,
+            "GOAL": 1.0,
+            "ASSIST": 3.0,
+            "GIALLO": 1.0,
+            "ROSSO": 0.0,
+            "Nome": "Cristiano D'Amico"
+        },
+        {
+            "GIOCATORE": "Lorenzo",
+            "Unnamed: 1": "Aversa",
+            "RUOLO": "CENTR",
+            "PRESENZE": 10.0,
+            "MIN GIOCATI": 443.0,
+            "GOAL": 1.0,
+            "ASSIST": 2.0,
+            "GIALLO": 2.0,
+            "ROSSO": 0.0,
+            "Nome": "Lorenzo Aversa"
+        },
+        {
+            "GIOCATORE": "Massimiliano",
+            "Unnamed: 1": "De Benedictis",
+            "RUOLO": "CENTR",
+            "PRESENZE": 11.0,
+            "MIN GIOCATI": 590.0,
+            "GOAL": 0.0,
+            "ASSIST": 2.0,
+            "GIALLO": 2.0,
+            "ROSSO": 0.0,
+            "Nome": "Massimiliano De Benedictis"
+        },
+        {
+            "GIOCATORE": "Paolo",
+            "Unnamed: 1": "Ferzoco",
+            "RUOLO": "CENTR",
+            "PRESENZE": 4.0,
+            "MIN GIOCATI": 124.0,
+            "GOAL": 1.0,
+            "ASSIST": 1.0,
+            "GIALLO": 1.0,
+            "ROSSO": 0.0,
+            "Nome": "Paolo Ferzoco"
+        },
+        {
+            "GIOCATORE": "Giovanni",
+            "Unnamed: 1": "Foglietta",
+            "RUOLO": "CENTR",
+            "PRESENZE": 8.0,
+            "MIN GIOCATI": 366.0,
+            "GOAL": 0.0,
+            "ASSIST": 3.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Giovanni Foglietta"
+        },
+        {
+            "GIOCATORE": "Leonardo",
+            "Unnamed: 1": "Evangelista",
+            "RUOLO": "ATT",
+            "PRESENZE": 11.0,
+            "MIN GIOCATI": 670.0,
+            "GOAL": 5.0,
+            "ASSIST": 2.0,
+            "GIALLO": 2.0,
+            "ROSSO": 0.0,
+            "Nome": "Leonardo Evangelista"
+        },
+        {
+            "GIOCATORE": "Mattia",
+            "Unnamed: 1": "Leonardi",
+            "RUOLO": "ATT",
+            "PRESENZE": 11.0,
+            "MIN GIOCATI": 639.0,
+            "GOAL": 3.0,
+            "ASSIST": 2.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Mattia Leonardi"
+        },
+        {
+            "GIOCATORE": "Alessandro",
+            "Unnamed: 1": "Orciuolo",
+            "RUOLO": "ATT",
+            "PRESENZE": 9.0,
+            "MIN GIOCATI": 108.0,
+            "GOAL": 1.0,
+            "ASSIST": 0.0,
+            "GIALLO": 2.0,
+            "ROSSO": 0.0,
+            "Nome": "Alessandro Orciuolo"
+        },
+        {
+            "GIOCATORE": "Lorenzo",
+            "Unnamed: 1": "Cedrone",
+            "RUOLO": "ATT",
+            "PRESENZE": 8.0,
+            "MIN GIOCATI": 497.0,
+            "GOAL": 2.0,
+            "ASSIST": 0.0,
+            "GIALLO": 1.0,
+            "ROSSO": 0.0,
+            "Nome": "Lorenzo Cedrone"
+        },
+        {
+            "GIOCATORE": "Vincenzo",
+            "Unnamed: 1": "Battaglia",
+            "RUOLO": "ATT",
+            "PRESENZE": 10.0,
+            "MIN GIOCATI": 564.0,
+            "GOAL": 3.0,
+            "ASSIST": 0.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Vincenzo Battaglia"
+        },
+        {
+            "GIOCATORE": "Brajan",
+            "Unnamed: 1": "Hoxhaj",
+            "RUOLO": "ATT",
+            "PRESENZE": 9.0,
+            "MIN GIOCATI": 203.0,
+            "GOAL": 0.0,
+            "ASSIST": 0.0,
+            "GIALLO": 3.0,
+            "ROSSO": 0.0,
+            "Nome": "Brajan Hoxhaj"
+        },
+        {
+            "GIOCATORE": "Niccolò",
+            "Unnamed: 1": "Cavaricci",
+            "RUOLO": "ATT",
+            "PRESENZE": 0.0,
+            "MIN GIOCATI": 0.0,
+            "GOAL": 0.0,
+            "ASSIST": 0.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Niccolò Cavaricci"
+        },
+        {
+            "GIOCATORE": "Davide",
+            "Unnamed: 1": "Marsella",
+            "RUOLO": "ATT",
+            "PRESENZE": 4.0,
+            "MIN GIOCATI": 72.0,
+            "GOAL": 0.0,
+            "ASSIST": 0.0,
+            "GIALLO": 0.0,
+            "ROSSO": 0.0,
+            "Nome": "Davide Marsella"
+        }
+    ]
+};
