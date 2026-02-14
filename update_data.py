@@ -14,17 +14,35 @@ def excel_to_json(file_path):
     # Process 'Partite' - Detailed stats per match
     df_partite = xl.parse('Partite')
     df_partite = df_partite.dropna(how='all')
-    partite_grouped = df_partite.groupby(['Data', 'Avversario'])
+    
+    # Extract goal distribution data
+    goal_distribution = []
+    goal_rows = df_partite[(df_partite['Attributo'].str.upper() == 'GOL') & (df_partite['Valore'] > 0)]
+    for _, row in goal_rows.iterrows():
+        goal_distribution.append({
+            "Data": str(row['Data']),
+            "Avversario": row['Avversario'],
+            "Competizione": row['Competizione'],
+            "Squadra": row['Squadra'],
+            "Minuto": row['Timer'],
+            "Frazione": row['Frazione']
+        })
+
+    # We need to preserve 'Frazione' (1° T, 2° T)
+    partite_grouped = df_partite.groupby(['Data', 'Avversario', 'Frazione'])
     
     matches_details = {}
-    for (date, opponent), group in partite_grouped:
+    for (date, opponent, period), group in partite_grouped:
+        # Create a key that includes the period if needed
+        # We'll store stats in a nested structure: match_key -> period -> stats
         match_key = f"{date}_{opponent}"
-        # Group by Attribute and Squadra to get values
+        if match_key not in matches_details:
+            matches_details[match_key] = {}
+        
         stats = {}
         for _, row in group.iterrows():
             attr = row['Attributo']
             team = row['Squadra']
-            # Sum the values instead of overwriting, treating NaNs as 0
             val = row['Valore'] if pd.notna(row['Valore']) else 0
             
             if attr not in stats:
@@ -32,7 +50,8 @@ def excel_to_json(file_path):
             if team not in stats[attr]:
                 stats[attr][team] = 0
             stats[attr][team] += val
-        matches_details[match_key] = stats
+        
+        matches_details[match_key][period] = stats
 
     # Process 'Squadra' - Player stats
     df_squadra = xl.parse('Squadra')
@@ -53,7 +72,8 @@ def excel_to_json(file_path):
     data = {
         "generale": generale_data,
         "partite_dettagli": matches_details,
-        "giocatori": players_data
+        "giocatori": players_data,
+        "distribuzione_gol": goal_distribution
     }
     
     # Handle NaNs by converting to None (which becomes null in JSON)

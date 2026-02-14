@@ -2,10 +2,16 @@ let dashboardData = null;
 let pointsChart = null;
 let goalsChart = null;
 let ipoTrendChart = null;
-let matchStatsChart = null;
-let possessionChart = null;
-let ipoChart = null;
-let selectedCompetition = 'Tutte';
+let comparisonChart = null;
+let dangerMatrixChart = null;
+let goalTimeChart = null;
+let ipoDiffChart = null;
+let keyPassDiffChart = null;
+let selectedCompetition = 'Campionato';
+let selectedPeriod = 'Tutta';
+
+// Register Chart.js DataLabels plugin
+Chart.register(ChartDataLabels);
 
 function init() {
     try {
@@ -24,7 +30,30 @@ function init() {
             updateDashboard();
             // Hide details when filtering competition
             document.getElementById('match-details').classList.add('hidden');
+            if (document.getElementById('match-placeholder')) {
+                document.getElementById('match-placeholder').classList.remove('hidden');
+            }
             document.getElementById('match-selector').value = "";
+        });
+
+        // Tab selection logic
+        document.querySelectorAll('.period-tab').forEach(button => {
+            button.addEventListener('click', () => {
+                selectedPeriod = button.dataset.period;
+                
+                // Update buttons UI
+                document.querySelectorAll('.period-tab').forEach(btn => {
+                    btn.classList.remove('bg-blue-900', 'text-white');
+                    btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+                });
+                button.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+                button.classList.add('bg-blue-900', 'text-white');
+
+                const matchValue = document.getElementById('match-selector').value;
+                if (matchValue) {
+                    renderMatchDetails(matchValue);
+                }
+            });
         });
 
         document.getElementById('match-selector').addEventListener('change', (e) => {
@@ -32,8 +61,27 @@ function init() {
                 renderMatchDetails(e.target.value);
             } else {
                 document.getElementById('match-details').classList.add('hidden');
+                if (document.getElementById('match-placeholder')) {
+                    document.getElementById('match-placeholder').classList.remove('hidden');
+                }
             }
         });
+
+        // Set default match to the latest one
+        const seasonData = getFilteredGenerale().filter(d => d["Frazione"] === "2° T");
+        if (seasonData.length > 0) {
+            const lastMatch = seasonData[seasonData.length - 1];
+            const lastMatchValue = `${lastMatch.Data}|${lastMatch.Avversario}`;
+            
+            // Populate the selector and render details
+            setTimeout(() => {
+                const selector = document.getElementById('match-selector');
+                if (selector) {
+                    selector.value = lastMatchValue;
+                    renderMatchDetails(lastMatchValue);
+                }
+            }, 100);
+        }
     } catch (error) {
         console.error('Errore nell\'inizializzazione della dashboard:', error);
     }
@@ -44,15 +92,18 @@ function updateDashboard() {
     populateMatchSelector();
     renderSeasonCharts();
     renderLastResults();
+    renderDangerMatrix();
+    renderGoalTimeChart();
+    renderPerformanceByMatchday();
 }
 
 function renderLastResults() {
     const listContainer = document.getElementById('last-results-list');
     listContainer.innerHTML = '';
     
-    // Get last matches from filtered data (2nd half rows only)
+    // Get all matches from filtered data (2nd half rows only)
     const filteredData = getFilteredGenerale().filter(d => d["Frazione"] === "2° T");
-    const lastMatches = filteredData.slice(-5).reverse(); // Last 5, most recent first
+    const lastMatches = [...filteredData].reverse(); // All matches, most recent first
 
     if (lastMatches.length === 0) {
         listContainer.innerHTML = '<div class="text-center text-gray-400 py-4 italic text-sm">Nessuna partita trovata</div>';
@@ -61,12 +112,23 @@ function renderLastResults() {
 
     lastMatches.forEach(match => {
         const resultDiv = document.createElement('div');
-        resultDiv.className = 'flex items-center justify-between p-2 rounded bg-gray-50 border-l-4 ' + getResultBorderColor(match);
+        const matchValue = `${match.Data}|${match.Avversario}`;
+        
+        // Add cursor-pointer and click event
+        resultDiv.className = 'flex items-center justify-between p-2 rounded bg-gray-50 border-l-4 cursor-pointer hover:bg-gray-100 transition-colors ' + getResultBorderColor(match);
         
         const date = match.Data.replace(' 00:00:00', '').substring(0, 10);
         const score = `${match["GOL fatti"]} - ${match["GOL Subiti"]}`;
         const opponent = match.Avversario;
         
+        resultDiv.onclick = () => {
+            const selector = document.getElementById('match-selector');
+            if (selector) {
+                selector.value = matchValue;
+                renderMatchDetails(matchValue);
+            }
+        };
+
         resultDiv.innerHTML = `
             <div class="flex flex-col">
                 <span class="text-[10px] text-gray-500 font-semibold">${date}</span>
@@ -212,9 +274,20 @@ function renderSeasonCharts() {
 
     // Calculate IPO for each match in the trend
     seasonData.forEach(d => {
-        const stats = findMatchStats(d.Data, d.Avversario);
-        if (stats) {
-            ipoValues.push(calculateIPO(stats, "Accademia Frosinone"));
+        const rawStats = findMatchStats(d.Data, d.Avversario);
+        if (rawStats) {
+            // IPO Trend is always for the FULL match
+            let fullStats = {};
+            Object.values(rawStats).forEach(pStats => {
+                for (const attr in pStats) {
+                    if (!fullStats[attr]) fullStats[attr] = {};
+                    for (const team in pStats[attr]) {
+                        if (!fullStats[attr][team]) fullStats[attr][team] = 0;
+                        fullStats[attr][team] += pStats[attr][team];
+                    }
+                }
+            });
+            ipoValues.push(calculateIPO(fullStats, "Accademia Frosinone"));
         } else {
             ipoValues.push(0);
         }
@@ -239,7 +312,10 @@ function renderSeasonCharts() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            plugins: {
+                datalabels: { display: false }
+            }
         }
     });
 
@@ -259,11 +335,26 @@ function renderSeasonCharts() {
                 {
                     label: 'IPO Avversario',
                     data: seasonData.map(d => {
-                        const stats = findMatchStats(d.Data, d.Avversario);
-                        if (stats) {
-                            const teams = Object.keys(stats["GOL"] || {});
-                            const oppTeam = teams.find(t => t !== "Accademia Frosinone") || "Avversario";
-                            return calculateIPO(stats, oppTeam);
+                        const rawStats = findMatchStats(d.Data, d.Avversario);
+                        if (rawStats) {
+                            let fullStats = {};
+                            Object.values(rawStats).forEach(pStats => {
+                                for (const attr in pStats) {
+                                    if (!fullStats[attr]) fullStats[attr] = {};
+                                    for (const team in pStats[attr]) {
+                                        if (!fullStats[attr][team]) fullStats[attr][team] = 0;
+                                        fullStats[attr][team] += pStats[attr][team];
+                                    }
+                                }
+                            });
+                            const teams = [];
+                            Object.values(fullStats).forEach(attrObj => {
+                                Object.keys(attrObj).forEach(t => {
+                                    if(t !== "Accademia Frosinone" && t !== "NaN" && !teams.includes(t)) teams.push(t);
+                                });
+                            });
+                            const oppTeam = teams[0] || "Avversario";
+                            return calculateIPO(fullStats, oppTeam);
                         }
                         return 0;
                     }),
@@ -277,7 +368,10 @@ function renderSeasonCharts() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            scales: { y: { beginAtZero: true } }
+            scales: { y: { beginAtZero: true } },
+            plugins: {
+                datalabels: { display: false }
+            }
         }
     });
 
@@ -304,7 +398,10 @@ function renderSeasonCharts() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            plugins: {
+                datalabels: { display: false }
+            }
         }
     });
 }
@@ -346,103 +443,471 @@ function calculateIPO(stats, team) {
     return parseFloat(ipo.toFixed(1));
 }
 
+function renderPerformanceByMatchday() {
+    const ctxIpoDiff = document.getElementById('ipoDiffChart').getContext('2d');
+    const ctxPassDiff = document.getElementById('keyPassDiffChart').getContext('2d');
+    
+    if (ipoDiffChart) ipoDiffChart.destroy();
+    if (keyPassDiffChart) keyPassDiffChart.destroy();
+
+    const filteredData = getFilteredGenerale();
+    const seasonData = filteredData.filter(d => d["Frazione"] === "2° T");
+    const labels = seasonData.map(d => d["Avversario"]);
+    
+    const frosinone = "Accademia Frosinone";
+    const ipoDiffs = [];
+    const passDiffs = [];
+
+    seasonData.forEach(d => {
+        const rawStats = findMatchStats(d.Data, d.Avversario);
+        if (rawStats) {
+            let fullStats = {};
+            Object.values(rawStats).forEach(pStats => {
+                for (const attr in pStats) {
+                    if (!fullStats[attr]) fullStats[attr] = {};
+                    for (const team in pStats[attr]) {
+                        if (!fullStats[attr][team]) fullStats[attr][team] = 0;
+                        fullStats[attr][team] += pStats[attr][team];
+                    }
+                }
+            });
+
+            // Opponent name
+            let teams = [];
+            Object.values(fullStats).forEach(attrObj => {
+                Object.keys(attrObj).forEach(t => {
+                    if(t !== frosinone && t !== "NaN" && !teams.includes(t)) teams.push(t);
+                });
+            });
+            const oppTeam = teams[0] || "Avversario";
+
+            // IPO Diff
+            const ipoMe = calculateIPO(fullStats, frosinone);
+            const ipoOpp = calculateIPO(fullStats, oppTeam);
+            ipoDiffs.push(+(ipoMe - ipoOpp).toFixed(1));
+
+            // Pass Diff
+            let passMe = 0;
+            let passOpp = 0;
+            const passKeys = ["Pass. Chiave", "PassChiave"];
+            passKeys.forEach(k => {
+                if (fullStats[k]) {
+                    passMe += fullStats[k][frosinone] || 0;
+                    passOpp += fullStats[k][oppTeam] || 0;
+                }
+            });
+            passDiffs.push(passMe - passOpp);
+        } else {
+            ipoDiffs.push(0);
+            passDiffs.push(0);
+        }
+    });
+
+    const createChart = (ctx, label, data, color) => {
+        return new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: label,
+                    data: data,
+                    backgroundColor: data.map(v => v >= 0 ? 'rgba(30, 58, 138, 0.7)' : 'rgba(239, 68, 68, 0.7)'),
+                    borderColor: data.map(v => v >= 0 ? 'rgb(30, 58, 138)' : 'rgb(239, 68, 68)'),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { 
+                        beginAtZero: true,
+                        grid: {
+                            color: (c) => c.tick.value === 0 ? '#000' : 'rgba(0,0,0,0.1)'
+                        }
+                    }
+                },
+                plugins: {
+                    datalabels: {
+                        anchor: (context) => context.dataset.data[context.dataIndex] >= 0 ? 'end' : 'start',
+                        align: (context) => context.dataset.data[context.dataIndex] >= 0 ? 'top' : 'bottom',
+                        display: 'auto',
+                        font: { size: 10, weight: 'bold' }
+                    }
+                }
+            }
+        });
+    };
+
+    ipoDiffChart = createChart(ctxIpoDiff, 'Diff. IPO (Me - Avv)', ipoDiffs);
+    keyPassDiffChart = createChart(ctxPassDiff, 'Diff. Passaggi Chiave (Me - Avv)', passDiffs);
+}
+
+function renderGoalTimeChart() {
+    const ctx = document.getElementById('goalTimeChart').getContext('2d');
+    if (goalTimeChart) goalTimeChart.destroy();
+
+    const frosinone = "Accademia Frosinone";
+    const distribution = dashboardData.distribuzione_gol || [];
+    
+    // Filter by competition if not 'Tutte'
+    const filtered = selectedCompetition === 'Tutte' 
+        ? distribution 
+        : distribution.filter(g => g.Competizione === selectedCompetition);
+
+    // Updated labels with multi-line for axis grouping
+    const labels = [
+        ["0-10'", "1° T"], "10-20'", "20-30'", "30-40'", "40+'",
+        ["0-10'", "2° T"], "10-20'", "20-30'", "30-40'", "40+'"
+    ];
+    const dataFrosinone = new Array(labels.length).fill(0);
+    const dataOpponent = new Array(labels.length).fill(0);
+
+    filtered.forEach(g => {
+        let min = parseFloat(g.Minuto) || 0;
+        let baseSlot = g.Frazione === "2° T" ? 5 : 0;
+        
+        // Calculate slot (0-10=0, 10-20=1, 20-30=2, 30-40=3, 40+=4)
+        let slotInHalf = Math.floor(min / 10);
+        if (slotInHalf > 4) slotInHalf = 4; // Max index 4 for 40+
+        if (min >= 40) slotInHalf = 4;      // Ensure any 40+ goes to the last slot
+        
+        const slotIndex = baseSlot + slotInHalf;
+        if (slotIndex >= 0 && slotIndex < labels.length) {
+            if (g.Squadra === frosinone) {
+                dataFrosinone[slotIndex]++;
+            } else {
+                dataOpponent[slotIndex]++;
+            }
+        }
+    });
+
+    goalTimeChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Gol Fatti',
+                    data: dataFrosinone,
+                    backgroundColor: 'rgba(30, 58, 138, 0.8)',
+                    borderColor: 'rgb(30, 58, 138)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Gol Subiti',
+                    data: dataOpponent,
+                    backgroundColor: 'rgba(239, 68, 68, 0.8)',
+                    borderColor: 'rgb(239, 68, 68)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { stepSize: 1 },
+                    title: { display: true, text: 'Numero di Gol' }
+                },
+                x: {
+                    title: { display: true, text: 'Minuto di gioco' },
+                    grid: {
+                        drawOnChartArea: false
+                    }
+                }
+            },
+            plugins: {
+                legend: { position: 'top' },
+                datalabels: {
+                    anchor: 'end',
+                    align: 'top',
+                    display: (context) => context.dataset.data[context.dataIndex] > 0
+                }
+            }
+        }
+    });
+}
+
+function renderDangerMatrix() {
+    const ctxMatrix = document.getElementById('dangerMatrixChart').getContext('2d');
+    const filteredData = getFilteredGenerale();
+    const seasonData = filteredData.filter(d => d["Frazione"] === "2° T");
+    
+    if (dangerMatrixChart) dangerMatrixChart.destroy();
+
+    const frosinone = "Accademia Frosinone";
+    const scatterData = [];
+
+    seasonData.forEach(d => {
+        const rawStats = findMatchStats(d.Data, d.Avversario);
+        if (rawStats) {
+            let fullStats = {};
+            Object.values(rawStats).forEach(pStats => {
+                for (const attr in pStats) {
+                    if (!fullStats[attr]) fullStats[attr] = {};
+                    for (const team in pStats[attr]) {
+                        if (!fullStats[attr][team]) fullStats[attr][team] = 0;
+                        fullStats[attr][team] += pStats[attr][team];
+                    }
+                }
+            });
+
+            // Find opponent name
+            let oppTeam = "Avversario";
+            for (const attr in fullStats) {
+                const teamNames = Object.keys(fullStats[attr]);
+                const found = teamNames.find(t => t !== frosinone && t !== "NaN" && t !== "null");
+                if (found) { oppTeam = found; break; }
+            }
+
+            // Calculate IPO Diff
+            const ipoMe = calculateIPO(fullStats, frosinone);
+            const ipoOpp = calculateIPO(fullStats, oppTeam);
+            const ipoDiff = ipoMe - ipoOpp;
+
+            // Calculate Passaggi Chiave Diff
+            const passKeys = ["Pass. Chiave", "PassChiave"];
+            let passMe = 0;
+            let passOpp = 0;
+            passKeys.forEach(k => {
+                if (fullStats[k]) {
+                    passMe += fullStats[k][frosinone] || 0;
+                    passOpp += fullStats[k][oppTeam] || 0;
+                }
+            });
+            const passDiff = passMe - passOpp;
+
+            scatterData.push({
+                x: passDiff,
+                y: ipoDiff,
+                match: `${d.Data.split(' ')[0]} vs ${d.Avversario}`
+            });
+        }
+    });
+
+    dangerMatrixChart = new Chart(ctxMatrix, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Partite',
+                data: scatterData,
+                backgroundColor: 'rgba(30, 58, 138, 0.7)',
+                pointRadius: 6,
+                pointHoverRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    title: { display: true, text: 'Diff. Passaggi Chiave (Me - Avv)' },
+                    grid: {
+                        color: (context) => context.tick.value === 0 ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.1)',
+                        lineWidth: (context) => context.tick.value === 0 ? 2 : 1
+                    }
+                },
+                y: {
+                    title: { display: true, text: 'Diff. IPO (Me - Avv)' },
+                    grid: {
+                        color: (context) => context.tick.value === 0 ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.1)',
+                        lineWidth: (context) => context.tick.value === 0 ? 2 : 1
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const d = context.raw;
+                            return [
+                                `Partita: ${d.match}`,
+                                `Diff. Passaggi: ${d.x}`,
+                                `Diff. IPO: ${d.y.toFixed(1)}`
+                            ];
+                        }
+                    }
+                },
+                datalabels: {
+                    align: 'top',
+                    offset: 5,
+                    formatter: (value) => value.match.split(' vs ')[1], // Mostra solo l'avversario
+                    font: { size: 9 },
+                    display: 'auto'
+                }
+            }
+        }
+    });
+}
+
 function renderMatchDetails(matchValue) {
     const detailsSection = document.getElementById('match-details');
+    const placeholder = document.getElementById('match-placeholder');
+    
     detailsSection.classList.remove('hidden');
+    if (placeholder) placeholder.classList.add('hidden');
     
     const [date, opponent] = matchValue.split('|');
-    const stats = findMatchStats(date, opponent);
+    const rawStats = findMatchStats(date, opponent);
     
-    if (!stats) {
+    if (!rawStats) {
         console.error('Statistiche non trovate per:', matchValue);
         return;
     }
 
-    const title = `${date.replace(' 00:00:00', '')} vs ${opponent}`;
+    // Process stats based on selectedPeriod
+    let stats = {};
+    if (selectedPeriod === 'Tutta') {
+        const periods = Object.keys(rawStats);
+        periods.forEach(p => {
+            const pStats = rawStats[p];
+            for (const attr in pStats) {
+                if (!stats[attr]) stats[attr] = {};
+                for (const team in pStats[attr]) {
+                    if (!stats[attr][team]) stats[attr][team] = 0;
+                    stats[attr][team] += pStats[attr][team];
+                }
+            }
+        });
+    } else {
+        stats = rawStats[selectedPeriod] || {};
+    }
+
+    const title = `${date.replace(' 00:00:00', '')} vs ${opponent} (${selectedPeriod})`;
     document.getElementById('match-title').textContent = `Dettagli: ${title}`;
     
-    const teams = Object.keys(stats["GOL"] || {}); // Get team names
     const frosinone = "Accademia Frosinone";
-    const homeTeam = teams.find(t => t !== frosinone) || "Avversario";
+    let oppTeam = opponent; // Default to the name in the selector
+    
+    // Try to find the exact team name used in the stats if different from 'opponent'
+    // Search in all attributes
+    for (const attr in stats) {
+        const teamNames = Object.keys(stats[attr]);
+        const found = teamNames.find(t => t !== frosinone && t !== "NaN" && t !== "null");
+        if (found) {
+            oppTeam = found;
+            break;
+        }
+    }
 
-    // Prepare data for Bar chart (comparison)
-    const attributes = ["GOL", "OccGol", "TiroPiedeArea", "TiroDaFuori", "Pass. Chiave", "Corner", "Fuorigioco"];
-    const frosinoneStats = attributes.map(attr => (stats[attr] && stats[attr][frosinone]) || 0);
-    const opponentStats = attributes.map(attr => (stats[attr] && stats[attr][homeTeam]) || 0);
+    // Attributes to compare
+    const config = [
+        { label: "GOL", key: ["GOL", "Gol"] },
+        { label: "IPO (Calcolato)", isIPO: true },
+        { label: "Passaggi Chiave", key: ["Pass. Chiave", "PassChiave"] },
+        { label: "Rigore", key: ["Rigore"] },
+        { label: "Occasione da Gol", key: ["Occasione da gol", "OccGol"] },
+        { label: "Azione Promettente", key: ["Azione promettente", "Az Prom"] },
+        { label: "Tiro Testa Area", key: ["Tiro testa in area", "TiroTestaArea"] },
+        { label: "Tiro Piede Area", key: ["Tiro di piede Area", "TiroPiedeArea"] },
+        { label: "Tiro da Fuori", key: ["Tiro da Fuori", "TiroDaFuori"] },
+        { label: "Punizione Centrale", key: ["Punizione Centrale", "PunCentr"] },
+        { label: "Punizione Laterale", key: ["Punizione Laterale", "PunLat"] },
+        { label: "Cross", key: ["Cross"] },
+        { label: "Corner", key: ["Corner"] },
+        { label: "Fuorigioco", key: ["Fuorigioco"] }
+    ];
 
-    if (matchStatsChart) matchStatsChart.destroy();
-    const ctxMatch = document.getElementById('matchStatsChart').getContext('2d');
-    matchStatsChart = new Chart(ctxMatch, {
+    const labels = config.map(c => c.label);
+    
+    const getVal = (team, keys) => {
+        if (!keys) return 0;
+        for (const k of keys) {
+            if (stats[k] && stats[k][team] !== undefined) return parseFloat(stats[k][team]) || 0;
+        }
+        return 0;
+    };
+
+    const frosinoneAbs = config.map(c => {
+        const val = c.isIPO ? calculateIPO(stats, frosinone) : getVal(frosinone, c.key);
+        return Math.floor(val);
+    });
+
+    const opponentAbs = config.map(c => {
+        const val = c.isIPO ? calculateIPO(stats, oppTeam) : getVal(oppTeam, c.key);
+        return Math.floor(val);
+    });
+
+    const frosinoneData = frosinoneAbs.map((v, i) => {
+        const total = v + opponentAbs[i];
+        return total > 0 ? parseFloat((v / total * 100).toFixed(1)) : 0;
+    });
+
+    const opponentData = opponentAbs.map((v, i) => {
+        const total = v + frosinoneAbs[i];
+        return total > 0 ? parseFloat((v / total * 100).toFixed(1)) : 0;
+    });
+
+    if (comparisonChart) comparisonChart.destroy();
+    const ctx = document.getElementById('comparisonChart').getContext('2d');
+    
+    comparisonChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: attributes,
+            labels: labels,
             datasets: [
                 {
                     label: frosinone,
-                    data: frosinoneStats,
-                    backgroundColor: 'rgba(30, 58, 138, 0.8)'
+                    data: frosinoneData,
+                    backgroundColor: 'rgba(30, 58, 138, 0.8)',
+                    borderColor: 'rgb(30, 58, 138)',
+                    borderWidth: 1,
+                    absValues: frosinoneAbs,
+                    stack: 'total'
                 },
                 {
-                    label: homeTeam,
-                    data: opponentStats,
-                    backgroundColor: 'rgba(239, 68, 68, 0.8)'
+                    label: oppTeam,
+                    data: opponentData,
+                    backgroundColor: 'rgba(239, 68, 68, 0.8)',
+                    borderColor: 'rgb(239, 68, 68)',
+                    borderWidth: 1,
+                    absValues: opponentAbs,
+                    stack: 'total'
                 }
             ]
         },
         options: {
             indexAxis: 'y',
             responsive: true,
-            maintainAspectRatio: false
-        }
-    });
-
-    // Possession Donut
-    if (possessionChart) possessionChart.destroy();
-    const posFrosinone = (stats["Poss(%)"] && stats["Poss(%)"][frosinone]) || 0;
-    // The data seems to have % as a difference or absolute? 
-    // Let's check "Poss(min)" for a better share
-    const minFro = (stats["Poss(min)"] && stats["Poss(min)"][frosinone]) || 0;
-    const minOpp = (stats["Poss(min)"] && stats["Poss(min)"][homeTeam]) || 0;
-    const totalMin = minFro + minOpp || 1;
-
-    const ctxPos = document.getElementById('possessionChart').getContext('2d');
-    possessionChart = new Chart(ctxPos, {
-        type: 'doughnut',
-        data: {
-            labels: [frosinone, homeTeam],
-            datasets: [{
-                data: [minFro, minOpp],
-                backgroundColor: ['rgb(30, 58, 138)', 'rgb(239, 68, 68)']
-            }]
-        },
-        options: {
-            responsive: true,
             maintainAspectRatio: false,
+            scales: {
+                x: {
+                    stacked: true,
+                    beginAtZero: true,
+                    max: 100,
+                    title: { display: true, text: '% Incidenza' },
+                    grid: { display: true }
+                },
+                y: {
+                    stacked: true,
+                    grid: { display: false }
+                }
+            },
             plugins: {
-                legend: { position: 'bottom' }
+                legend: { position: 'top' },
+                tooltip: { 
+                    callbacks: {
+                        label: function(context) {
+                            const abs = context.dataset.absValues[context.dataIndex];
+                            return `${context.dataset.label}: ${context.raw}% (Assoluto: ${abs})`;
+                        }
+                    }
+                },
+                datalabels: {
+                    display: (context) => context.dataset.data[context.dataIndex] > 5,
+                    color: '#fff',
+                    anchor: 'center',
+                    align: 'center',
+                    font: { weight: 'bold', size: 11 },
+                    formatter: (value, context) => {
+                        const abs = context.dataset.absValues[context.dataIndex];
+                        return abs > 0 ? `(${abs})` : '';
+                    }
+                }
             }
-        }
-    });
-
-    // IPO Chart
-    if (ipoChart) ipoChart.destroy();
-    const ipoFro = calculateIPO(stats, frosinone);
-    const ipoOpp = calculateIPO(stats, homeTeam);
-    const ctxIpo = document.getElementById('ipoChart').getContext('2d');
-    ipoChart = new Chart(ctxIpo, {
-        type: 'bar',
-        data: {
-            labels: [frosinone, homeTeam],
-            datasets: [{
-                label: 'IPO',
-                data: [ipoFro, ipoOpp],
-                backgroundColor: ['rgb(30, 58, 138)', 'rgb(239, 68, 68)']
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: { y: { beginAtZero: true } }
         }
     });
 

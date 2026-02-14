@@ -6,11 +6,22 @@
     <title>MatchData Dashboard - Accademia Frosinone U16</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <style>
         .chart-container {
             position: relative;
             height: 300px;
             width: 100%;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1e3a8a;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -24,7 +35,7 @@
                     <label for="competition-selector" class="text-sm font-medium whitespace-nowrap">Competizione:</label>
                     <select id="competition-selector" class="bg-blue-800 border border-blue-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         <option value="Tutte">Tutte</option>
-                        <option value="Campionato">Campionato</option>
+                        <option value="Campionato" selected>Campionato</option>
                         <option value="Amichevole">Amichevole</option>
                     </select>
                 </div>
@@ -40,43 +51,78 @@
 
     <main class="container mx-auto mt-8 px-4">
         
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
-            <!-- Last Results Section -->
-            <div class="lg:col-span-1 bg-white p-4 rounded-lg shadow-md border-t-4 border-blue-900">
-                <h2 class="text-xs font-bold mb-3 text-gray-500 uppercase tracking-wider border-b pb-2">Ultimi Risultati</h2>
-                <div id="last-results-list" class="flex flex-col gap-2">
+        <!-- Summary Totals Row (Full Width) -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-600 flex flex-col justify-center">
+                <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Partite Giocate</p>
+                <p class="text-2xl font-bold text-gray-800" id="total-matches">-</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-500 flex flex-col justify-center">
+                <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Gol Segnati</p>
+                <p class="text-2xl font-bold text-gray-800" id="total-goals">-</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-yellow-500 flex flex-col justify-center">
+                <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Punti Totali</p>
+                <p class="text-2xl font-bold text-gray-800" id="total-points">-</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-red-500 flex flex-col justify-center">
+                <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Gol Subiti</p>
+                <p class="text-2xl font-bold text-gray-800" id="total-conceded">-</p>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+            <!-- Last Results Section (Sidebar) -->
+            <div class="lg:col-span-2 bg-white p-4 rounded-lg shadow-md border-t-4 border-blue-900 flex flex-col h-[650px]">
+                <h2 class="text-xs font-bold mb-3 text-gray-500 uppercase tracking-wider border-b pb-2">Risultati</h2>
+                <div id="last-results-list" class="flex flex-col gap-2 overflow-y-auto pr-2 custom-scrollbar">
                     <!-- Dynamic Content -->
                     <div class="text-center text-gray-400 py-4 italic text-sm">Caricamento...</div>
                 </div>
             </div>
 
-            <!-- Summary Dashboard -->
-            <div class="lg:col-span-3">
-                <section class="grid grid-cols-2 md:grid-cols-4 gap-4 h-full">
-                    <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-600 flex flex-col justify-center">
-                        <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Partite Giocate</p>
-                        <p class="text-2xl font-bold text-gray-800" id="total-matches">-</p>
+            <!-- Match Details -->
+            <div class="lg:col-span-6">
+                <section id="match-details" class="bg-white p-6 rounded-lg shadow-md hidden h-[650px] flex flex-col">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b-2 border-blue-500 pb-2" id="match-title">Dettagli Partita</h2>
+                    
+                    <div class="flex gap-2 mb-4">
+                        <button data-period="Tutta" class="period-tab px-4 py-2 rounded-lg font-medium transition-colors bg-blue-900 text-white">Partita Intera</button>
+                        <button data-period="1° T" class="period-tab px-4 py-2 rounded-lg font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">1° Tempo</button>
+                        <button data-period="2° T" class="period-tab px-4 py-2 rounded-lg font-medium transition-colors bg-gray-200 text-gray-700 hover:bg-gray-300">2° Tempo</button>
                     </div>
-                    <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-500 flex flex-col justify-center">
-                        <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Gol Segnati</p>
-                        <p class="text-2xl font-bold text-gray-800" id="total-goals">-</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-yellow-500 flex flex-col justify-center">
-                        <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Punti Totali</p>
-                        <p class="text-2xl font-bold text-gray-800" id="total-points">-</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-red-500 flex flex-col justify-center">
-                        <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Gol Subiti</p>
-                        <p class="text-2xl font-bold text-gray-800" id="total-conceded">-</p>
+
+                    <div class="flex-grow min-h-0">
+                        <div class="chart-container h-full">
+                            <canvas id="comparisonChart"></canvas>
+                        </div>
                     </div>
                 </section>
+                
+                <!-- Placeholder when no match is selected -->
+                <div id="match-placeholder" class="bg-white p-12 rounded-lg shadow-md flex flex-col items-center justify-center text-gray-400 border-2 border-dashed border-gray-200 h-[650px]">
+                    <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    <p class="text-lg font-medium text-center">Seleziona una partita dal menu in alto o dai risultati per vedere i dettagli</p>
+                </div>
+            </div>
+
+            <!-- Goal Distribution (Moved next to results and match details) -->
+            <div class="lg:col-span-4 bg-white p-6 rounded-lg shadow-md h-[650px] flex flex-col">
+                <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b-2 border-blue-500 pb-2">Distribuzione Gol</h2>
+                <div class="flex-grow min-h-0">
+                    <div class="chart-container h-full">
+                        <canvas id="goalTimeChart"></canvas>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-400 mt-2 italic text-center">Gol fatti (Blu) e subiti (Rossi)</p>
             </div>
         </div>
 
         <!-- Season Overview -->
         <section class="mb-12">
             <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b-2 border-blue-500 pb-2">Andamento Stagione</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Row 1: Points and Goals Distribution -->
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="text-lg font-medium mb-4 text-gray-700">Punti Totali</h3>
                     <div class="chart-container">
@@ -84,48 +130,46 @@
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-lg font-medium mb-4 text-gray-700">Indice IPO (Media)</h3>
+                    <h3 class="text-lg font-medium mb-4 text-gray-700">Differenza IPO per Giornata</h3>
+                    <div class="chart-container">
+                        <canvas id="ipoDiffChart"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2 italic text-center">Differenza tra IPO Acc. Frosinone e Avversario</p>
+                </div>
+
+                <!-- Row 2: IPO Comparison and Key Pass Diff -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-medium mb-4 text-gray-700">Indice IPO (Confronto)</h3>
                     <div class="chart-container">
                         <canvas id="ipoTrendChart"></canvas>
                     </div>
                 </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-medium mb-4 text-gray-700">Diff. Passaggi Chiave per Giornata</h3>
+                    <div class="chart-container">
+                        <canvas id="keyPassDiffChart"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2 italic text-center">Differenza tra Passaggi Chiave fatti e subiti</p>
+                </div>
+
+                <!-- Row 3: Goals Comparison and Danger Matrix -->
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="text-lg font-medium mb-4 text-gray-700">Gol Fatti vs Subiti</h3>
                     <div class="chart-container">
                         <canvas id="goalsChart"></canvas>
                     </div>
                 </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-medium mb-4 text-gray-700">Matrice di Pericolosità</h3>
+                    <div class="chart-container h-[300px]">
+                        <canvas id="dangerMatrixChart"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2 italic text-center">X: Diff. Passaggi Chiave | Y: Diff. IPO (Positivo = Superiorità)</p>
+                </div>
             </div>
         </section>
 
-        <!-- Match Details -->
-        <section id="match-details" class="mb-12 hidden">
-            <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b-2 border-blue-500 pb-2" id="match-title">Dettagli Partita</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Main Stats -->
-                <div class="bg-white p-6 rounded-lg shadow-md md:col-span-2">
-                    <h3 class="text-lg font-medium mb-4 text-gray-700">Statistiche Comparate</h3>
-                    <div class="chart-container" style="height: 400px;">
-                        <canvas id="matchStatsChart"></canvas>
-                    </div>
-                </div>
-                <!-- Possession and Index -->
-                <div class="flex flex-col gap-6">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-lg font-medium mb-4 text-gray-700">Possesso Palla</h3>
-                        <div class="chart-container" style="height: 200px;">
-                            <canvas id="possessionChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h3 class="text-lg font-medium mb-4 text-gray-700">Indice Prestazione (IPO)</h3>
-                        <div class="chart-container" style="height: 200px;">
-                            <canvas id="ipoChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    </main>
 
     </main>
 
