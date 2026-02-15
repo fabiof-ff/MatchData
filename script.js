@@ -253,12 +253,14 @@ function renderLastResults() {
         // Scegli simbolo
         let symbol = '';
         if (match["Casa / Trasferta"] === 'Casa') {
+            // Casa: icona home stilizzata blu
             symbol = `<span title="Partita in casa" class="mr-1 align-middle">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M9 21V9h6v12"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#2563eb" stroke="none"><path d="M12 3l9 9-1.5 1.5L12 6l-7.5 7.5L3 12z"/><rect x="7" y="13" width="10" height="7" rx="2" fill="#2563eb"/></svg>
             </span>`;
         } else if (match["Casa / Trasferta"] === 'Trasferta') {
+            // Trasferta: icona pin/location arancione
             symbol = `<span title="Partita in trasferta" class="mr-1 align-middle">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="19" r="2"/><path d="M5 17V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v10"/><path d="M17 17a2 2 0 0 0 2 2"/><path d="M7 17a2 2 0 0 1-2 2"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e42" stroke="none"><path d="M12 2C7.58 2 4 5.58 4 10c0 5.25 7.25 12 8 12s8-6.75 8-12c0-4.42-3.58-8-8-8zm0 10.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
             </span>`;
         }
         resultDiv.innerHTML = `
