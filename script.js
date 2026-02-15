@@ -299,33 +299,43 @@ function updateSummaryHeader() {
     const filteredData = getFilteredGenerale();
     // Filter for 2° T rows
     const sessionEndData = filteredData.filter(d => d["Frazione"] === "2° T");
-    
+
     const totalMatches = sessionEndData.length;
     let totalGoals = 0;
     let totalPoints = 0;
     let totalConceded = 0;
 
-    if (selectedCompetition === 'Tutte') {
-        const lastRow = sessionEndData[sessionEndData.length - 1] || {};
-        totalGoals = lastRow["Gol Fatti (tot)"] || 0;
-        totalPoints = lastRow["Punti (tot)"] || 0;
-        totalConceded = lastRow["Gol Subiti (tot)"] || 0;
-    } else {
-        // Recalculate totals for specific competition since (tot) fields are global cumulative in the CSV usually
-        // Actually, looking at the data, it might be better to sum up individual match results if they are relative
-        // Let's check data.js again if (tot) is global or per competition.
-        // Usually these are global. Let's sum "GOL fatti", "GOL Subiti" and "Punti".
-        sessionEndData.forEach(row => {
-            totalGoals += (row["GOL fatti"] || 0);
-            totalConceded += (row["GOL Subiti"] || 0);
-            totalPoints += (row["Punti"] || 0);
-        });
-    }
-    
-        document.getElementById('total-matches').textContent = totalMatches; // Total Matches
-        document.getElementById('total-goals').textContent = totalGoals; // Total Goals
-        document.getElementById('total-points').textContent = totalPoints; // Total Points
-        document.getElementById('total-conceded').textContent = totalConceded; // Total Conceded
+    // Sum goals and points from partite_dettagli for filtered matches
+    sessionEndData.forEach(row => {
+        const matchKey = `${row.Data}_${row.Avversario}`;
+        let golFatti = 0;
+        let golSubiti = 0;
+        if (dashboardData.partite_dettagli[matchKey]) {
+            for (const frazione in dashboardData.partite_dettagli[matchKey]) {
+                const stats = dashboardData.partite_dettagli[matchKey][frazione];
+                Object.keys(stats).forEach(key => {
+                    if (key.toLowerCase() === 'gol') {
+                        const golObj = stats[key];
+                        if (golObj["Accademia Frosinone"] !== undefined) golFatti += golObj["Accademia Frosinone"];
+                        for (const team in golObj) {
+                            if (team !== "Accademia Frosinone") golSubiti += golObj[team];
+                        }
+                    }
+                });
+            }
+        }
+        totalGoals += golFatti;
+        totalConceded += golSubiti;
+        // Calcolo punti: 3 per vittoria, 1 per pareggio, 0 per sconfitta
+        if (golFatti > golSubiti) totalPoints += 3;
+        else if (golFatti === golSubiti && (golFatti > 0 || golSubiti > 0)) totalPoints += 1;
+        // Se entrambi 0, nessun punto (partita non giocata)
+    });
+
+    document.getElementById('total-matches').textContent = totalMatches; // Total Matches
+    document.getElementById('total-goals').textContent = totalGoals; // Total Goals
+    document.getElementById('total-points').textContent = totalPoints; // Total Points
+    document.getElementById('total-conceded').textContent = totalConceded; // Total Conceded
 }
 
 function populateMatchSelector() {
