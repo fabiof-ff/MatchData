@@ -731,122 +731,7 @@ function calculateIPO(stats, team) {
 }
 
 function renderPerformanceByMatchday() {
-    const ctxIpoDiff = document.getElementById('ipoDiffChart').getContext('2d');
-    const ctxPassDiff = document.getElementById('keyPassDiffChart').getContext('2d');
-    
-    if (ipoDiffChart) ipoDiffChart.destroy();
-    if (keyPassDiffChart) keyPassDiffChart.destroy();
-
-    const filteredData = getFilteredGenerale();
-    const seasonData = filteredData.filter(d => d["Frazione"] === "2° T");
-    const labels = seasonData.map(d => d["Avversario"]);
-    
-    const frosinone = "Accademia Frosinone";
-    const ipoDiffs = [];
-    const passDiffs = [];
-
-    seasonData.forEach(d => {
-        const rawStats = findMatchStats(d.Data, d.Avversario);
-        if (rawStats) {
-            let fullStats = {};
-            Object.values(rawStats).forEach(pStats => {
-                for (const attr in pStats) {
-                    if (!fullStats[attr]) fullStats[attr] = {};
-                    for (const team in pStats[attr]) {
-                        if (!fullStats[attr][team]) fullStats[attr][team] = 0;
-                        fullStats[attr][team] += pStats[attr][team];
-                    }
-                }
-            });
-
-            // Opponent name
-            let teams = [];
-            Object.values(fullStats).forEach(attrObj => {
-                Object.keys(attrObj).forEach(t => {
-                    if(t !== frosinone && t !== "NaN" && !teams.includes(t)) teams.push(t);
-                });
-            });
-            const oppTeam = teams[0] || "Avversario";
-
-            // IPO Diff
-            const ipoMe = calculateIPO(fullStats, frosinone);
-            const ipoOpp = calculateIPO(fullStats, oppTeam);
-            ipoDiffs.push(+(ipoMe - ipoOpp).toFixed(1));
-
-            // Pass Diff
-            let passMe = 0;
-            let passOpp = 0;
-            const passKeys = ["Pass. Chiave", "PassChiave"];
-            passKeys.forEach(k => {
-                if (fullStats[k]) {
-                    passMe += fullStats[k][frosinone] || 0;
-                    passOpp += fullStats[k][oppTeam] || 0;
-                }
-            });
-            passDiffs.push(passMe - passOpp);
-        } else {
-            ipoDiffs.push(0);
-            passDiffs.push(0);
-        }
-    });
-
-    const createChart = (ctx, label, data, color) => {
-        return new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: label,
-                    data: data,
-                    backgroundColor: seasonData.map((d, i) => {
-                        const matchKey = `${d.Data}|${d.Avversario}`;
-                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.2)'; // Faded gray
-                        return data[i] >= 0 ? 'rgba(30, 58, 138, 0.8)' : 'rgba(239, 68, 68, 0.8)';
-                    }),
-                    borderColor: seasonData.map((d, i) => {
-                        const matchKey = `${d.Data}|${d.Avversario}`;
-                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.4)';
-                        return data[i] >= 0 ? 'rgb(30, 58, 138)' : 'rgb(239, 68, 68)';
-                    }),
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                onClick: (event, elements) => {
-                    if (elements.length > 0) {
-                        const index = elements[0].index;
-                        const match = seasonData[index];
-                        const matchKey = `${match.Data}|${match.Avversario}`;
-                        selectedMatchKey = matchKey;
-                        document.getElementById('match-selector').value = matchKey;
-                        renderMatchDetails(matchKey, false); // Don't scroll when clicking diagram
-                        updateDashboard();
-                    }
-                },
-                scales: {
-                    y: { 
-                        beginAtZero: true,
-                        grid: {
-                            color: (c) => c.tick.value === 0 ? '#000' : 'rgba(0,0,0,0.1)'
-                        }
-                    }
-                },
-                plugins: {
-                    datalabels: {
-                        anchor: (context) => context.dataset.data[context.dataIndex] >= 0 ? 'end' : 'start',
-                        align: (context) => context.dataset.data[context.dataIndex] >= 0 ? 'top' : 'bottom',
-                        display: 'auto',
-                        font: { size: 10, weight: 'bold' }
-                    }
-                }
-            }
-        });
-    };
-
-    ipoDiffChart = createChart(ctxIpoDiff, 'Diff. IPO (Me - Avv)', ipoDiffs);
-    keyPassDiffChart = createChart(ctxPassDiff, 'Diff. Passaggi Chiave (Me - Avv)', passDiffs);
+    // Diagrammi differenza IPO e Passaggi Chiave rimossi
 }
 
 function renderCombinedDiffChart() {
@@ -926,16 +811,18 @@ function renderCombinedDiffChart() {
                 {
                     label: 'Diff. IPO (Me - Avv)',
                     data: ipoDiffs,
-                    backgroundColor: 'rgba(30, 58, 138, 0.7)',
-                    borderColor: 'rgb(30, 58, 138)',
-                    borderWidth: 1
+                    backgroundColor: 'rgba(0, 191, 255, 0.7)', // celeste
+                    borderColor: 'rgba(0, 191, 255, 1)',
+                    borderWidth: 1,
+                    yAxisID: 'y',
                 },
                 {
                     label: 'Diff. Passaggi Chiave (Me - Avv)',
                     data: passDiffs,
-                    backgroundColor: 'rgba(239, 68, 68, 0.7)',
-                    borderColor: 'rgb(239, 68, 68)',
-                    borderWidth: 1
+                    backgroundColor: 'rgba(50, 205, 50, 0.7)', // verdino
+                    borderColor: 'rgba(50, 205, 50, 1)',
+                    borderWidth: 1,
+                    yAxisID: 'y2',
                 }
             ]
         },
@@ -947,6 +834,22 @@ function renderCombinedDiffChart() {
                     beginAtZero: true,
                     grid: {
                         color: (c) => c.tick.value === 0 ? '#000' : 'rgba(0,0,0,0.1)'
+                    },
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'Diff. IPO'
+                    }
+                },
+                y2: {
+                    beginAtZero: true,
+                    grid: {
+                        drawOnChartArea: false
+                    },
+                    position: 'right',
+                    title: {
+                        display: true,
+                        text: 'Diff. Passaggi Chiave'
                     }
                 }
             },
