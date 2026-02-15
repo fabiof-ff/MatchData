@@ -884,7 +884,22 @@ function renderGoalTimeChart() {
     if (goalTimeChart) goalTimeChart.destroy();
 
     const frosinone = "Accademia Frosinone";
-    const distribution = dashboardData.distribuzione_gol || [];
+    // Arricchisci ogni elemento con Casa/Trasferta
+    const distribution = (dashboardData.distribuzione_gol || []).map(g => {
+        // Cerca nel generale la partita corrispondente
+        let casaTrasferta = undefined;
+        const generaleRow = dashboardData.generale.find(row => {
+            // Gestione formato data diverso
+            let dataMatch = row.Data;
+            let dataGol = g.Data;
+            // Normalizza formato data
+            if (dataMatch.length === 10 && dataGol.length > 10) dataGol = dataGol.substring(0, 10);
+            if (dataGol.length === 10 && dataMatch.length > 10) dataMatch = dataMatch.substring(0, 10);
+            return dataMatch === dataGol && row.Avversario === g.Avversario && row.Frazione === g.Frazione;
+        });
+        if (generaleRow) casaTrasferta = generaleRow["Casa / Trasferta"];
+        return { ...g, "Casa / Trasferta": casaTrasferta };
+    });
 
     let filtered = distribution;
     // Filtra per competizione
