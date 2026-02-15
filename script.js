@@ -809,7 +809,7 @@ function renderCombinedDiffChart() {
             labels: labels,
             datasets: [
                 {
-                    label: 'Diff. IPO (Me - Avv)',
+                    label: 'Diff. IPO',
                     data: ipoDiffs,
                     backgroundColor: 'rgba(0, 191, 255, 0.7)', // celeste
                     borderColor: 'rgba(0, 191, 255, 1)',
@@ -817,7 +817,7 @@ function renderCombinedDiffChart() {
                     yAxisID: 'y',
                 },
                 {
-                    label: 'Diff. Passaggi Chiave (Me - Avv)',
+                    label: 'Diff. Passaggi Chiave',
                     data: passDiffs,
                     backgroundColor: 'rgba(50, 205, 50, 0.7)', // verdino
                     borderColor: 'rgba(50, 205, 50, 1)',
