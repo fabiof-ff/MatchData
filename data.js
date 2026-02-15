@@ -1,676 +1,445 @@
 const DASHBOARD_DATA = {
     "generale": [
         {
-            "Competizione": "Amichevole",
-            "Giornata": 1,
             "Data": "2025-08-23 00:00:00",
-            "Casa / Trasferta": "Trasferta",
             "Avversario": "Avellino",
+            "Competizione": "Amichevole",
+            "Casa / Trasferta": "Trasferta",
             "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 0,
-            "Gol Subiti (tot)": 0
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
         },
         {
-            "Competizione": "Amichevole",
-            "Giornata": 1,
             "Data": "2025-08-23 00:00:00",
-            "Casa / Trasferta": "Trasferta",
             "Avversario": "Avellino",
+            "Competizione": "Amichevole",
+            "Casa / Trasferta": "Trasferta",
             "Frazione": "2° T",
-            "Punti": 0.0,
-            "Punti (tot)": 0.0,
-            "GOL fatti": 0,
-            "GOL Subiti": 2,
-            "Gol Fatti (tot)": 0,
-            "Gol Subiti (tot)": 2
+            "GOL fatti": 0.0,
+            "GOL Subiti": 2.0
         },
         {
-            "Competizione": "Amichevole",
-            "Giornata": 2,
             "Data": "2025-08-28 00:00:00",
-            "Casa / Trasferta": "Trasferta",
             "Avversario": "Juve Stabia",
+            "Competizione": "Amichevole",
+            "Casa / Trasferta": "Trasferta",
             "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 1,
-            "GOL Subiti": 3,
-            "Gol Fatti (tot)": 1,
-            "Gol Subiti (tot)": 5
+            "GOL fatti": 1.0,
+            "GOL Subiti": 3.0
         },
         {
-            "Competizione": "Amichevole",
-            "Giornata": 2,
             "Data": "2025-08-28 00:00:00",
-            "Casa / Trasferta": "Trasferta",
             "Avversario": "Juve Stabia",
+            "Competizione": "Amichevole",
+            "Casa / Trasferta": "Trasferta",
             "Frazione": "2° T",
-            "Punti": 0.0,
-            "Punti (tot)": 0.0,
-            "GOL fatti": 1,
-            "GOL Subiti": 4,
-            "Gol Fatti (tot)": 2,
-            "Gol Subiti (tot)": 9
+            "GOL fatti": 1.0,
+            "GOL Subiti": 4.0
         },
         {
-            "Competizione": "Amichevole",
-            "Giornata": 3,
             "Data": "2025-08-30 00:00:00",
-            "Casa / Trasferta": "Trasferta",
             "Avversario": "Latina",
+            "Competizione": "Amichevole",
+            "Casa / Trasferta": "Trasferta",
             "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 2,
-            "Gol Subiti (tot)": 9
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
         },
         {
-            "Competizione": "Amichevole",
-            "Giornata": 3,
             "Data": "2025-08-30 00:00:00",
-            "Casa / Trasferta": "Trasferta",
             "Avversario": "Latina",
-            "Frazione": "2° T",
-            "Punti": 1.0,
-            "Punti (tot)": 1.0,
-            "GOL fatti": 1,
-            "GOL Subiti": 1,
-            "Gol Fatti (tot)": 3,
-            "Gol Subiti (tot)": 10
-        },
-        {
             "Competizione": "Amichevole",
-            "Giornata": 4,
-            "Data": "2025-09-06 00:00:00",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "ASD Formia",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 2,
-            "GOL Subiti": 1,
-            "Gol Fatti (tot)": 5,
-            "Gol Subiti (tot)": 11
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "2° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 1.0
         },
         {
+            "Data": "2025-08-30 00:00:00",
+            "Avversario": "Latina",
             "Competizione": "Amichevole",
-            "Giornata": 4,
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "3° T",
+            "GOL fatti": 2.0,
+            "GOL Subiti": 1.0
+        },
+        {
             "Data": "2025-09-06 00:00:00",
-            "Casa / Trasferta": "Casa",
             "Avversario": "ASD Formia",
-            "Frazione": "2° T",
-            "Punti": 3.0,
-            "Punti (tot)": 4.0,
-            "GOL fatti": 5,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 10,
-            "Gol Subiti (tot)": 11
+            "Competizione": "Amichevole",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "1° T",
+            "GOL fatti": 2.0,
+            "GOL Subiti": 1.0
         },
         {
-            "Competizione": "Campionato",
-            "Giornata": 1,
+            "Data": "2025-09-06 00:00:00",
+            "Avversario": "ASD Formia",
+            "Competizione": "Amichevole",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "2° T",
+            "GOL fatti": 5.0,
+            "GOL Subiti": 0.0
+        },
+        {
             "Data": "2025-09-20 00:00:00",
-            "Casa / Trasferta": "Casa",
             "Avversario": "Atletico Lodigiani",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
             "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 1,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 1,
-            "Gol Subiti (tot)": 0
+            "GOL fatti": 1.0,
+            "GOL Subiti": 0.0
         },
         {
-            "Competizione": "Campionato",
-            "Giornata": 1,
             "Data": "2025-09-20 00:00:00",
-            "Casa / Trasferta": "Casa",
             "Avversario": "Atletico Lodigiani",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
             "Frazione": "2° T",
-            "Punti": 3.0,
-            "Punti (tot)": 3.0,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 1,
-            "Gol Subiti (tot)": 0
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
         },
         {
-            "Competizione": "Campionato",
-            "Giornata": 2,
             "Data": "2025-09-27 00:00:00",
-            "Casa / Trasferta": "Trasferta",
             "Avversario": "Grifone Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
             "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 1,
-            "GOL Subiti": 3,
-            "Gol Fatti (tot)": 2,
-            "Gol Subiti (tot)": 3
+            "GOL fatti": 1.0,
+            "GOL Subiti": 3.0
         },
         {
-            "Competizione": "Campionato",
-            "Giornata": 2,
             "Data": "2025-09-27 00:00:00",
-            "Casa / Trasferta": "Trasferta",
             "Avversario": "Grifone Calcio",
-            "Frazione": "2° T",
-            "Punti": 0.0,
-            "Punti (tot)": 3.0,
-            "GOL fatti": 1,
-            "GOL Subiti": 1,
-            "Gol Fatti (tot)": 3,
-            "Gol Subiti (tot)": 4
-        },
-        {
             "Competizione": "Campionato",
-            "Giornata": 3,
-            "Data": "04/10/2025",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "Fondi Calcio",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 1,
-            "GOL Subiti": 2,
-            "Gol Fatti (tot)": 4,
-            "Gol Subiti (tot)": 6
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 3,
-            "Data": "04/10/2025",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "Fondi Calcio",
-            "Frazione": "2° T",
-            "Punti": 3.0,
-            "Punti (tot)": 6.0,
-            "GOL fatti": 6,
-            "GOL Subiti": 1,
-            "Gol Fatti (tot)": 10,
-            "Gol Subiti (tot)": 7
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 4,
-            "Data": "11/10/2025",
             "Casa / Trasferta": "Trasferta",
-            "Avversario": "San Lorenzo Calcio",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 0,
-            "GOL Subiti": 1,
-            "Gol Fatti (tot)": 10,
-            "Gol Subiti (tot)": 8
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 4,
-            "Data": "11/10/2025",
-            "Casa / Trasferta": "Trasferta",
-            "Avversario": "San Lorenzo Calcio",
             "Frazione": "2° T",
-            "Punti": 3.0,
-            "Punti (tot)": 9.0,
-            "GOL fatti": 3,
-            "GOL Subiti": 1,
-            "Gol Fatti (tot)": 13,
-            "Gol Subiti (tot)": 9
+            "GOL fatti": 1.0,
+            "GOL Subiti": 1.0
         },
         {
-            "Competizione": "Campionato",
-            "Giornata": 5,
-            "Data": "18/10/2025",
-            "Casa / Trasferta": "Trasferta",
-            "Avversario": "Savio",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 1,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 14,
-            "Gol Subiti (tot)": 9
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 5,
-            "Data": "18/10/2025",
-            "Casa / Trasferta": "Trasferta",
-            "Avversario": "Savio",
-            "Frazione": "2° T",
-            "Punti": 3.0,
-            "Punti (tot)": 12.0,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 14,
-            "Gol Subiti (tot)": 9
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 6,
-            "Data": "25/10/2025",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "Pomezia Calcio",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 14,
-            "Gol Subiti (tot)": 9
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 6,
-            "Data": "25/10/2025",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "Pomezia Calcio",
-            "Frazione": "2° T",
-            "Punti": 3.0,
-            "Punti (tot)": 15.0,
-            "GOL fatti": 2,
-            "GOL Subiti": 1,
-            "Gol Fatti (tot)": 16,
-            "Gol Subiti (tot)": 10
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 7,
-            "Data": "01/11/2025",
-            "Casa / Trasferta": "Trasferta",
-            "Avversario": "Vigor Perconti",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 1,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 17,
-            "Gol Subiti (tot)": 10
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 7,
-            "Data": "01/11/2025",
-            "Casa / Trasferta": "Trasferta",
-            "Avversario": "Vigor Perconti",
-            "Frazione": "2° T",
-            "Punti": 0.0,
-            "Punti (tot)": 15.0,
-            "GOL fatti": 1,
-            "GOL Subiti": 3,
-            "Gol Fatti (tot)": 18,
-            "Gol Subiti (tot)": 13
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 8,
-            "Data": "08/11/2025",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "Colleferro",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 1,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 19,
-            "Gol Subiti (tot)": 13
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 8,
-            "Data": "08/11/2025",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "Colleferro",
-            "Frazione": "2° T",
-            "Punti": 3.0,
-            "Punti (tot)": 18.0,
-            "GOL fatti": 1,
-            "GOL Subiti": 1,
-            "Gol Fatti (tot)": 20,
-            "Gol Subiti (tot)": 14
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 9,
-            "Data": "15/11/2025",
-            "Casa / Trasferta": "Trasferta",
-            "Avversario": "Ciampino",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 0,
-            "GOL Subiti": 1,
-            "Gol Fatti (tot)": 20,
-            "Gol Subiti (tot)": 15
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 9,
-            "Data": "15/11/2025",
-            "Casa / Trasferta": "Trasferta",
-            "Avversario": "Ciampino",
-            "Frazione": "2° T",
-            "Punti": 0.0,
-            "Punti (tot)": 18.0,
-            "GOL fatti": 1,
-            "GOL Subiti": 1,
-            "Gol Fatti (tot)": 21,
-            "Gol Subiti (tot)": 16
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 10,
-            "Data": "22/11/2025",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "Polisportiva De Rossi",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 2,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 23,
-            "Gol Subiti (tot)": 16
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 10,
-            "Data": "22/11/2025",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "Polisportiva De Rossi",
-            "Frazione": "2° T",
-            "Punti": 3.0,
-            "Punti (tot)": 21.0,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 23,
-            "Gol Subiti (tot)": 16
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 11,
-            "Data": "29/11/2025",
-            "Casa / Trasferta": "Trasferta",
-            "Avversario": "Atletico 2000",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 23,
-            "Gol Subiti (tot)": 16
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 11,
-            "Data": "29/11/2025",
-            "Casa / Trasferta": "Trasferta",
-            "Avversario": "Atletico 2000",
-            "Frazione": "2° T",
-            "Punti": 1.0,
-            "Punti (tot)": 22.0,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 23,
-            "Gol Subiti (tot)": 16
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 12,
-            "Data": "06/12/2025",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "Albalonga",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 23,
-            "Gol Subiti (tot)": 16
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 12,
-            "Data": "06/12/2025",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "Albalonga",
-            "Frazione": "2° T",
-            "Punti": 3.0,
-            "Punti (tot)": 25.0,
-            "GOL fatti": 1,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 24,
-            "Gol Subiti (tot)": 16
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 13,
             "Data": "2025-12-13 00:00:00",
-            "Casa / Trasferta": "Trasferta",
             "Avversario": "Spes Montesacro",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
             "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 24,
-            "Gol Subiti (tot)": 16
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
         },
         {
-            "Competizione": "Campionato",
-            "Giornata": 13,
             "Data": "2025-12-13 00:00:00",
-            "Casa / Trasferta": "Trasferta",
             "Avversario": "Spes Montesacro",
-            "Frazione": "2° T",
-            "Punti": 3.0,
-            "Punti (tot)": 28.0,
-            "GOL fatti": 2,
-            "GOL Subiti": 1,
-            "Gol Fatti (tot)": 26,
-            "Gol Subiti (tot)": 17
-        },
-        {
             "Competizione": "Campionato",
-            "Giornata": 14,
-            "Data": "16/12/2025",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "SS Romulea",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 0,
-            "GOL Subiti": 2,
-            "Gol Fatti (tot)": 26,
-            "Gol Subiti (tot)": 19
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 14,
-            "Data": "16/12/2025",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "SS Romulea",
-            "Frazione": "2° T",
-            "Punti": 0.0,
-            "Punti (tot)": 28.0,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 26,
-            "Gol Subiti (tot)": 19
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 15,
-            "Data": "20/12/2025",
             "Casa / Trasferta": "Trasferta",
-            "Avversario": "Real Latina",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 26,
-            "Gol Subiti (tot)": 19
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 15,
-            "Data": "20/12/2025",
-            "Casa / Trasferta": "Trasferta",
-            "Avversario": "Real Latina",
             "Frazione": "2° T",
-            "Punti": 1.0,
-            "Punti (tot)": 29.0,
-            "GOL fatti": 1,
-            "GOL Subiti": 1,
-            "Gol Fatti (tot)": 27,
-            "Gol Subiti (tot)": 20
+            "GOL fatti": 2.0,
+            "GOL Subiti": 1.0
         },
         {
-            "Competizione": "Campionato",
-            "Giornata": 16,
-            "Data": "10/01/2026",
-            "Casa / Trasferta": "Trasferta",
-            "Avversario": "Atletico Lodigiani",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 4,
-            "GOL Subiti": 2,
-            "Gol Fatti (tot)": 31,
-            "Gol Subiti (tot)": 22
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 16,
-            "Data": "10/01/2026",
-            "Casa / Trasferta": "Trasferta",
-            "Avversario": "Atletico Lodigiani",
-            "Frazione": "2° T",
-            "Punti": 3.0,
-            "Punti (tot)": 32.0,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 31,
-            "Gol Subiti (tot)": 22
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 17,
-            "Data": "17/01/2026",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "Grifone Calcio",
-            "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 31,
-            "Gol Subiti (tot)": 22
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 17,
-            "Data": "17/01/2026",
-            "Casa / Trasferta": "Casa",
-            "Avversario": "Grifone Calcio",
-            "Frazione": "2° T",
-            "Punti": 1.0,
-            "Punti (tot)": 33.0,
-            "GOL fatti": 1,
-            "GOL Subiti": 1,
-            "Gol Fatti (tot)": 32,
-            "Gol Subiti (tot)": 23
-        },
-        {
-            "Competizione": "Campionato",
-            "Giornata": 18,
             "Data": "2026-01-24 00:00:00",
-            "Casa / Trasferta": "Trasferta",
             "Avversario": "Fondi Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
             "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 1,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 33,
-            "Gol Subiti (tot)": 23
+            "GOL fatti": 1.0,
+            "GOL Subiti": 0
         },
         {
-            "Competizione": "Campionato",
-            "Giornata": 18,
             "Data": "2026-01-24 00:00:00",
-            "Casa / Trasferta": "Trasferta",
             "Avversario": "Fondi Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
             "Frazione": "2° T",
-            "Punti": 0.0,
-            "Punti (tot)": 33.0,
             "GOL fatti": 0,
-            "GOL Subiti": 2,
-            "Gol Fatti (tot)": 33,
-            "Gol Subiti (tot)": 25
+            "GOL Subiti": 2.0
         },
         {
-            "Competizione": "Campionato",
-            "Giornata": 19,
             "Data": "2026-01-31 00:00:00",
-            "Casa / Trasferta": "Casa",
             "Avversario": "San Lorenzo Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
             "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
-            "GOL fatti": 2,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 35,
-            "Gol Subiti (tot)": 25
+            "GOL fatti": 2.0,
+            "GOL Subiti": 0
         },
         {
-            "Competizione": "Campionato",
-            "Giornata": 19,
             "Data": "2026-01-31 00:00:00",
-            "Casa / Trasferta": "Casa",
             "Avversario": "San Lorenzo Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
             "Frazione": "2° T",
-            "Punti": 3.0,
-            "Punti (tot)": 36.0,
-            "GOL fatti": 4,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 39,
-            "Gol Subiti (tot)": 25
+            "GOL fatti": 4.0,
+            "GOL Subiti": 0
         },
         {
-            "Competizione": "Campionato",
-            "Giornata": 20,
             "Data": "2026-02-07 00:00:00",
-            "Casa / Trasferta": "Casa",
             "Avversario": "Savio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
             "Frazione": "1° T",
-            "Punti": null,
-            "Punti (tot)": null,
             "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 39,
-            "Gol Subiti (tot)": 25
+            "GOL Subiti": 0
         },
         {
-            "Competizione": "Campionato",
-            "Giornata": 20,
             "Data": "2026-02-07 00:00:00",
-            "Casa / Trasferta": "Casa",
             "Avversario": "Savio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
             "Frazione": "2° T",
-            "Punti": 1.0,
-            "Punti (tot)": 37.0,
             "GOL fatti": 0,
-            "GOL Subiti": 0,
-            "Gol Fatti (tot)": 39,
-            "Gol Subiti (tot)": 25
+            "GOL Subiti": 0
+        },
+        {
+            "Data": "01/11/2025",
+            "Avversario": "Vigor Perconti",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "1° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "01/11/2025",
+            "Avversario": "Vigor Perconti",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "2° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 3.0
+        },
+        {
+            "Data": "04/10/2025",
+            "Avversario": "Fondi Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "1° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 2.0
+        },
+        {
+            "Data": "04/10/2025",
+            "Avversario": "Fondi Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "2° T",
+            "GOL fatti": 6.0,
+            "GOL Subiti": 1.0
+        },
+        {
+            "Data": "06/12/2025",
+            "Avversario": "Albalonga",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "1° T",
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "06/12/2025",
+            "Avversario": "Albalonga",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "2° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "08/11/2025",
+            "Avversario": "Colleferro",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "1° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "08/11/2025",
+            "Avversario": "Colleferro",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "2° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 1.0
+        },
+        {
+            "Data": "10/01/2026",
+            "Avversario": "Atletico Lodigiani",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "1° T",
+            "GOL fatti": 4.0,
+            "GOL Subiti": 2.0
+        },
+        {
+            "Data": "10/01/2026",
+            "Avversario": "Atletico Lodigiani",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "2° T",
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "11/10/2025",
+            "Avversario": "San Lorenzo Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "1° T",
+            "GOL fatti": 0.0,
+            "GOL Subiti": 1.0
+        },
+        {
+            "Data": "11/10/2025",
+            "Avversario": "San Lorenzo Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "2° T",
+            "GOL fatti": 3.0,
+            "GOL Subiti": 1.0
+        },
+        {
+            "Data": "15/11/2025",
+            "Avversario": "Ciampino",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "1° T",
+            "GOL fatti": 0.0,
+            "GOL Subiti": 1.0
+        },
+        {
+            "Data": "15/11/2025",
+            "Avversario": "Ciampino",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "2° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 1.0
+        },
+        {
+            "Data": "16/12/2025",
+            "Avversario": "SS Romulea",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "1° T",
+            "GOL fatti": 0.0,
+            "GOL Subiti": 2.0
+        },
+        {
+            "Data": "16/12/2025",
+            "Avversario": "SS Romulea",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "2° T",
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "17/01/2026",
+            "Avversario": "Grifone Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "1° T",
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "17/01/2026",
+            "Avversario": "Grifone Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "2° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 1.0
+        },
+        {
+            "Data": "18/10/2025",
+            "Avversario": "Savio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "1° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "18/10/2025",
+            "Avversario": "Savio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "2° T",
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "20/12/2025",
+            "Avversario": "Real Latina",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "1° T",
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "20/12/2025",
+            "Avversario": "Real Latina",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "2° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 1.0
+        },
+        {
+            "Data": "22/11/2025",
+            "Avversario": "Polisportiva De Rossi",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "1° T",
+            "GOL fatti": 2.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "22/11/2025",
+            "Avversario": "Polisportiva De Rossi",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "2° T",
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "25/10/2025",
+            "Avversario": "Pomezia Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "1° T",
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "25/10/2025",
+            "Avversario": "Pomezia Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "2° T",
+            "GOL fatti": 2.0,
+            "GOL Subiti": 1.0
+        },
+        {
+            "Data": "29/11/2025",
+            "Avversario": "Atletico 2000",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "1° T",
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
+        },
+        {
+            "Data": "29/11/2025",
+            "Avversario": "Atletico 2000",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "2° T",
+            "GOL fatti": 0.0,
+            "GOL Subiti": 0.0
         }
     ],
     "partite_dettagli": {
@@ -743,6 +512,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Avellino": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "2° T": {
@@ -813,6 +585,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Avellino": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             }
         },
@@ -885,6 +660,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Juve Stabia": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "2° T": {
@@ -955,6 +733,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Juve Stabia": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             }
         },
@@ -1027,6 +808,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Latina": 0.0,
                     "Accademia Frosinone": 1.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "2° T": {
@@ -1097,6 +881,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Latina": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "3° T": {
@@ -1167,6 +954,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Latina": 0.0,
                     "Accademia Frosinone": 1.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             }
         },
@@ -1239,6 +1029,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Accademia Frosinone": 0.0,
                     "ASD Formia": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             },
             "2° T": {
@@ -1309,6 +1102,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Accademia Frosinone": 0.0,
                     "ASD Formia": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             }
         },
@@ -1381,6 +1177,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Accademia Frosinone": 0.0,
                     "Atletico Lodigiani": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             },
             "2° T": {
@@ -1451,6 +1250,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Accademia Frosinone": 1.0,
                     "Atletico Lodigiani": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             }
         },
@@ -1550,6 +1352,9 @@ const DASHBOARD_DATA = {
                 "Espulsione": {
                     "Grifone Calcio": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "2° T": {
@@ -1650,6 +1455,9 @@ const DASHBOARD_DATA = {
                 "Espulsione": {
                     "Grifone Calcio": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             }
         },
@@ -1738,6 +1546,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Spes Montesacro": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "2° T": {
@@ -1808,6 +1619,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Spes Montesacro": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             }
         },
@@ -1865,6 +1679,9 @@ const DASHBOARD_DATA = {
                 },
                 "Press.din.centr.": {
                     "NaN": 1.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "2° T": {
@@ -1930,6 +1747,9 @@ const DASHBOARD_DATA = {
                 },
                 "Prima press.alta": {
                     "NaN": 1.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             }
         },
@@ -2004,6 +1824,9 @@ const DASHBOARD_DATA = {
                 },
                 "TiroTestaArea": {
                     "San Lorenzo Calcio": 1.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             },
             "2° T": {
@@ -2071,6 +1894,9 @@ const DASHBOARD_DATA = {
                 },
                 "TiroTestaArea": {
                     "Accademia Frosinone": 1.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             }
         },
@@ -2129,6 +1955,9 @@ const DASHBOARD_DATA = {
                 },
                 "Tran.Dif.": {
                     "NaN": 1.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             },
             "2° T": {
@@ -2186,6 +2015,9 @@ const DASHBOARD_DATA = {
                 },
                 "Fuorigioco": {
                     "Accademia Frosinone": 1.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             }
         },
@@ -2288,6 +2120,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Accademia Frosinone": 0.0,
                     "Vigor Perconti": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "2° T": {
@@ -2376,6 +2211,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Accademia Frosinone": 0.0,
                     "Vigor Perconti": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             }
         },
@@ -2475,6 +2313,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Fondi Calcio": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             },
             "2° T": {
@@ -2572,6 +2413,9 @@ const DASHBOARD_DATA = {
                 "Espulsione": {
                     "Fondi Calcio": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             }
         },
@@ -2674,6 +2518,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Albalonga": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             },
             "2° T": {
@@ -2759,6 +2606,9 @@ const DASHBOARD_DATA = {
                 "Espulsione": {
                     "Albalonga": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             }
         },
@@ -2853,6 +2703,9 @@ const DASHBOARD_DATA = {
                 },
                 "Rigore": {
                     "Colleferro": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             },
             "2° T": {
@@ -2929,6 +2782,9 @@ const DASHBOARD_DATA = {
                 },
                 "Fuorigioco": {
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             }
         },
@@ -3028,6 +2884,9 @@ const DASHBOARD_DATA = {
                 "Espulsione": {
                     "Accademia Frosinone": 0.0,
                     "Atletico Lodigiani": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "2° T": {
@@ -3125,6 +2984,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Accademia Frosinone": 0.0,
                     "Atletico Lodigiani": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             }
         },
@@ -3224,6 +3086,9 @@ const DASHBOARD_DATA = {
                 "Espulsione": {
                     "San Lorenzo Calcio": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "2° T": {
@@ -3318,6 +3183,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "San Lorenzo Calcio": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             }
         },
@@ -3417,6 +3285,9 @@ const DASHBOARD_DATA = {
                 "Espulsione": {
                     "Ciampino": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "2° T": {
@@ -3505,6 +3376,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Ciampino": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             }
         },
@@ -3604,6 +3478,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "SS Romulea": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             },
             "2° T": {
@@ -3701,6 +3578,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "SS Romulea": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             }
         },
@@ -3800,6 +3680,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Grifone Calcio": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             },
             "2° T": {
@@ -3900,6 +3783,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Grifone Calcio": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             }
         },
@@ -4029,6 +3915,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Accademia Frosinone": 0.0,
                     "Savio": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "2° T": {
@@ -4156,6 +4045,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Accademia Frosinone": 0.0,
                     "Savio": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             }
         },
@@ -4255,6 +4147,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Accademia Frosinone": 0.0,
                     "Real Latina": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "2° T": {
@@ -4349,6 +4244,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Accademia Frosinone": 0.0,
                     "Real Latina": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             }
         },
@@ -4451,6 +4349,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Accademia Frosinone": 0.0,
                     "Polisportiva De Rossi": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             },
             "2° T": {
@@ -4545,6 +4446,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Accademia Frosinone": 0.0,
                     "Polisportiva De Rossi": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             }
         },
@@ -4647,6 +4551,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Pomezia Calcio": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             },
             "2° T": {
@@ -4748,6 +4655,9 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Pomezia Calcio": 0.0,
                     "Accademia Frosinone": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
                 }
             }
         },
@@ -4844,6 +4754,9 @@ const DASHBOARD_DATA = {
                 "Rigore": {
                     "Accademia Frosinone": 0.0,
                     "Atletico 2000": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             },
             "2° T": {
@@ -4938,324 +4851,14 @@ const DASHBOARD_DATA = {
                 "Fuorigioco": {
                     "Accademia Frosinone": 0.0,
                     "Atletico 2000": 0.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
                 }
             }
         }
     },
-    "giocatori": [
-        {
-            "GIOCATORE": "Franco",
-            "Unnamed: 1": "Prussiano",
-            "RUOLO": "POR",
-            "PRESENZE": 6.0,
-            "MIN GIOCATI": 480.0,
-            "GOAL": -7.0,
-            "ASSIST": 0.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Franco Prussiano"
-        },
-        {
-            "GIOCATORE": "Diego",
-            "Unnamed: 1": "Cerrone",
-            "RUOLO": "POR",
-            "PRESENZE": 3.0,
-            "MIN GIOCATI": 240.0,
-            "GOAL": -7.0,
-            "ASSIST": 0.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Diego Cerrone"
-        },
-        {
-            "GIOCATORE": "Flavio",
-            "Unnamed: 1": "Gottaldi",
-            "RUOLO": "POR",
-            "PRESENZE": 0.0,
-            "MIN GIOCATI": 0.0,
-            "GOAL": 0.0,
-            "ASSIST": 0.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Flavio Gottaldi"
-        },
-        {
-            "GIOCATORE": "Christian",
-            "Unnamed: 1": "Cardinali",
-            "RUOLO": "DIF",
-            "PRESENZE": 10.0,
-            "MIN GIOCATI": 551.0,
-            "GOAL": 0.0,
-            "ASSIST": 0.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Christian Cardinali"
-        },
-        {
-            "GIOCATORE": "Alessandro",
-            "Unnamed: 1": "Vozza",
-            "RUOLO": "DIF",
-            "PRESENZE": 11.0,
-            "MIN GIOCATI": 880.0,
-            "GOAL": 1.0,
-            "ASSIST": 0.0,
-            "GIALLO": 2.0,
-            "ROSSO": 0.0,
-            "Nome": "Alessandro Vozza"
-        },
-        {
-            "GIOCATORE": "Giovanni",
-            "Unnamed: 1": "Archilletti",
-            "RUOLO": "DIF",
-            "PRESENZE": 9.0,
-            "MIN GIOCATI": 636.0,
-            "GOAL": 0.0,
-            "ASSIST": 2.0,
-            "GIALLO": 3.0,
-            "ROSSO": 0.0,
-            "Nome": "Giovanni Archilletti"
-        },
-        {
-            "GIOCATORE": "Simone",
-            "Unnamed: 1": "Cappitelli",
-            "RUOLO": "DIF",
-            "PRESENZE": 10.0,
-            "MIN GIOCATI": 606.0,
-            "GOAL": 2.0,
-            "ASSIST": 0.0,
-            "GIALLO": 3.0,
-            "ROSSO": 0.0,
-            "Nome": "Simone Cappitelli"
-        },
-        {
-            "GIOCATORE": "Thomas Marco",
-            "Unnamed: 1": "Guinetti",
-            "RUOLO": "DIF",
-            "PRESENZE": 1.0,
-            "MIN GIOCATI": 6.0,
-            "GOAL": 0.0,
-            "ASSIST": 0.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Thomas Marco Guinetti"
-        },
-        {
-            "GIOCATORE": "Edoardo",
-            "Unnamed: 1": "Testa",
-            "RUOLO": "DIF",
-            "PRESENZE": 9.0,
-            "MIN GIOCATI": 290.0,
-            "GOAL": 0.0,
-            "ASSIST": 0.0,
-            "GIALLO": 2.0,
-            "ROSSO": 0.0,
-            "Nome": "Edoardo Testa"
-        },
-        {
-            "GIOCATORE": "Emanuele",
-            "Unnamed: 1": "Bruni",
-            "RUOLO": "DIF",
-            "PRESENZE": 0.0,
-            "MIN GIOCATI": 0.0,
-            "GOAL": 0.0,
-            "ASSIST": 0.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Emanuele Bruni"
-        },
-        {
-            "GIOCATORE": "Alessandro",
-            "Unnamed: 1": "Belli",
-            "RUOLO": "DIF",
-            "PRESENZE": 3.0,
-            "MIN GIOCATI": 176.0,
-            "GOAL": 0.0,
-            "ASSIST": 0.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Alessandro Belli"
-        },
-        {
-            "GIOCATORE": "Oualid",
-            "Unnamed: 1": "Zammour",
-            "RUOLO": "CENTR",
-            "PRESENZE": 10.0,
-            "MIN GIOCATI": 419.0,
-            "GOAL": 1.0,
-            "ASSIST": 0.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Oualid Zammour"
-        },
-        {
-            "GIOCATORE": "Stefano",
-            "Unnamed: 1": "Massa",
-            "RUOLO": "CENTR",
-            "PRESENZE": 8.0,
-            "MIN GIOCATI": 429.0,
-            "GOAL": 2.0,
-            "ASSIST": 1.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Stefano Massa"
-        },
-        {
-            "GIOCATORE": "Cristiano",
-            "Unnamed: 1": "D'Amico",
-            "RUOLO": "CENTR",
-            "PRESENZE": 10.0,
-            "MIN GIOCATI": 535.0,
-            "GOAL": 1.0,
-            "ASSIST": 3.0,
-            "GIALLO": 1.0,
-            "ROSSO": 0.0,
-            "Nome": "Cristiano D'Amico"
-        },
-        {
-            "GIOCATORE": "Lorenzo",
-            "Unnamed: 1": "Aversa",
-            "RUOLO": "CENTR",
-            "PRESENZE": 10.0,
-            "MIN GIOCATI": 443.0,
-            "GOAL": 1.0,
-            "ASSIST": 2.0,
-            "GIALLO": 2.0,
-            "ROSSO": 0.0,
-            "Nome": "Lorenzo Aversa"
-        },
-        {
-            "GIOCATORE": "Massimiliano",
-            "Unnamed: 1": "De Benedictis",
-            "RUOLO": "CENTR",
-            "PRESENZE": 11.0,
-            "MIN GIOCATI": 590.0,
-            "GOAL": 0.0,
-            "ASSIST": 2.0,
-            "GIALLO": 2.0,
-            "ROSSO": 0.0,
-            "Nome": "Massimiliano De Benedictis"
-        },
-        {
-            "GIOCATORE": "Paolo",
-            "Unnamed: 1": "Ferzoco",
-            "RUOLO": "CENTR",
-            "PRESENZE": 4.0,
-            "MIN GIOCATI": 124.0,
-            "GOAL": 1.0,
-            "ASSIST": 1.0,
-            "GIALLO": 1.0,
-            "ROSSO": 0.0,
-            "Nome": "Paolo Ferzoco"
-        },
-        {
-            "GIOCATORE": "Giovanni",
-            "Unnamed: 1": "Foglietta",
-            "RUOLO": "CENTR",
-            "PRESENZE": 8.0,
-            "MIN GIOCATI": 366.0,
-            "GOAL": 0.0,
-            "ASSIST": 3.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Giovanni Foglietta"
-        },
-        {
-            "GIOCATORE": "Leonardo",
-            "Unnamed: 1": "Evangelista",
-            "RUOLO": "ATT",
-            "PRESENZE": 11.0,
-            "MIN GIOCATI": 670.0,
-            "GOAL": 5.0,
-            "ASSIST": 2.0,
-            "GIALLO": 2.0,
-            "ROSSO": 0.0,
-            "Nome": "Leonardo Evangelista"
-        },
-        {
-            "GIOCATORE": "Mattia",
-            "Unnamed: 1": "Leonardi",
-            "RUOLO": "ATT",
-            "PRESENZE": 11.0,
-            "MIN GIOCATI": 639.0,
-            "GOAL": 3.0,
-            "ASSIST": 2.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Mattia Leonardi"
-        },
-        {
-            "GIOCATORE": "Alessandro",
-            "Unnamed: 1": "Orciuolo",
-            "RUOLO": "ATT",
-            "PRESENZE": 9.0,
-            "MIN GIOCATI": 108.0,
-            "GOAL": 1.0,
-            "ASSIST": 0.0,
-            "GIALLO": 2.0,
-            "ROSSO": 0.0,
-            "Nome": "Alessandro Orciuolo"
-        },
-        {
-            "GIOCATORE": "Lorenzo",
-            "Unnamed: 1": "Cedrone",
-            "RUOLO": "ATT",
-            "PRESENZE": 8.0,
-            "MIN GIOCATI": 497.0,
-            "GOAL": 2.0,
-            "ASSIST": 0.0,
-            "GIALLO": 1.0,
-            "ROSSO": 0.0,
-            "Nome": "Lorenzo Cedrone"
-        },
-        {
-            "GIOCATORE": "Vincenzo",
-            "Unnamed: 1": "Battaglia",
-            "RUOLO": "ATT",
-            "PRESENZE": 10.0,
-            "MIN GIOCATI": 564.0,
-            "GOAL": 3.0,
-            "ASSIST": 0.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Vincenzo Battaglia"
-        },
-        {
-            "GIOCATORE": "Brajan",
-            "Unnamed: 1": "Hoxhaj",
-            "RUOLO": "ATT",
-            "PRESENZE": 9.0,
-            "MIN GIOCATI": 203.0,
-            "GOAL": 0.0,
-            "ASSIST": 0.0,
-            "GIALLO": 3.0,
-            "ROSSO": 0.0,
-            "Nome": "Brajan Hoxhaj"
-        },
-        {
-            "GIOCATORE": "Niccolò",
-            "Unnamed: 1": "Cavaricci",
-            "RUOLO": "ATT",
-            "PRESENZE": 0.0,
-            "MIN GIOCATI": 0.0,
-            "GOAL": 0.0,
-            "ASSIST": 0.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Niccolò Cavaricci"
-        },
-        {
-            "GIOCATORE": "Davide",
-            "Unnamed: 1": "Marsella",
-            "RUOLO": "ATT",
-            "PRESENZE": 4.0,
-            "MIN GIOCATI": 72.0,
-            "GOAL": 0.0,
-            "ASSIST": 0.0,
-            "GIALLO": 0.0,
-            "ROSSO": 0.0,
-            "Nome": "Davide Marsella"
-        }
-    ],
+    "giocatori": [],
     "distribuzione_gol": [
         {
             "Data": "2025-08-23 00:00:00",
@@ -5263,7 +4866,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Avellino",
             "Minuto": 8.7,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-23 00:00:00",
@@ -5271,7 +4875,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Avellino",
             "Minuto": 34.0,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-28 00:00:00",
@@ -5279,7 +4884,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Juve Stabia",
             "Minuto": 5.0,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-28 00:00:00",
@@ -5287,7 +4893,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Juve Stabia",
             "Minuto": 14.7,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-28 00:00:00",
@@ -5295,7 +4902,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Accademia Frosinone",
             "Minuto": 34.0,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-28 00:00:00",
@@ -5303,7 +4911,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Juve Stabia",
             "Minuto": 3.5,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-28 00:00:00",
@@ -5311,7 +4920,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Juve Stabia",
             "Minuto": 10.4,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-28 00:00:00",
@@ -5319,7 +4929,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Accademia Frosinone",
             "Minuto": 15.7,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-28 00:00:00",
@@ -5327,7 +4938,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Juve Stabia",
             "Minuto": 18.5,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-28 00:00:00",
@@ -5335,7 +4947,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Juve Stabia",
             "Minuto": 25.5,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-30 00:00:00",
@@ -5343,7 +4956,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Latina",
             "Minuto": 10.1,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-30 00:00:00",
@@ -5351,7 +4965,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Accademia Frosinone",
             "Minuto": 25.1,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-30 00:00:00",
@@ -5359,7 +4974,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Accademia Frosinone",
             "Minuto": 10.0,
-            "Frazione": "3° T"
+            "Frazione": "3° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-30 00:00:00",
@@ -5367,7 +4983,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Accademia Frosinone",
             "Minuto": 16.5,
-            "Frazione": "3° T"
+            "Frazione": "3° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-08-30 00:00:00",
@@ -5375,7 +4992,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Latina",
             "Minuto": 31.5,
-            "Frazione": "3° T"
+            "Frazione": "3° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-09-06 00:00:00",
@@ -5383,7 +5001,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Accademia Frosinone",
             "Minuto": 10.0,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2025-09-06 00:00:00",
@@ -5391,7 +5010,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "ASD Formia",
             "Minuto": 25.0,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2025-09-06 00:00:00",
@@ -5399,7 +5019,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Accademia Frosinone",
             "Minuto": 10.0,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2025-09-06 00:00:00",
@@ -5407,7 +5028,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Accademia Frosinone",
             "Minuto": 15.0,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2025-09-06 00:00:00",
@@ -5415,7 +5037,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Accademia Frosinone",
             "Minuto": 30.0,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2025-09-06 00:00:00",
@@ -5423,7 +5046,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Amichevole",
             "Squadra": "Accademia Frosinone",
             "Minuto": 35.4,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2025-09-20 00:00:00",
@@ -5431,7 +5055,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 35.0,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2025-09-27 00:00:00",
@@ -5439,7 +5064,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Grifone Calcio",
             "Minuto": 2.305666666666667,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-09-27 00:00:00",
@@ -5447,7 +5073,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 3.825916666666667,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-09-27 00:00:00",
@@ -5455,7 +5082,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Grifone Calcio",
             "Minuto": 25.86125,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-09-27 00:00:00",
@@ -5463,7 +5091,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Grifone Calcio",
             "Minuto": 40.12791666666667,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-09-27 00:00:00",
@@ -5471,7 +5100,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 37.57391666666667,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-09-27 00:00:00",
@@ -5479,7 +5109,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Grifone Calcio",
             "Minuto": 44.50416666666667,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "04/10/2025",
@@ -5487,7 +5118,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Fondi Calcio",
             "Minuto": 21.796,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "04/10/2025",
@@ -5495,7 +5127,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Fondi Calcio",
             "Minuto": 32.627,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "04/10/2025",
@@ -5503,7 +5136,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 35.318,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "04/10/2025",
@@ -5511,7 +5145,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 6.755,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "04/10/2025",
@@ -5519,7 +5154,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 15.545,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "04/10/2025",
@@ -5527,7 +5163,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 17.536,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "04/10/2025",
@@ -5535,7 +5172,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 19.514,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "04/10/2025",
@@ -5543,7 +5181,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 31.108,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "04/10/2025",
@@ -5551,7 +5190,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 32.013,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "04/10/2025",
@@ -5559,7 +5199,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Fondi Calcio",
             "Minuto": 36.246,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "11/10/2025",
@@ -5567,7 +5208,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "San Lorenzo Calcio",
             "Minuto": 11.15033333333333,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "11/10/2025",
@@ -5575,7 +5217,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 13.30208333333333,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "11/10/2025",
@@ -5583,7 +5226,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 20.13308333333334,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "11/10/2025",
@@ -5591,7 +5235,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "San Lorenzo Calcio",
             "Minuto": 36.68866666666666,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "11/10/2025",
@@ -5599,7 +5244,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 40.93458333333333,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "18/10/2025",
@@ -5607,7 +5253,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 27.531,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "25/10/2025",
@@ -5615,7 +5262,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Pomezia Calcio",
             "Minuto": 2.322,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "25/10/2025",
@@ -5623,7 +5271,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 30.236,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "25/10/2025",
@@ -5631,7 +5280,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 32.093,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "01/11/2025",
@@ -5639,7 +5289,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 35.497,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "01/11/2025",
@@ -5647,7 +5298,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Vigor Perconti",
             "Minuto": 1.863,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "01/11/2025",
@@ -5655,7 +5307,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 21.036,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "01/11/2025",
@@ -5663,7 +5316,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Vigor Perconti",
             "Minuto": 29.11,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "01/11/2025",
@@ -5671,7 +5325,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Vigor Perconti",
             "Minuto": 41.482,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "08/11/2025",
@@ -5679,7 +5334,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 34.614,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "08/11/2025",
@@ -5687,7 +5343,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 32.769,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "08/11/2025",
@@ -5695,7 +5352,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Colleferro",
             "Minuto": 40.251,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "15/11/2025",
@@ -5703,7 +5361,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Ciampino",
             "Minuto": 4.173,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "15/11/2025",
@@ -5711,7 +5370,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Ciampino",
             "Minuto": 17.126,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "15/11/2025",
@@ -5719,7 +5379,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 39.9,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "22/11/2025",
@@ -5727,7 +5388,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 5.356,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "22/11/2025",
@@ -5735,7 +5397,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 14.932,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "06/12/2025",
@@ -5743,7 +5406,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 26.5,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2025-12-13 00:00:00",
@@ -5751,7 +5415,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Spes Montesacro",
             "Minuto": 20.0,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-12-13 00:00:00",
@@ -5759,7 +5424,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 10.0,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2025-12-13 00:00:00",
@@ -5767,7 +5433,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 40.0,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "16/12/2025",
@@ -5775,7 +5442,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "SS Romulea",
             "Minuto": 9.5,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "16/12/2025",
@@ -5783,7 +5451,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "SS Romulea",
             "Minuto": 31.5,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "20/12/2025",
@@ -5791,7 +5460,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Real Latina",
             "Minuto": 11.742,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "20/12/2025",
@@ -5799,7 +5469,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 22.604,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "10/01/2026",
@@ -5807,7 +5478,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 6.332,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "10/01/2026",
@@ -5815,7 +5487,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 8.744,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "10/01/2026",
@@ -5823,7 +5496,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 20.009,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "10/01/2026",
@@ -5831,7 +5505,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Atletico Lodigiani",
             "Minuto": 22.771,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "10/01/2026",
@@ -5839,7 +5514,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 34.205,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "10/01/2026",
@@ -5847,7 +5523,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Atletico Lodigiani",
             "Minuto": 36.765,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "17/01/2026",
@@ -5855,7 +5532,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Grifone Calcio",
             "Minuto": 0.219,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "17/01/2026",
@@ -5863,7 +5541,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 0.088,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2026-01-24 00:00:00",
@@ -5871,7 +5550,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 27.7,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2026-01-24 00:00:00",
@@ -5879,7 +5559,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Fondi Calcio",
             "Minuto": 0.7,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2026-01-24 00:00:00",
@@ -5887,7 +5568,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Fondi Calcio",
             "Minuto": 47.1,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         },
         {
             "Data": "2026-01-31 00:00:00",
@@ -5895,7 +5577,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 29.8,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2026-01-31 00:00:00",
@@ -5903,7 +5586,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 41.5,
-            "Frazione": "1° T"
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2026-01-31 00:00:00",
@@ -5911,7 +5595,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 27.5,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2026-01-31 00:00:00",
@@ -5919,7 +5604,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 36.1,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2026-01-31 00:00:00",
@@ -5927,7 +5613,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 38.2,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         },
         {
             "Data": "2026-01-31 00:00:00",
@@ -5935,7 +5622,8 @@ const DASHBOARD_DATA = {
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
             "Minuto": 40.6,
-            "Frazione": "2° T"
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         }
     ]
 };
