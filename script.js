@@ -71,16 +71,13 @@ function renderCustomXYChart() {
         }
         // Funzione per estrarre valore
         function getVal(key) {
-            // Mappa chiave user-friendly a chiave dati dettagliata se necessario
             let mappedKey = xyKeyMap[key] || key;
             let sum = 0;
-            // Per "IPO" calcolo dedicato
             if (mappedKey === 'IPO') {
                 sum += calculateIPO(stats['1° T'] || {}, frosinone);
                 sum += calculateIPO(stats['2° T'] || {}, frosinone);
                 return sum;
             }
-            // Per "GOL Subiti" somma tutte le varianti di "GOL"/"Gol" dell'avversario in 1°T e 2°T
             if (mappedKey === 'GOL Subiti') {
                 const avv = d.Avversario;
                 ['1° T', '2° T'].forEach(frazione => {
@@ -94,7 +91,6 @@ function renderCustomXYChart() {
                 });
                 return sum;
             }
-            // Per "GOL" (fatti) somma tutte le varianti di "GOL"/"Gol" per Accademia Frosinone in 1°T e 2°T
             if (mappedKey === 'GOL') {
                 ['1° T', '2° T'].forEach(frazione => {
                     if (stats[frazione]) {
@@ -107,13 +103,11 @@ function renderCustomXYChart() {
                 });
                 return sum;
             }
-            // Per tutti gli altri parametri, somma valori per Accademia Frosinone in 1°T e 2°T
             ['1° T', '2° T'].forEach(frazione => {
                 if (stats[frazione] && stats[frazione][mappedKey] && stats[frazione][mappedKey][frosinone] !== undefined) {
                     sum += stats[frazione][mappedKey][frosinone];
                 }
             });
-            // fallback: cerca con varianti se non trovato
             if (sum === 0) {
                 const variants = [mappedKey, mappedKey.toLowerCase(), mappedKey.toUpperCase()];
                 for (const v of variants) {
@@ -128,10 +122,21 @@ function renderCustomXYChart() {
         }
         xVal = getVal(xKey);
         yVal = getVal(yKey);
+        // Determina il risultato
+        let risultato = 'P';
+        let golFatti = getVal('GOL');
+        let golSubiti = getVal('GOL Subiti');
+        if (golFatti > golSubiti) risultato = 'V';
+        else if (golFatti < golSubiti) risultato = 'S';
+        // Colore in base al risultato
+        let color = risultato === 'V' ? '#22c55e' : risultato === 'S' ? '#ef4444' : '#6b7280';
         return {
             x: xVal,
             y: yVal,
-            label: `${d.Data.replace(' 00:00:00', '')} vs ${d.Avversario}`
+            label: `${d.Data.replace(' 00:00:00', '')} vs ${d.Avversario}`,
+            backgroundColor: color,
+            borderColor: color,
+            risultato: risultato
         };
     });
     if (customXYChart) customXYChart.destroy();
@@ -142,8 +147,8 @@ function renderCustomXYChart() {
             datasets: [{
                 label: 'Partite',
                 data: data,
-                backgroundColor: 'rgba(30,58,138,0.7)',
-                borderColor: 'rgba(30,58,138,1)',
+                backgroundColor: data.map(d => d.backgroundColor),
+                borderColor: data.map(d => d.borderColor),
                 pointRadius: 7,
                 pointHoverRadius: 11,
             }]
@@ -154,10 +159,13 @@ function renderCustomXYChart() {
             plugins: {
                 legend: { display: false },
                 tooltip: {
+                    position: 'nearest',
+                    yAlign: 'top',
                     callbacks: {
                         label: function(context) {
                             const d = context.raw;
-                            return `${d.label}: (${d.x}, ${d.y})`;
+                            let res = d.risultato === 'V' ? 'Vittoria' : d.risultato === 'S' ? 'Sconfitta' : 'Pareggio';
+                            return `${d.label}: (${d.x}, ${d.y}) - ${res}`;
                         }
                     }
                 }
