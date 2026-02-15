@@ -129,7 +129,7 @@ function renderCustomXYChart() {
         if (golFatti > golSubiti) risultato = 'V';
         else if (golFatti < golSubiti) risultato = 'S';
         // Colore in base al risultato
-        let color = risultato === 'V' ? '#22c55e' : risultato === 'S' ? '#ef4444' : '#6b7280';
+        let color = risultato === 'V' ? '#22c55e' : risultato === 'S' ? '#ef4444' : '#facc15'; // giallo per pareggio
         return {
             x: xVal,
             y: yVal,
