@@ -1122,11 +1122,23 @@ function renderDangerMatrix() {
             });
             const passDiff = passMe - passOpp;
 
+            // Calcola risultato partita (sommando tutte le frazioni)
+            let fatti = 0, subiti = 0;
+            d.frazioni?.forEach(fz => {
+                fatti += Number(fz["GOL fatti"] ?? fz["Gol fatti"] ?? fz["Gol Fatti"] ?? 0);
+                subiti += Number(fz["GOL Subiti"] ?? fz["Gol Subiti"] ?? fz["Gol subiti"] ?? 0);
+            });
+            let resultType = '';
+            if (fatti > subiti) resultType = 'Vittoria';
+            else if (fatti < subiti) resultType = 'Sconfitta';
+            else resultType = 'Pareggio';
+
             scatterData.push({
                 x: passDiff,
                 y: ipoDiff,
                 match: `${d.Data.split(' ')[0]} vs ${d.Avversario}`,
-                matchKey: `${d.Data}|${d.Avversario}`
+                matchKey: `${d.Data}|${d.Avversario}`,
+                resultType
             });
         }
     });
@@ -1137,14 +1149,22 @@ function renderDangerMatrix() {
             datasets: [{
                 label: 'Partite',
                 data: scatterData,
-                backgroundColor: scatterData.map(d => 
-                    selectedMatchKey && d.matchKey !== selectedMatchKey ? 'rgba(200, 200, 200, 0.2)' : 'rgba(30, 58, 138, 0.8)'
-                ),
+                backgroundColor: scatterData.map(d => {
+                    if (selectedMatchKey && d.matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.2)';
+                    if (d.resultType === 'Vittoria') return 'rgba(34,197,94,0.8)'; // verde
+                    if (d.resultType === 'Pareggio') return 'rgba(234,179,8,0.8)'; // giallo
+                    if (d.resultType === 'Sconfitta') return 'rgba(239,68,68,0.8)'; // rosso
+                    return 'rgba(30,58,138,0.8)'; // fallback blu
+                }),
                 pointRadius: scatterData.map(d => d.matchKey === selectedMatchKey ? 10 : 6),
                 pointHoverRadius: 12,
-                borderColor: scatterData.map(d => 
-                    selectedMatchKey && d.matchKey !== selectedMatchKey ? 'rgba(200, 200, 200, 0.3)' : 'rgb(30, 58, 138)'
-                ),
+                borderColor: scatterData.map(d => {
+                    if (selectedMatchKey && d.matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.3)';
+                    if (d.resultType === 'Vittoria') return 'rgba(34,197,94,1)';
+                    if (d.resultType === 'Pareggio') return 'rgba(234,179,8,1)';
+                    if (d.resultType === 'Sconfitta') return 'rgba(239,68,68,1)';
+                    return 'rgb(30,58,138)';
+                }),
                 borderWidth: scatterData.map(d => d.matchKey === selectedMatchKey ? 3 : 0)
             }]
         },
