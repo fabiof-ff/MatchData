@@ -233,10 +233,10 @@ function updateSummaryHeader() {
         });
     }
     
-    document.getElementById('total-matches').textContent = totalMatches;
-    document.getElementById('total-goals').textContent = totalGoals;
-    document.getElementById('total-points').textContent = totalPoints;
-    document.getElementById('total-conceded').textContent = totalConceded;
+        document.getElementById('total-matches').textContent = totalMatches; // Total Matches
+        document.getElementById('total-goals').textContent = totalGoals; // Total Goals
+        document.getElementById('total-points').textContent = totalPoints; // Total Points
+        document.getElementById('total-conceded').textContent = totalConceded; // Total Conceded
 }
 
 function populateMatchSelector() {
