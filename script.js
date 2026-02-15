@@ -103,25 +103,8 @@ function init() {
             }
         });
 
-        // Set default match to the latest one
-        const seasonData = getFilteredMatches().filter(d => d["Frazione"] === "2° T");
-        if (seasonData.length > 0) {
-            const lastMatch = seasonData[seasonData.length - 1];
-            const lastMatchValue = `${lastMatch.Data}|${lastMatch.Avversario}`;
-            selectedMatchKey = lastMatchValue;
-            
-            // Populate the selector and render details
-            setTimeout(() => {
-                const selector = document.getElementById('match-selector');
-                if (selector) {
-                    selector.value = lastMatchValue;
-                    renderMatchDetails(lastMatchValue, false); // Don't scroll on init
-                    renderSeasonCharts();
-                    renderPerformanceByMatchday();
-                    renderDangerMatrix();
-                }
-            }, 100);
-        }
+        // Nessuna partita selezionata all'avvio
+        selectedMatchKey = null;
 
         // Add double-click to reset filters on ALL chart containers and boxes
         document.querySelectorAll('.bg-white.p-6.rounded-lg.shadow-md, .bg-white.p-4.rounded-lg.shadow-md').forEach(box => {
