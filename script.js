@@ -253,9 +253,13 @@ function renderLastResults() {
         // Scegli simbolo
         let symbol = '';
         if (match["Casa / Trasferta"] === 'Casa') {
-            symbol = '<span title="Partita in casa" class="mr-1">🏠</span>';
+            symbol = `<span title="Partita in casa" class="mr-1 align-middle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M9 21V9h6v12"/></svg>
+            </span>`;
         } else if (match["Casa / Trasferta"] === 'Trasferta') {
-            symbol = '<span title="Partita in trasferta" class="mr-1">🚌</span>';
+            symbol = `<span title="Partita in trasferta" class="mr-1 align-middle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="19" r="2"/><path d="M5 17V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v10"/><path d="M17 17a2 2 0 0 0 2 2"/><path d="M7 17a2 2 0 0 1-2 2"/></svg>
+            </span>`;
         }
         resultDiv.innerHTML = `
             <div class="flex flex-col">
