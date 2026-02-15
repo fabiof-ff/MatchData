@@ -11,6 +11,7 @@ let selectedMatchKey = null; // Track the currently selected match
 let selectedCompetition = 'Campionato';
 let selectedPeriod = 'Tutta';
 let selectedOpponent = '';
+let selectedHomeAway = 'Tutte';
 
 // Register Chart.js DataLabels plugin
 Chart.register(ChartDataLabels);
@@ -33,6 +34,17 @@ function init() {
             document.getElementById('opponent-selector').value = '';
             updateDashboard(true);
             // Hide details when filtering competition
+            document.getElementById('match-details').classList.add('hidden');
+            if (document.getElementById('match-placeholder')) {
+                document.getElementById('match-placeholder').classList.remove('hidden');
+            }
+            document.getElementById('match-selector').value = "";
+        });
+
+        // Home/Away filter logic
+        document.getElementById('homeaway-selector').addEventListener('change', (e) => {
+            selectedHomeAway = e.target.value;
+            updateDashboard(true);
             document.getElementById('match-details').classList.add('hidden');
             if (document.getElementById('match-placeholder')) {
                 document.getElementById('match-placeholder').classList.remove('hidden');
@@ -264,6 +276,9 @@ function getFilteredGenerale() {
     }
     if (selectedOpponent && selectedOpponent !== '') {
         data = data.filter(d => d["Avversario"] === selectedOpponent);
+    }
+    if (selectedHomeAway && selectedHomeAway !== 'Tutte') {
+        data = data.filter(d => d["Casa / Trasferta"] === selectedHomeAway);
     }
     return data;
 }
