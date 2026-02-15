@@ -10,6 +10,7 @@ let keyPassDiffChart = null;
 let selectedMatchKey = null; // Track the currently selected match
 let selectedCompetition = 'Campionato';
 let selectedPeriod = 'Tutta';
+let selectedOpponent = '';
 
 // Register Chart.js DataLabels plugin
 Chart.register(ChartDataLabels);
@@ -28,6 +29,8 @@ function init() {
         
         document.getElementById('competition-selector').addEventListener('change', (e) => {
             selectedCompetition = e.target.value;
+            selectedOpponent = '';
+            document.getElementById('opponent-selector').value = '';
             updateDashboard(true);
             // Hide details when filtering competition
             document.getElementById('match-details').classList.add('hidden');
@@ -144,12 +147,29 @@ function renderLastResults() {
     const listContainer = document.getElementById('last-results-list');
     listContainer.innerHTML = '';
 
+    // Sync selectedMatchKey with match-selector value
+    const matchSelectorValue = document.getElementById('match-selector').value;
+    if (matchSelectorValue) selectedMatchKey = matchSelectorValue;
+
     // Calcola risultati da partite_dettagli
     const partiteDettagli = dashboardData.partite_dettagli;
     const matches = [];
     for (const matchKey in partiteDettagli) {
         // matchKey: Data_Avversario
         const [data, avversario] = matchKey.split('_');
+        // Filter by match (Partita) first: if set, show only that match
+        if (selectedMatchKey) {
+            if (`${data}|${avversario}` !== selectedMatchKey) continue;
+        } else {
+            // Filter by opponent
+            if (selectedOpponent && selectedOpponent !== '' && avversario !== selectedOpponent) continue;
+            // Filter by competition
+            if (selectedCompetition && selectedCompetition !== 'Tutte') {
+                // Find the competition for this match
+                const compRow = dashboardData.generale.find(d => d.Data === data && d.Avversario === avversario);
+                if (!compRow || compRow.Competizione !== selectedCompetition) continue;
+            }
+        }
         let golFatti = 0;
         let golSubiti = 0;
         let casaTrasferta = "";
@@ -234,11 +254,46 @@ function getResultBorderColor(match) {
 }
 
 function getFilteredGenerale() {
-    if (selectedCompetition === 'Tutte') {
-        return dashboardData.generale;
+    let data = dashboardData.generale;
+    if (selectedCompetition !== 'Tutte') {
+        data = data.filter(d => d["Competizione"] === selectedCompetition);
     }
-    return dashboardData.generale.filter(d => d["Competizione"] === selectedCompetition);
+    if (selectedOpponent && selectedOpponent !== '') {
+        data = data.filter(d => d["Avversario"] === selectedOpponent);
+    }
+    return data;
 }
+// Populate opponent selector with unique teams
+function populateOpponentSelector() {
+    const selector = document.getElementById('opponent-selector');
+    selector.innerHTML = '';
+    const opponents = new Set();
+    dashboardData.generale.forEach(d => {
+        opponents.add(d.Avversario);
+    });
+    const allOption = document.createElement('option');
+    allOption.value = '';
+    allOption.textContent = 'Tutte';
+    selector.appendChild(allOption);
+    Array.from(opponents).sort().forEach(team => {
+        const option = document.createElement('option');
+        option.value = team;
+        option.textContent = team;
+        selector.appendChild(option);
+    });
+}
+        // Populate opponent filter after dashboardData is loaded
+        setTimeout(populateOpponentSelector, 0);
+
+        document.getElementById('opponent-selector').addEventListener('change', (e) => {
+            selectedOpponent = e.target.value;
+            updateDashboard(true);
+            document.getElementById('match-details').classList.add('hidden');
+            if (document.getElementById('match-placeholder')) {
+                document.getElementById('match-placeholder').classList.remove('hidden');
+            }
+            document.getElementById('match-selector').value = "";
+        });
 
 function updateSummaryHeader() {
     const filteredData = getFilteredGenerale();
