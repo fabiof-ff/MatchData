@@ -1,3 +1,157 @@
+// --- Custom XY Chart ---
+let customXYChart = null;
+// Mappatura tra etichette user-friendly e chiavi dati dettagliati
+const xyParamOptions = [
+    { key: 'GOL', label: 'Gol Fatti' },
+    { key: 'GOL Subiti', label: 'Gol Subiti' },
+    { key: 'IPO', label: 'IPO (calcolato)' },
+    { key: 'Pass. Chiave', label: 'Passaggi Chiave' },
+    { key: 'OccGol', label: 'Occasioni da Gol' },
+    { key: 'Az Prom', label: 'Azioni Promettenti' },
+    { key: 'TiroTestaArea', label: 'Tiri Testa Area' },
+    { key: 'TiroPiedeArea', label: 'Tiri Piede Area' },
+    { key: 'TiroDaFuori', label: 'Tiri da Fuori' },
+    { key: 'Corner', label: 'Corner' },
+    { key: 'Cross', label: 'Cross' },
+    { key: 'Rigore', label: 'Rigori' },
+    { key: 'Fuorigioco', label: 'Fuorigioco' },
+    // ...aggiungi altri parametri se servono
+];
+
+// Mappa per fallback tra vecchie chiavi e nuove chiavi dettagliate
+const xyKeyMap = {
+    'GOL fatti': 'GOL',
+    'GOL Subiti': 'GOL Subiti',
+    'Occasione da gol': 'OccGol',
+    'Azione promettente': 'Az Prom',
+    'Tiro testa in area': 'TiroTestaArea',
+    'Tiro di piede Area': 'TiroPiedeArea',
+    'Tiro da Fuori': 'TiroDaFuori',
+};
+
+function populateXYSelectors() {
+    const xSel = document.getElementById('xy-x-selector');
+    const ySel = document.getElementById('xy-y-selector');
+    xSel.innerHTML = '';
+    ySel.innerHTML = '';
+    xyParamOptions.forEach(opt => {
+        const xOpt = document.createElement('option');
+        xOpt.value = opt.key;
+        xOpt.textContent = opt.label;
+        xSel.appendChild(xOpt);
+        const yOpt = document.createElement('option');
+        yOpt.value = opt.key;
+        yOpt.textContent = opt.label;
+        ySel.appendChild(yOpt.cloneNode(true));
+    });
+    xSel.value = 'IPO';
+    ySel.value = 'Pass. Chiave';
+}
+
+function renderCustomXYChart() {
+    const xKey = document.getElementById('xy-x-selector').value;
+    const yKey = document.getElementById('xy-y-selector').value;
+    const filteredData = getFilteredMatches().filter(d => d["Frazione"] === "2° T");
+    const frosinone = "Accademia Frosinone";
+    const data = filteredData.map(d => {
+        // Calcola IPO se richiesto
+        let xVal = 0, yVal = 0;
+        const stats = findMatchStats(d.Data, d.Avversario);
+        let fullStats = {};
+        if (stats) {
+            Object.values(stats).forEach(pStats => {
+                for (const attr in pStats) {
+                    if (!fullStats[attr]) fullStats[attr] = {};
+                    for (const team in pStats[attr]) {
+                        if (!fullStats[attr][team]) fullStats[attr][team] = 0;
+                        fullStats[attr][team] += pStats[attr][team];
+                    }
+                }
+            });
+        }
+        // Funzione per estrarre valore
+        function getVal(key) {
+            // Mappa chiave user-friendly a chiave dati dettagliata se necessario
+            let mappedKey = xyKeyMap[key] || key;
+            if (mappedKey === 'IPO') return calculateIPO(fullStats, frosinone);
+            // Per "GOL Subiti" cerca la squadra avversaria
+            if (mappedKey === 'GOL Subiti') {
+                // Trova la squadra avversaria
+                const avv = d.Avversario;
+                // Cerca "GOL" per l'avversario
+                if (fullStats['GOL'] && fullStats['GOL'][avv] !== undefined) return fullStats['GOL'][avv];
+                return 0;
+            }
+            // Per "GOL" (fatti) cerca "GOL" per Accademia Frosinone
+            if (mappedKey === 'GOL') {
+                if (fullStats['GOL'] && fullStats['GOL'][frosinone] !== undefined) return fullStats['GOL'][frosinone];
+                return 0;
+            }
+            if (fullStats[mappedKey] && fullStats[mappedKey][frosinone] !== undefined) return fullStats[mappedKey][frosinone];
+            // fallback: cerca con varianti
+            const variants = [mappedKey, mappedKey.toLowerCase(), mappedKey.toUpperCase()];
+            for (const v of variants) {
+                if (fullStats[v] && fullStats[v][frosinone] !== undefined) return fullStats[v][frosinone];
+            }
+            return 0;
+        }
+        xVal = getVal(xKey);
+        yVal = getVal(yKey);
+        return {
+            x: xVal,
+            y: yVal,
+            label: `${d.Data.replace(' 00:00:00', '')} vs ${d.Avversario}`
+        };
+    });
+    if (customXYChart) customXYChart.destroy();
+    const ctx = document.getElementById('customXYChart').getContext('2d');
+    customXYChart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Partite',
+                data: data,
+                backgroundColor: 'rgba(30,58,138,0.7)',
+                borderColor: 'rgba(30,58,138,1)',
+                pointRadius: 7,
+                pointHoverRadius: 11,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const d = context.raw;
+                            return `${d.label}: (${d.x}, ${d.y})`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: xKey },
+                    grid: { color: 'rgba(0,0,0,0.08)' }
+                },
+                y: {
+                    title: { display: true, text: yKey },
+                    grid: { color: 'rgba(0,0,0,0.08)' }
+                }
+            }
+        }
+    });
+}
+
+// Inizializza i selector e il grafico custom dopo il caricamento
+window.addEventListener('DOMContentLoaded', () => {
+    populateXYSelectors();
+    renderCustomXYChart();
+    document.getElementById('xy-x-selector').addEventListener('change', renderCustomXYChart);
+    document.getElementById('xy-y-selector').addEventListener('change', renderCustomXYChart);
+});
 let dashboardData = null;
 let pointsChart = null;
 let goalsChart = null;
