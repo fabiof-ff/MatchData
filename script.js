@@ -266,7 +266,7 @@ function renderLastResults() {
         resultDiv.innerHTML = `
             <div class="flex flex-col">
                 <span class="text-[10px] text-gray-500 font-semibold">${date}</span>
-                <span class="text-xs font-bold truncate max-w-[100px]">${symbol}${opponent}</span>
+                <span class="flex items-center text-xs font-bold truncate max-w-[120px]">${symbol}<span>${opponent}</span></span>
             </div>
             <div class="text-sm font-black bg-white px-2 py-1 rounded shadow-sm border">
                 ${score}
