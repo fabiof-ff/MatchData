@@ -73,27 +73,52 @@ function renderCustomXYChart() {
         function getVal(key) {
             // Mappa chiave user-friendly a chiave dati dettagliata se necessario
             let mappedKey = xyKeyMap[key] || key;
-            if (mappedKey === 'IPO') return calculateIPO(fullStats, frosinone);
-            // Per "GOL Subiti" cerca la squadra avversaria
+            // Somma 1°T e 2°T per tutti i parametri
+            let sum = 0;
+            // Per "IPO" calcolo dedicato
+            if (mappedKey === 'IPO') {
+                // Somma IPO di 1°T e 2°T
+                sum += calculateIPO(stats['1° T'] || {}, frosinone);
+                sum += calculateIPO(stats['2° T'] || {}, frosinone);
+                return sum;
+            }
+            // Per "GOL Subiti" somma "GOL" dell'avversario in 1°T e 2°T
             if (mappedKey === 'GOL Subiti') {
-                // Trova la squadra avversaria
                 const avv = d.Avversario;
-                // Cerca "GOL" per l'avversario
-                if (fullStats['GOL'] && fullStats['GOL'][avv] !== undefined) return fullStats['GOL'][avv];
-                return 0;
+                ['1° T', '2° T'].forEach(frazione => {
+                    if (stats[frazione] && stats[frazione]['GOL'] && stats[frazione]['GOL'][avv] !== undefined) {
+                        sum += stats[frazione]['GOL'][avv];
+                    }
+                });
+                return sum;
             }
-            // Per "GOL" (fatti) cerca "GOL" per Accademia Frosinone
+            // Per "GOL" (fatti) somma "GOL" per Accademia Frosinone in 1°T e 2°T
             if (mappedKey === 'GOL') {
-                if (fullStats['GOL'] && fullStats['GOL'][frosinone] !== undefined) return fullStats['GOL'][frosinone];
-                return 0;
+                ['1° T', '2° T'].forEach(frazione => {
+                    if (stats[frazione] && stats[frazione]['GOL'] && stats[frazione]['GOL'][frosinone] !== undefined) {
+                        sum += stats[frazione]['GOL'][frosinone];
+                    }
+                });
+                return sum;
             }
-            if (fullStats[mappedKey] && fullStats[mappedKey][frosinone] !== undefined) return fullStats[mappedKey][frosinone];
-            // fallback: cerca con varianti
-            const variants = [mappedKey, mappedKey.toLowerCase(), mappedKey.toUpperCase()];
-            for (const v of variants) {
-                if (fullStats[v] && fullStats[v][frosinone] !== undefined) return fullStats[v][frosinone];
+            // Per tutti gli altri parametri, somma valori per Accademia Frosinone in 1°T e 2°T
+            ['1° T', '2° T'].forEach(frazione => {
+                if (stats[frazione] && stats[frazione][mappedKey] && stats[frazione][mappedKey][frosinone] !== undefined) {
+                    sum += stats[frazione][mappedKey][frosinone];
+                }
+            });
+            // fallback: cerca con varianti se non trovato
+            if (sum === 0) {
+                const variants = [mappedKey, mappedKey.toLowerCase(), mappedKey.toUpperCase()];
+                for (const v of variants) {
+                    ['1° T', '2° T'].forEach(frazione => {
+                        if (stats[frazione] && stats[frazione][v] && stats[frazione][v][frosinone] !== undefined) {
+                            sum += stats[frazione][v][frosinone];
+                        }
+                    });
+                }
             }
-            return 0;
+            return sum;
         }
         xVal = getVal(xKey);
         yVal = getVal(yKey);
