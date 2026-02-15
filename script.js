@@ -863,6 +863,10 @@ function renderCombinedDiffChart() {
         console.warn('Nessun dato valido per Diff. IPO e Passaggi Chiave (Barre combinate)');
         return;
     }
+    // Calcola min e max comuni per allineare lo zero
+    const allValues = ipoDiffs.concat(passDiffs);
+    const minY = Math.min(0, Math.floor(Math.min(...allValues)));
+    const maxY = Math.max(0, Math.ceil(Math.max(...allValues)));
     window.combinedDiffChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -891,7 +895,9 @@ function renderCombinedDiffChart() {
             maintainAspectRatio: false,
             scales: {
                 y: {
-                    beginAtZero: true,
+                    beginAtZero: false,
+                    min: minY,
+                    max: maxY,
                     grid: {
                         color: (c) => c.tick.value === 0 ? '#000' : 'rgba(0,0,0,0.1)'
                     },
@@ -902,7 +908,9 @@ function renderCombinedDiffChart() {
                     }
                 },
                 y2: {
-                    beginAtZero: true,
+                    beginAtZero: false,
+                    min: minY,
+                    max: maxY,
                     grid: {
                         drawOnChartArea: false
                     },
