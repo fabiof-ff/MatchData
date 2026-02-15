@@ -73,30 +73,36 @@ function renderCustomXYChart() {
         function getVal(key) {
             // Mappa chiave user-friendly a chiave dati dettagliata se necessario
             let mappedKey = xyKeyMap[key] || key;
-            // Somma 1°T e 2°T per tutti i parametri
             let sum = 0;
             // Per "IPO" calcolo dedicato
             if (mappedKey === 'IPO') {
-                // Somma IPO di 1°T e 2°T
                 sum += calculateIPO(stats['1° T'] || {}, frosinone);
                 sum += calculateIPO(stats['2° T'] || {}, frosinone);
                 return sum;
             }
-            // Per "GOL Subiti" somma "GOL" dell'avversario in 1°T e 2°T
+            // Per "GOL Subiti" somma tutte le varianti di "GOL"/"Gol" dell'avversario in 1°T e 2°T
             if (mappedKey === 'GOL Subiti') {
                 const avv = d.Avversario;
                 ['1° T', '2° T'].forEach(frazione => {
-                    if (stats[frazione] && stats[frazione]['GOL'] && stats[frazione]['GOL'][avv] !== undefined) {
-                        sum += stats[frazione]['GOL'][avv];
+                    if (stats[frazione]) {
+                        ['GOL', 'Gol', 'gol'].forEach(golKey => {
+                            if (stats[frazione][golKey] && stats[frazione][golKey][avv] !== undefined) {
+                                sum += stats[frazione][golKey][avv];
+                            }
+                        });
                     }
                 });
                 return sum;
             }
-            // Per "GOL" (fatti) somma "GOL" per Accademia Frosinone in 1°T e 2°T
+            // Per "GOL" (fatti) somma tutte le varianti di "GOL"/"Gol" per Accademia Frosinone in 1°T e 2°T
             if (mappedKey === 'GOL') {
                 ['1° T', '2° T'].forEach(frazione => {
-                    if (stats[frazione] && stats[frazione]['GOL'] && stats[frazione]['GOL'][frosinone] !== undefined) {
-                        sum += stats[frazione]['GOL'][frosinone];
+                    if (stats[frazione]) {
+                        ['GOL', 'Gol', 'gol'].forEach(golKey => {
+                            if (stats[frazione][golKey] && stats[frazione][golKey][frosinone] !== undefined) {
+                                sum += stats[frazione][golKey][frosinone];
+                            }
+                        });
                     }
                 });
                 return sum;
