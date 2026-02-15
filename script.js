@@ -303,30 +303,46 @@ function getResultBorderColor(match) {
 }
 
 function getFilteredMatches() {
-    let data = dashboardData.generale;
-    if (selectedCompetition !== 'Tutte') {
-        data = data.filter(d => d["Competizione"] === selectedCompetition);
-    }
-    if (selectedOpponent && selectedOpponent !== '') {
-        data = data.filter(d => d["Avversario"] === selectedOpponent);
-    }
-    if (selectedHomeAway && selectedHomeAway !== 'Tutte') {
-        data = data.filter(d => d["Casa / Trasferta"] === selectedHomeAway);
-    }
-    // Applica filtro Vittoria/Pareggio/Sconfitta se selezionato
+    // Aggrega per partita (Data + Avversario)
+    const partite = {};
+    dashboardData.generale.forEach(d => {
+        // Applica filtri base (competizione, avversario, casa/trasferta)
+        if (selectedCompetition !== 'Tutte' && d["Competizione"] !== selectedCompetition) return;
+        if (selectedOpponent && selectedOpponent !== '' && d["Avversario"] !== selectedOpponent) return;
+        if (selectedHomeAway && selectedHomeAway !== 'Tutte' && d["Casa / Trasferta"] !== selectedHomeAway) return;
+        const key = `${d.Data}|${d.Avversario}`;
+        if (!partite[key]) {
+            partite[key] = {
+                Data: d.Data,
+                Avversario: d.Avversario,
+                "Competizione": d["Competizione"],
+                "Casa / Trasferta": d["Casa / Trasferta"],
+                "GOL fatti": 0,
+                "GOL Subiti": 0,
+                frazioni: [],
+                "Frazione": d["Frazione"] // provvisoria, aggiornata sotto
+            };
+        }
+        partite[key]["GOL fatti"] += Number(d["GOL fatti"] ?? d["Gol fatti"] ?? d["Gol Fatti"] ?? 0);
+        partite[key]["GOL Subiti"] += Number(d["GOL Subiti"] ?? d["Gol Subiti"] ?? d["Gol subiti"] ?? 0);
+        partite[key].frazioni.push(d);
+        // Aggiorna la frazione se questa è "2° T" (preferita per i diagrammi)
+        if (d["Frazione"] === "2° T") {
+            partite[key]["Frazione"] = "2° T";
+        }
+    });
+    // Applica filtro risultato a livello partita
+    let matches = Object.values(partite);
     if (selectedResult && selectedResult !== 'Tutte') {
-        data = data.filter(d => {
-            // Calcola risultato per la riga (solo se ha i dati necessari)
-            let fatti = Number(d["GOL fatti"] ?? d["Gol fatti"] ?? d["Gol Fatti"] ?? 0);
-            let subiti = Number(d["GOL Subiti"] ?? d["Gol Subiti"] ?? d["Gol subiti"] ?? 0);
+        matches = matches.filter(m => {
             let res = '';
-            if (fatti > subiti) res = 'Vittoria';
-            else if (fatti < subiti) res = 'Sconfitta';
-            else res = 'Pareggio'; // considera anche 0-0 come pareggio
+            if (m["GOL fatti"] > m["GOL Subiti"]) res = 'Vittoria';
+            else if (m["GOL fatti"] < m["GOL Subiti"]) res = 'Sconfitta';
+            else res = 'Pareggio';
             return res === selectedResult;
         });
     }
-    return data;
+    return matches;
 }
 // Populate opponent selector with unique teams
 function populateOpponentSelector() {
