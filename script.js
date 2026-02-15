@@ -379,39 +379,39 @@ function populateOpponentSelector() {
 
 function updateSummaryHeader() {
     const filteredData = getFilteredMatches();
-    // Filter for 2° T rows
-    const sessionEndData = filteredData.filter(d => d["Frazione"] === "2° T");
-
-    const totalMatches = sessionEndData.length;
+    // Aggrega per partita (Data + Avversario) e somma i gol di tutte le frazioni
+    const partite = {};
+    filteredData.forEach(d => {
+        const key = `${d.Data}|${d.Avversario}`;
+        if (!partite[key]) {
+            partite[key] = {
+                Data: d.Data,
+                Avversario: d.Avversario,
+                golFatti: 0,
+                golSubiti: 0
+            };
+        }
+        partite[key].golFatti += Number(d["GOL fatti"] ?? d["Gol fatti"] ?? d["Gol Fatti"] ?? 0);
+        partite[key].golSubiti += Number(d["GOL Subiti"] ?? d["Gol Subiti"] ?? d["Gol subiti"] ?? 0);
+    });
+    const matches = Object.values(partite);
+    const totalMatches = matches.length;
     let totalGoals = 0;
     let totalPoints = 0;
     let totalConceded = 0;
     let totalWins = 0;
     let totalDraws = 0;
     let totalLosses = 0;
-
-    // Sum goals, points, and W/D/L from partite_dettagli for filtered matches
-    sessionEndData.forEach(row => {
-        const matchKey = `${row.Data}_${row.Avversario}`;
-        let golFatti = 0;
-        let golSubiti = 0;
-        if (dashboardData.partite_dettagli[matchKey]) {
-            for (const frazione in dashboardData.partite_dettagli[matchKey]) {
-                const stats = dashboardData.partite_dettagli[matchKey][frazione];
-                Object.keys(stats).forEach(key => {
-                    if (key.toLowerCase() === 'gol') {
-                        const golObj = stats[key];
-                        if (golObj["Accademia Frosinone"] !== undefined) golFatti += golObj["Accademia Frosinone"];
-                        for (const team in golObj) {
-                            if (team !== "Accademia Frosinone") golSubiti += golObj[team];
-                        }
-                    }
-                });
-            }
+    matches.forEach(match => {
+        let golFatti = match.golFatti;
+        let golSubiti = match.golSubiti;
+        // Se non ci sono dati gol per la partita, assegna 0-0
+        if (isNaN(golFatti) || isNaN(golSubiti) || (golFatti === 0 && golSubiti === 0 && match.golFatti === 0 && match.golSubiti === 0)) {
+            golFatti = 0;
+            golSubiti = 0;
         }
         totalGoals += golFatti;
         totalConceded += golSubiti;
-        // Calcolo punti: 3 per vittoria, 1 per pareggio (anche 0-0), 0 per sconfitta
         if (golFatti > golSubiti) {
             totalPoints += 3;
             totalWins += 1;
@@ -541,11 +541,10 @@ function renderSeasonCharts() {
         goalsMade.push(runningGolFatti);
         goalsAgainst.push(runningGolSubiti);
 
-        // Calcolo punti: 3 per vittoria, 1 per pareggio, 0 per sconfitta
+        // Calcolo punti: 3 per vittoria, 1 per pareggio (anche 0-0), 0 per sconfitta
         let puntiPartita = 0;
         if (golFatti > golSubiti) puntiPartita = 3;
-        else if (golFatti === golSubiti && (golFatti > 0 || golSubiti > 0)) puntiPartita = 1;
-        // Se entrambi 0, nessun punto (partita non giocata)
+        else if (golFatti === golSubiti) puntiPartita = 1;
         runningPoints += puntiPartita;
         points.push(runningPoints);
     });
