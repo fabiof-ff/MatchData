@@ -104,7 +104,7 @@ function init() {
         });
 
         // Set default match to the latest one
-        const seasonData = getFilteredGenerale().filter(d => d["Frazione"] === "2° T");
+        const seasonData = getFilteredMatches().filter(d => d["Frazione"] === "2° T");
         if (seasonData.length > 0) {
             const lastMatch = seasonData[seasonData.length - 1];
             const lastMatchValue = `${lastMatch.Data}|${lastMatch.Avversario}`;
@@ -302,7 +302,7 @@ function getResultBorderColor(match) {
     return 'border-yellow-500';
 }
 
-function getFilteredGenerale() {
+function getFilteredMatches() {
     let data = dashboardData.generale;
     if (selectedCompetition !== 'Tutte') {
         data = data.filter(d => d["Competizione"] === selectedCompetition);
@@ -312,6 +312,19 @@ function getFilteredGenerale() {
     }
     if (selectedHomeAway && selectedHomeAway !== 'Tutte') {
         data = data.filter(d => d["Casa / Trasferta"] === selectedHomeAway);
+    }
+    // Applica filtro Vittoria/Pareggio/Sconfitta se selezionato
+    if (selectedResult && selectedResult !== 'Tutte') {
+        data = data.filter(d => {
+            // Calcola risultato per la riga (solo se ha i dati necessari)
+            let fatti = Number(d["GOL fatti"] ?? d["Gol fatti"] ?? d["Gol Fatti"] ?? 0);
+            let subiti = Number(d["GOL Subiti"] ?? d["Gol Subiti"] ?? d["Gol subiti"] ?? 0);
+            let res = '';
+            if (fatti > subiti) res = 'Vittoria';
+            else if (fatti < subiti) res = 'Sconfitta';
+            else res = 'Pareggio'; // considera anche 0-0 come pareggio
+            return res === selectedResult;
+        });
     }
     return data;
 }
@@ -349,7 +362,7 @@ function populateOpponentSelector() {
         });
 
 function updateSummaryHeader() {
-    const filteredData = getFilteredGenerale();
+    const filteredData = getFilteredMatches();
     // Filter for 2° T rows
     const sessionEndData = filteredData.filter(d => d["Frazione"] === "2° T");
 
@@ -382,7 +395,7 @@ function updateSummaryHeader() {
         }
         totalGoals += golFatti;
         totalConceded += golSubiti;
-        // Calcolo punti: 3 per vittoria, 1 per pareggio, 0 per sconfitta
+        // Calcolo punti: 3 per vittoria, 1 per pareggio (anche 0-0), 0 per sconfitta
         if (golFatti > golSubiti) {
             totalPoints += 3;
             totalWins += 1;
@@ -407,7 +420,7 @@ function populateMatchSelector() {
     const selector = document.getElementById('match-selector');
     selector.innerHTML = '<option value="">Seleziona una partita</option>';
     
-    const filteredData = getFilteredGenerale();
+    const filteredData = getFilteredMatches();
     // Only unique matches (using Data and Avversario as key)
     const seenMatches = new Set();
     const matches = [];
@@ -475,7 +488,7 @@ function renderSeasonCharts() {
     const ctxIpoTrend = document.getElementById('ipoTrendChart').getContext('2d');
     
     // Filter "Generale" for 2° T rows
-    const filteredData = getFilteredGenerale();
+    const filteredData = getFilteredMatches();
     const seasonData = filteredData.filter(d => d["Frazione"] === "2° T");
     
     const labels = seasonData.map(d => d["Avversario"]);
@@ -788,7 +801,7 @@ function renderCombinedDiffChart() {
         window.combinedDiffChart.destroy();
     }
 
-    const filteredData = getFilteredGenerale();
+    const filteredData = getFilteredMatches();
     const seasonData = filteredData.filter(d => d["Frazione"] === "2° T");
     const labels = seasonData.map(d => d["Avversario"]);
     const frosinone = "Accademia Frosinone";
@@ -1029,7 +1042,7 @@ function renderGoalTimeChart() {
 
 function renderDangerMatrix() {
     const ctxMatrix = document.getElementById('dangerMatrixChart').getContext('2d');
-    const filteredData = getFilteredGenerale();
+    const filteredData = getFilteredMatches();
     const seasonData = filteredData.filter(d => d["Frazione"] === "2° T");
     
     if (dangerMatrixChart) dangerMatrixChart.destroy();
