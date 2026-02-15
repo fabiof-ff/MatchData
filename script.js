@@ -250,10 +250,17 @@ function renderLastResults() {
             }
         };
 
+        // Scegli simbolo
+        let symbol = '';
+        if (match["Casa / Trasferta"] === 'Casa') {
+            symbol = '<span title="Partita in casa" class="mr-1">🏠</span>';
+        } else if (match["Casa / Trasferta"] === 'Trasferta') {
+            symbol = '<span title="Partita in trasferta" class="mr-1">🚌</span>';
+        }
         resultDiv.innerHTML = `
             <div class="flex flex-col">
                 <span class="text-[10px] text-gray-500 font-semibold">${date}</span>
-                <span class="text-xs font-bold truncate max-w-[100px]">${opponent}</span>
+                <span class="text-xs font-bold truncate max-w-[100px]">${symbol}${opponent}</span>
             </div>
             <div class="text-sm font-black bg-white px-2 py-1 rounded shadow-sm border">
                 ${score}
