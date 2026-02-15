@@ -67,6 +67,7 @@ function init() {
                 renderSeasonCharts(); // Refresh to highlight
                 renderPerformanceByMatchday(); // Refresh to highlight
                 renderDangerMatrix(); // Refresh to highlight
+                renderGoalTimeChart(); // Aggiorna distribuzione gol
             } else {
                 selectedMatchKey = null;
                 document.getElementById('match-details').classList.add('hidden');
@@ -75,6 +76,7 @@ function init() {
                 renderSeasonCharts();
                 renderPerformanceByMatchday();
                 renderDangerMatrix();
+                renderGoalTimeChart(); // Aggiorna distribuzione gol
             }
         });
 
@@ -229,6 +231,7 @@ function renderLastResults() {
                 selector.value = matchValue;
                 renderMatchDetails(matchValue, true); // Scroll when clicking result
                 updateDashboard(); // Refresh all highlights
+                renderGoalTimeChart(); // Aggiorna distribuzione gol
             }
         };
 
@@ -288,6 +291,7 @@ function populateOpponentSelector() {
         document.getElementById('opponent-selector').addEventListener('change', (e) => {
             selectedOpponent = e.target.value;
             updateDashboard(true);
+            renderGoalTimeChart(); // Aggiorna distribuzione gol
             document.getElementById('match-details').classList.add('hidden');
             if (document.getElementById('match-placeholder')) {
                 document.getElementById('match-placeholder').classList.remove('hidden');
@@ -831,11 +835,21 @@ function renderGoalTimeChart() {
 
     const frosinone = "Accademia Frosinone";
     const distribution = dashboardData.distribuzione_gol || [];
-    
-    // Filter by competition if not 'Tutte'
-    const filtered = selectedCompetition === 'Tutte' 
-        ? distribution 
-        : distribution.filter(g => g.Competizione === selectedCompetition);
+
+    let filtered = distribution;
+    // Filtra per competizione
+    if (selectedCompetition !== 'Tutte') {
+        filtered = filtered.filter(g => g.Competizione === selectedCompetition);
+    }
+    // Filtra per squadra avversaria
+    if (selectedOpponent && selectedOpponent !== '') {
+        filtered = filtered.filter(g => g.Avversario === selectedOpponent);
+    }
+    // Filtra per partita selezionata
+    if (selectedMatchKey) {
+        const [data, avversario] = selectedMatchKey.split('|');
+        filtered = filtered.filter(g => g.Data === data && g.Avversario === avversario);
+    }
 
     // Updated labels with multi-line for axis grouping
     const labels = [
