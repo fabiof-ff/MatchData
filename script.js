@@ -12,11 +12,22 @@ let selectedCompetition = 'Campionato';
 let selectedPeriod = 'Tutta';
 let selectedOpponent = '';
 let selectedHomeAway = 'Tutte';
+let selectedResult = 'Tutte';
 
 // Register Chart.js DataLabels plugin
 Chart.register(ChartDataLabels);
 
 function init() {
+            // Filtro risultato (Vittoria/Pareggio/Sconfitta)
+            document.getElementById('result-selector').addEventListener('change', (e) => {
+                selectedResult = e.target.value;
+                updateDashboard(true);
+                document.getElementById('match-details').classList.add('hidden');
+                if (document.getElementById('match-placeholder')) {
+                    document.getElementById('match-placeholder').classList.remove('hidden');
+                }
+                document.getElementById('match-selector').value = "";
+            });
     try {
         // Use the global variable from data.js
         dashboardData = DASHBOARD_DATA;
@@ -208,12 +219,19 @@ function renderLastResults() {
         }
         // Applica filtro Casa/Trasferta
         if (selectedHomeAway && selectedHomeAway !== 'Tutte' && casaTrasferta !== selectedHomeAway) continue;
+        // Applica filtro risultato
+        let resultType = 'Tutte';
+        if (golFatti > golSubiti) resultType = 'Vittoria';
+        else if (golFatti < golSubiti) resultType = 'Sconfitta';
+        else if (golFatti === golSubiti) resultType = 'Pareggio';
+        if (selectedResult && selectedResult !== 'Tutte' && resultType !== selectedResult) continue;
         matches.push({
             Data: data,
             Avversario: avversario,
             "GOL fatti": golFatti,
             "GOL Subiti": golSubiti,
-            "Casa / Trasferta": casaTrasferta
+            "Casa / Trasferta": casaTrasferta,
+            "Risultato": resultType
         });
     }
     // Ordina per data decrescente
