@@ -304,8 +304,11 @@ function updateSummaryHeader() {
     let totalGoals = 0;
     let totalPoints = 0;
     let totalConceded = 0;
+    let totalWins = 0;
+    let totalDraws = 0;
+    let totalLosses = 0;
 
-    // Sum goals and points from partite_dettagli for filtered matches
+    // Sum goals, points, and W/D/L from partite_dettagli for filtered matches
     sessionEndData.forEach(row => {
         const matchKey = `${row.Data}_${row.Avversario}`;
         let golFatti = 0;
@@ -327,15 +330,24 @@ function updateSummaryHeader() {
         totalGoals += golFatti;
         totalConceded += golSubiti;
         // Calcolo punti: 3 per vittoria, 1 per pareggio, 0 per sconfitta
-        if (golFatti > golSubiti) totalPoints += 3;
-        else if (golFatti === golSubiti && (golFatti > 0 || golSubiti > 0)) totalPoints += 1;
-        // Se entrambi 0, nessun punto (partita non giocata)
+        if (golFatti > golSubiti) {
+            totalPoints += 3;
+            totalWins += 1;
+        } else if (golFatti === golSubiti) {
+            totalPoints += 1;
+            totalDraws += 1;
+        } else if (golFatti < golSubiti) {
+            totalLosses += 1;
+        }
     });
 
     document.getElementById('total-matches').textContent = totalMatches; // Total Matches
     document.getElementById('total-goals').textContent = totalGoals; // Total Goals
     document.getElementById('total-points').textContent = totalPoints; // Total Points
     document.getElementById('total-conceded').textContent = totalConceded; // Total Conceded
+    document.getElementById('total-wins').textContent = totalWins; // Total Wins
+    document.getElementById('total-draws').textContent = totalDraws; // Total Draws
+    document.getElementById('total-losses').textContent = totalLosses; // Total Losses
 }
 
 function populateMatchSelector() {
