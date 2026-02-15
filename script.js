@@ -557,52 +557,53 @@ function renderSeasonCharts() {
     if (goalsChart) goalsChart.destroy();
     if (ipoTrendChart) ipoTrendChart.destroy();
 
-    pointsChart = new Chart(ctxPoints, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Punti Totali',
-                data: points,
-                borderColor: 'rgb(30, 58, 138)',
-                backgroundColor: 'rgba(30, 58, 138, 0.1)',
-                fill: true,
-                tension: 0.1,
-                pointBackgroundColor: seasonData.map(d => {
-                    const matchKey = `${d.Data}|${d.Avversario}`;
-                    if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.2)';
-                    return 'rgb(30, 58, 138)';
-                }),
-                pointBorderColor: seasonData.map(d => {
-                    const matchKey = `${d.Data}|${d.Avversario}`;
-                    if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.3)';
-                    return 'rgb(30, 58, 138)';
-                }),
-                pointRadius: seasonData.map(d => {
-                    const matchKey = `${d.Data}|${d.Avversario}`;
-                    return matchKey === selectedMatchKey ? 8 : 4;
-                })
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            onClick: (event, elements) => {
-                if (elements.length > 0) {
-                    const index = elements[0].index;
-                    const match = seasonData[index];
-                    const matchKey = `${match.Data}|${match.Avversario}`;
-                    selectedMatchKey = matchKey;
-                    document.getElementById('match-selector').value = matchKey;
-                    renderMatchDetails(matchKey, false); // Don't scroll when clicking diagram
-                    updateDashboard();
-                }
+        pointsChart = new Chart(ctxPoints, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Punti Totali',
+                    data: points,
+                    borderColor: 'rgb(30, 58, 138)',
+                    backgroundColor: 'rgba(30, 58, 138, 0.1)',
+                    fill: true,
+                    tension: 0.1,
+                    pointBackgroundColor: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.2)';
+                        return 'rgb(30, 58, 138)';
+                    }),
+                    pointBorderColor: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200, 200, 200, 0.3)';
+                        return 'rgb(30, 58, 138)';
+                    }),
+                    pointRadius: seasonData.map(d => {
+                        const matchKey = `${d.Data}|${d.Avversario}`;
+                        return matchKey === selectedMatchKey ? 8 : 4;
+                    })
+                }]
             },
-            plugins: {
-                datalabels: { display: false }
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        const match = seasonData[index];
+                        const matchKey = `${match.Data}|${match.Avversario}`;
+                        selectedMatchKey = matchKey;
+                        document.getElementById('match-selector').value = matchKey;
+                        renderMatchDetails(matchKey, false); // Don't scroll when clicking diagram
+                        updateDashboard();
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    datalabels: { display: false }
+                }
             }
-        }
-    });
+        });
 
     ipoTrendChart = new Chart(ctxIpoTrend, {
         type: 'bar',
