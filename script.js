@@ -978,6 +978,24 @@ function renderGoalTimeChart() {
     if (selectedHomeAway && selectedHomeAway !== 'Tutte') {
         filtered = filtered.filter(g => g["Casa / Trasferta"] === selectedHomeAway);
     }
+    // Filtra per risultato (Vittoria/Pareggio/Sconfitta)
+    if (selectedResult && selectedResult !== 'Tutte') {
+        // Per ogni gol, trova la partita aggregata e calcola il risultato
+        filtered = filtered.filter(g => {
+            // Trova tutte le frazioni di questa partita
+            const matchRows = dashboardData.generale.filter(row => row.Data === g.Data && row.Avversario === g.Avversario);
+            let fatti = 0, subiti = 0;
+            matchRows.forEach(row => {
+                fatti += Number(row["GOL fatti"] ?? row["Gol fatti"] ?? row["Gol Fatti"] ?? 0);
+                subiti += Number(row["GOL Subiti"] ?? row["Gol Subiti"] ?? row["Gol subiti"] ?? 0);
+            });
+            let res = '';
+            if (fatti > subiti) res = 'Vittoria';
+            else if (fatti < subiti) res = 'Sconfitta';
+            else res = 'Pareggio';
+            return res === selectedResult;
+        });
+    }
 
     // Updated labels with multi-line for axis grouping
     const labels = [
