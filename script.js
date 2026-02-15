@@ -206,6 +206,8 @@ function renderLastResults() {
                 casaTrasferta = stats["Casa / Trasferta"]["Accademia Frosinone"];
             }
         }
+        // Applica filtro Casa/Trasferta
+        if (selectedHomeAway && selectedHomeAway !== 'Tutte' && casaTrasferta !== selectedHomeAway) continue;
         matches.push({
             Data: data,
             Avversario: avversario,
@@ -897,6 +899,10 @@ function renderGoalTimeChart() {
     if (selectedMatchKey) {
         const [data, avversario] = selectedMatchKey.split('|');
         filtered = filtered.filter(g => g.Data === data && g.Avversario === avversario);
+    }
+    // Filtra per Casa/Trasferta
+    if (selectedHomeAway && selectedHomeAway !== 'Tutte') {
+        filtered = filtered.filter(g => g["Casa / Trasferta"] === selectedHomeAway);
     }
 
     // Updated labels with multi-line for axis grouping
