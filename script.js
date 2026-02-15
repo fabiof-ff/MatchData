@@ -143,31 +143,65 @@ function updateDashboard(repopulateSelector = false) {
 function renderLastResults() {
     const listContainer = document.getElementById('last-results-list');
     listContainer.innerHTML = '';
-    
-    // Get all matches from filtered data (2nd half rows only)
-    const filteredData = getFilteredGenerale().filter(d => d["Frazione"] === "2° T");
-    const lastMatches = [...filteredData].reverse(); // All matches, most recent first
 
-    if (lastMatches.length === 0) {
+    // Calcola risultati da partite_dettagli
+    const partiteDettagli = dashboardData.partite_dettagli;
+    const matches = [];
+    for (const matchKey in partiteDettagli) {
+        // matchKey: Data_Avversario
+        const [data, avversario] = matchKey.split('_');
+        let golFatti = 0;
+        let golSubiti = 0;
+        let casaTrasferta = "";
+        // Somma i gol per Accademia Frosinone e avversario (sia 'GOL' che 'Gol')
+        for (const frazione in partiteDettagli[matchKey]) {
+            const stats = partiteDettagli[matchKey][frazione];
+            // Cerca tutte le chiavi che corrispondono a 'GOL' o 'Gol' (case-insensitive)
+            Object.keys(stats).forEach(key => {
+                if (key.toLowerCase() === 'gol') {
+                    const golObj = stats[key];
+                    if (golObj["Accademia Frosinone"] !== undefined) golFatti += golObj["Accademia Frosinone"];
+                    for (const team in golObj) {
+                        if (team !== "Accademia Frosinone") golSubiti += golObj[team];
+                    }
+                }
+            });
+            // Trova se la squadra era in casa o trasferta
+            if (stats["Casa / Trasferta"] && stats["Casa / Trasferta"]["Accademia Frosinone"] !== undefined) {
+                casaTrasferta = stats["Casa / Trasferta"]["Accademia Frosinone"];
+            }
+        }
+        matches.push({
+            Data: data,
+            Avversario: avversario,
+            "GOL fatti": golFatti,
+            "GOL Subiti": golSubiti,
+            "Casa / Trasferta": casaTrasferta
+        });
+    }
+    // Ordina per data decrescente
+    matches.sort((a, b) => new Date(b.Data) - new Date(a.Data));
+
+    if (matches.length === 0) {
         listContainer.innerHTML = '<div class="text-center text-gray-400 py-4 italic text-sm">Nessuna partita trovata</div>';
         return;
     }
 
-    lastMatches.forEach(match => {
+    matches.forEach(match => {
         const resultDiv = document.createElement('div');
         const matchValue = `${match.Data}|${match.Avversario}`;
-        
+
         // Add highlight class if selected
         const isSelected = selectedMatchKey === matchValue;
         const bgClass = isSelected ? 'bg-blue-100' : 'bg-gray-50';
         const borderColor = getResultBorderColor(match);
 
         resultDiv.className = `flex items-center justify-between p-2 rounded ${bgClass} border-l-4 cursor-pointer hover:bg-white hover:shadow-sm transition-all ${borderColor}`;
-        
+
         const date = match.Data.replace(' 00:00:00', '').substring(0, 10);
         const score = `${match["GOL fatti"]} - ${match["GOL Subiti"]}`;
         const opponent = match.Avversario;
-        
+
         resultDiv.onclick = () => {
             selectedMatchKey = matchValue;
             const selector = document.getElementById('match-selector');
@@ -297,29 +331,46 @@ function renderSeasonCharts() {
     
     const labels = seasonData.map(d => d["Avversario"]);
     
-    // Calculate cumulative values
-    let points = [];
+    // Calcola Gol Fatti/Subiti solo da partite_dettagli
     let goalsMade = [];
     let goalsAgainst = [];
+    let points = [];
     let ipoValues = [];
+    const partiteDettagli = dashboardData.partite_dettagli;
+    let runningGolFatti = 0;
+    let runningGolSubiti = 0;
+    let runningPoints = 0;
+    seasonData.forEach(d => {
+        const matchKey = `${d.Data}_${d.Avversario}`;
+        let golFatti = 0;
+        let golSubiti = 0;
+        if (partiteDettagli[matchKey]) {
+            for (const frazione in partiteDettagli[matchKey]) {
+                const stats = partiteDettagli[matchKey][frazione];
+                Object.keys(stats).forEach(key => {
+                    if (key.toLowerCase() === 'gol') {
+                        const golObj = stats[key];
+                        if (golObj["Accademia Frosinone"] !== undefined) golFatti += golObj["Accademia Frosinone"];
+                        for (const team in golObj) {
+                            if (team !== "Accademia Frosinone") golSubiti += golObj[team];
+                        }
+                    }
+                });
+            }
+        }
+        runningGolFatti += golFatti;
+        runningGolSubiti += golSubiti;
+        goalsMade.push(runningGolFatti);
+        goalsAgainst.push(runningGolSubiti);
 
-    if (selectedCompetition === 'Tutte') {
-        points = seasonData.map(d => d["Punti (tot)"] || 0);
-        goalsMade = seasonData.map(d => d["Gol Fatti (tot)"] || 0);
-        goalsAgainst = seasonData.map(d => d["Gol Subiti (tot)"] || 0);
-    } else {
-        let runningP = 0;
-        let runningG = 0;
-        let runningC = 0;
-        seasonData.forEach(d => {
-            runningP += (d["Punti"] || 0);
-            runningG += (d["GOL fatti"] || 0);
-            runningC += (d["GOL Subiti"] || 0);
-            points.push(runningP);
-            goalsMade.push(runningG);
-            goalsAgainst.push(runningC);
-        });
-    }
+        // Calcolo punti: 3 per vittoria, 1 per pareggio, 0 per sconfitta
+        let puntiPartita = 0;
+        if (golFatti > golSubiti) puntiPartita = 3;
+        else if (golFatti === golSubiti && (golFatti > 0 || golSubiti > 0)) puntiPartita = 1;
+        // Se entrambi 0, nessun punto (partita non giocata)
+        runningPoints += puntiPartita;
+        points.push(runningPoints);
+    });
 
     // Calculate IPO for each match in the trend
     seasonData.forEach(d => {
