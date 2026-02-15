@@ -140,6 +140,7 @@ function updateDashboard(repopulateSelector = false) {
     renderDangerMatrix();
     renderGoalTimeChart();
     renderPerformanceByMatchday();
+    renderCombinedDiffChart();
 
     // Restore scroll position
     window.scrollTo(scrollX, scrollY);
@@ -386,16 +387,35 @@ function populateMatchSelector() {
 }
 
 function findMatchStats(date, opponent) {
-    const cleanDate = date.replace(' 00:00:00', '');
+    // Normalizza la data in tutti i formati possibili
+    let d = date;
+    if (d.includes(' 00:00:00')) d = d.replace(' 00:00:00', '');
+    // Se la data è in formato YYYY-MM-DD, converti in DD/MM/YYYY
+    if (/^\d{4}-\d{2}-\d{2}$/.test(d)) {
+        const [y, m, day] = d.split('-');
+        d = `${day}/${m}/${y}`;
+    }
+    // Se la data è in formato YYYY-MM-DD 00:00:00, converti in DD/MM/YYYY
+    if (/^\d{4}-\d{2}-\d{2} 00:00:00$/.test(date)) {
+        const [y, m, day] = date.split(' ')[0].split('-');
+        d = `${day}/${m}/${y}`;
+    }
+    // Prova tutte le combinazioni di chiave
     const keys = [
         `${date}_${opponent}`,
-        `${cleanDate}_${opponent}`,
-        `${cleanDate} 00:00:00_${opponent}`
+        `${d}_${opponent}`,
+        `${d} 00:00:00_${opponent}`,
+        `${date.replace(' 00:00:00', '')}_${opponent}`
     ];
-    
     for (const key of keys) {
         if (dashboardData.partite_dettagli[key]) {
             return dashboardData.partite_dettagli[key];
+        }
+    }
+    // Se non trova, cerca una chiave che contiene la data e l'avversario
+    for (const k in dashboardData.partite_dettagli) {
+        if (k.includes(opponent) && (k.includes(date) || k.includes(d))) {
+            return dashboardData.partite_dettagli[k];
         }
     }
     return null;
@@ -827,6 +847,116 @@ function renderPerformanceByMatchday() {
 
     ipoDiffChart = createChart(ctxIpoDiff, 'Diff. IPO (Me - Avv)', ipoDiffs);
     keyPassDiffChart = createChart(ctxPassDiff, 'Diff. Passaggi Chiave (Me - Avv)', passDiffs);
+}
+
+function renderCombinedDiffChart() {
+    const ctx = document.getElementById('combinedDiffChart').getContext('2d');
+    if (window.combinedDiffChart && typeof window.combinedDiffChart.destroy === 'function') {
+        window.combinedDiffChart.destroy();
+    }
+
+    const filteredData = getFilteredGenerale();
+    const seasonData = filteredData.filter(d => d["Frazione"] === "2° T");
+    const labels = seasonData.map(d => d["Avversario"]);
+    const frosinone = "Accademia Frosinone";
+    const ipoDiffs = [];
+    const passDiffs = [];
+
+    seasonData.forEach(d => {
+        const rawStats = findMatchStats(d.Data, d.Avversario);
+        if (rawStats) {
+            let fullStats = {};
+            Object.values(rawStats).forEach(pStats => {
+                for (const attr in pStats) {
+                    if (!fullStats[attr]) fullStats[attr] = {};
+                    for (const team in pStats[attr]) {
+                        if (!fullStats[attr][team]) fullStats[attr][team] = 0;
+                        fullStats[attr][team] += pStats[attr][team];
+                    }
+                }
+            });
+            let teams = [];
+            Object.values(fullStats).forEach(attrObj => {
+                Object.keys(attrObj).forEach(t => {
+                    if(t !== frosinone && t !== "NaN" && !teams.includes(t)) teams.push(t);
+                });
+            });
+            const oppTeam = teams[0] || "Avversario";
+            const ipoMe = calculateIPO(fullStats, frosinone);
+            const ipoOpp = calculateIPO(fullStats, oppTeam);
+            ipoDiffs.push(+(ipoMe - ipoOpp).toFixed(1));
+            let passMe = 0;
+            let passOpp = 0;
+            const passKeys = ["Pass. Chiave", "PassChiave"];
+            passKeys.forEach(k => {
+                if (fullStats[k]) {
+                    passMe += fullStats[k][frosinone] || 0;
+                    passOpp += fullStats[k][oppTeam] || 0;
+                }
+            });
+            passDiffs.push(passMe - passOpp);
+        } else {
+            ipoDiffs.push(0);
+            passDiffs.push(0);
+        }
+    });
+
+    // Se non ci sono dati validi o le etichette sono vuote, mostra un messaggio
+    if (
+        labels.length === 0 ||
+        ipoDiffs.length === 0 ||
+        passDiffs.length === 0 ||
+        (ipoDiffs.every(v => v === 0) && passDiffs.every(v => v === 0))
+    ) {
+        ctx.save();
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.font = '18px Arial';
+        ctx.fillStyle = '#888';
+        ctx.textAlign = 'center';
+        ctx.fillText('Nessun dato disponibile per il grafico combinato', ctx.canvas.width / 2, ctx.canvas.height / 2);
+        ctx.restore();
+        console.warn('Nessun dato valido per Diff. IPO e Passaggi Chiave (Barre combinate)');
+        return;
+    }
+    window.combinedDiffChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Diff. IPO (Me - Avv)',
+                    data: ipoDiffs,
+                    backgroundColor: 'rgba(30, 58, 138, 0.7)',
+                    borderColor: 'rgb(30, 58, 138)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Diff. Passaggi Chiave (Me - Avv)',
+                    data: passDiffs,
+                    backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                    borderColor: 'rgb(239, 68, 68)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: (c) => c.tick.value === 0 ? '#000' : 'rgba(0,0,0,0.1)'
+                    }
+                }
+            },
+            plugins: {
+                datalabels: {
+                    display: false
+                }
+            }
+        }
+    });
 }
 
 function renderGoalTimeChart() {
