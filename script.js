@@ -231,15 +231,39 @@ function renderCustomXYChart() {
             datasets: [{
                 label: 'Partite',
                 data: data,
-                backgroundColor: data.map(d => d.backgroundColor),
-                borderColor: data.map(d => d.borderColor),
-                pointRadius: 7,
-                pointHoverRadius: 11,
+                backgroundColor: data.map((d, i) => {
+                    const matchKey = `${filteredData[i].Data}|${filteredData[i].Avversario}`;
+                    if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200,200,200,0.2)';
+                    return d.backgroundColor;
+                }),
+                borderColor: data.map((d, i) => {
+                    const matchKey = `${filteredData[i].Data}|${filteredData[i].Avversario}`;
+                    if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200,200,200,0.4)';
+                    return d.borderColor;
+                }),
+                pointRadius: data.map((d, i) => {
+                    const matchKey = `${filteredData[i].Data}|${filteredData[i].Avversario}`;
+                    return (selectedMatchKey && matchKey === selectedMatchKey) ? 11 : 7;
+                }),
+                pointHoverRadius: 13,
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            onClick: (event, elements) => {
+                if (elements.length > 0) {
+                    const el = elements[0];
+                    const match = filteredData[el.index];
+                    const matchKey = `${match.Data}|${match.Avversario}`;
+                    if (selectedMatchKey === matchKey) {
+                        selectedMatchKey = null;
+                    } else {
+                        selectedMatchKey = matchKey;
+                    }
+                    updateDashboard();
+                }
+            },
             plugins: {
                 legend: { display: false },
                 tooltip: {
@@ -1204,16 +1228,32 @@ function renderCombinedDiffChart() {
                 {
                     label: 'Diff. IPO',
                     data: ipoDiffs,
-                    backgroundColor: 'rgba(0, 191, 255, 0.7)', // celeste
-                    borderColor: 'rgba(0, 191, 255, 1)',
+                    backgroundColor: ipoDiffs.map((v, i) => {
+                        const matchKey = `${seasonData[i].Data}|${seasonData[i].Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200,200,200,0.2)';
+                        return 'rgba(0, 191, 255, 0.7)';
+                    }),
+                    borderColor: ipoDiffs.map((v, i) => {
+                        const matchKey = `${seasonData[i].Data}|${seasonData[i].Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200,200,200,0.4)';
+                        return 'rgba(0, 191, 255, 1)';
+                    }),
                     borderWidth: 1,
                     yAxisID: 'y',
                 },
                 {
                     label: 'Diff. Passaggi Chiave',
                     data: passDiffs,
-                    backgroundColor: 'rgba(50, 205, 50, 0.7)', // verdino
-                    borderColor: 'rgba(50, 205, 50, 1)',
+                    backgroundColor: passDiffs.map((v, i) => {
+                        const matchKey = `${seasonData[i].Data}|${seasonData[i].Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200,200,200,0.2)';
+                        return 'rgba(50, 205, 50, 0.7)';
+                    }),
+                    borderColor: passDiffs.map((v, i) => {
+                        const matchKey = `${seasonData[i].Data}|${seasonData[i].Avversario}`;
+                        if (selectedMatchKey && matchKey !== selectedMatchKey) return 'rgba(200,200,200,0.4)';
+                        return 'rgba(50, 205, 50, 1)';
+                    }),
                     borderWidth: 1,
                     yAxisID: 'y2',
                 }
@@ -1222,6 +1262,20 @@ function renderCombinedDiffChart() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            onClick: (event, elements) => {
+                if (elements.length > 0) {
+                    const el = elements[0];
+                    // el.datasetIndex: 0 (IPO) or 1 (Passaggi Chiave), el.index: bar index
+                    const match = seasonData[el.index];
+                    const matchKey = `${match.Data}|${match.Avversario}`;
+                    if (selectedMatchKey === matchKey) {
+                        selectedMatchKey = null;
+                    } else {
+                        selectedMatchKey = matchKey;
+                    }
+                    updateDashboard();
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: false,
