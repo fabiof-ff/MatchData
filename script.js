@@ -15,6 +15,8 @@ const xyParamOptions = [
     { key: 'Cross', label: 'Cross' },
     { key: 'Rigore', label: 'Rigori' },
     { key: 'Fuorigioco', label: 'Fuorigioco' },
+    { key: 'DIFF_IPO', label: 'Diff. IPO' },
+    { key: 'DIFF_PASSCHIAVE', label: 'Diff. Passaggi Chiave' },
     { key: 'DATA', label: 'Data Partita' },
     // ...aggiungi altri parametri se servono
 ];
@@ -90,6 +92,32 @@ function renderCustomXYChart() {
             let sum = 0;
             if (mappedKey === 'DATA') {
                 return parseDateToNumber(d.Data);
+            }
+            if (mappedKey === 'DIFF_IPO') {
+                // Calcola la differenza IPO tra Frosinone e avversario (sommando 1°T e 2°T)
+                let ipoMe = 0, ipoOpp = 0;
+                const avv = d.Avversario;
+                ipoMe += calculateIPO(stats['1° T'] || {}, frosinone);
+                ipoMe += calculateIPO(stats['2° T'] || {}, frosinone);
+                ipoOpp += calculateIPO(stats['1° T'] || {}, avv);
+                ipoOpp += calculateIPO(stats['2° T'] || {}, avv);
+                return +(ipoMe - ipoOpp).toFixed(2);
+            }
+            if (mappedKey === 'DIFF_PASSCHIAVE') {
+                // Calcola la differenza Passaggi Chiave tra Frosinone e avversario (sommando 1°T e 2°T)
+                let passMe = 0, passOpp = 0;
+                const avv = d.Avversario;
+                ['1° T', '2° T'].forEach(frazione => {
+                    if (stats[frazione]) {
+                        ['Pass. Chiave', 'PassChiave'].forEach(k => {
+                            if (stats[frazione][k]) {
+                                if (stats[frazione][k][frosinone] !== undefined) passMe += stats[frazione][k][frosinone];
+                                if (stats[frazione][k][avv] !== undefined) passOpp += stats[frazione][k][avv];
+                            }
+                        });
+                    }
+                });
+                return passMe - passOpp;
             }
             if (mappedKey === 'IPO') {
                 sum += calculateIPO(stats['1° T'] || {}, frosinone);
