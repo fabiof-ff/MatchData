@@ -198,13 +198,25 @@
                 <div class="col-span-full bg-white p-6 rounded-lg shadow-md mt-6">
                     <h3 class="text-lg font-medium mb-4 text-gray-700">Diagramma XY libero</h3>
                     <div class="flex flex-wrap gap-4 mb-4">
-                        <div>
-                            <label for="xy-x-selector" class="block text-sm font-medium text-gray-600 mb-1">Asse X</label>
-                            <select id="xy-x-selector" class="bg-blue-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></select>
+                        <div class="relative">
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Asse X</label>
+                            <button id="xy-x-dropdown-btn" type="button" class="w-full bg-blue-50 border border-blue-200 text-gray-800 text-sm rounded-lg p-2.5 text-left flex justify-between items-center">
+                                <span id="xy-x-dropdown-label">Seleziona parametri</span>
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div id="xy-x-dropdown" class="absolute z-10 mt-1 w-full bg-white border border-blue-200 rounded-lg shadow-lg hidden max-h-60 overflow-y-auto">
+                                <!-- Opzioni generate da JS -->
+                            </div>
                         </div>
-                        <div>
-                            <label for="xy-y-selector" class="block text-sm font-medium text-gray-600 mb-1">Asse Y</label>
-                            <select id="xy-y-selector" class="bg-blue-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></select>
+                        <div class="relative">
+                            <label class="block text-sm font-medium text-gray-600 mb-1">Asse Y</label>
+                            <button id="xy-y-dropdown-btn" type="button" class="w-full bg-blue-50 border border-blue-200 text-gray-800 text-sm rounded-lg p-2.5 text-left flex justify-between items-center">
+                                <span id="xy-y-dropdown-label">Seleziona parametri</span>
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                            <div id="xy-y-dropdown" class="absolute z-10 mt-1 w-full bg-white border border-blue-200 rounded-lg shadow-lg hidden max-h-60 overflow-y-auto">
+                                <!-- Opzioni generate da JS -->
+                            </div>
                         </div>
                     </div>
                     <div class="chart-container h-[600px] w-full">

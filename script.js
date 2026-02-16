@@ -33,27 +33,65 @@ const xyKeyMap = {
 };
 
 function populateXYSelectors() {
-    const xSel = document.getElementById('xy-x-selector');
-    const ySel = document.getElementById('xy-y-selector');
-    xSel.innerHTML = '';
-    ySel.innerHTML = '';
+    // Dropdown custom con checkbox
+    const xDropdown = document.getElementById('xy-x-dropdown');
+    const yDropdown = document.getElementById('xy-y-dropdown');
+    xDropdown.innerHTML = '';
+    yDropdown.innerHTML = '';
     xyParamOptions.forEach(opt => {
-        const xOpt = document.createElement('option');
-        xOpt.value = opt.key;
-        xOpt.textContent = opt.label;
-        xSel.appendChild(xOpt);
-        const yOpt = document.createElement('option');
-        yOpt.value = opt.key;
-        yOpt.textContent = opt.label;
-        ySel.appendChild(yOpt.cloneNode(true));
+        const xDiv = document.createElement('div');
+        xDiv.className = 'px-3 py-2 hover:bg-blue-50 flex items-center';
+        const xCheck = document.createElement('input');
+        xCheck.type = 'checkbox';
+        xCheck.value = opt.key;
+        xCheck.id = 'xy-x-' + opt.key;
+        xCheck.className = 'mr-2';
+        xDiv.appendChild(xCheck);
+        const xLab = document.createElement('label');
+        xLab.htmlFor = xCheck.id;
+        xLab.textContent = opt.label;
+        xDiv.appendChild(xLab);
+        xDropdown.appendChild(xDiv);
+        // Default: IPO selezionato
+        if (opt.key === 'IPO') xCheck.checked = true;
+
+        const yDiv = document.createElement('div');
+        yDiv.className = 'px-3 py-2 hover:bg-blue-50 flex items-center';
+        const yCheck = document.createElement('input');
+        yCheck.type = 'checkbox';
+        yCheck.value = opt.key;
+        yCheck.id = 'xy-y-' + opt.key;
+        yCheck.className = 'mr-2';
+        yDiv.appendChild(yCheck);
+        const yLab = document.createElement('label');
+        yLab.htmlFor = yCheck.id;
+        yLab.textContent = opt.label;
+        yDiv.appendChild(yLab);
+        yDropdown.appendChild(yDiv);
+        // Default: Pass. Chiave selezionato
+        if (opt.key === 'Pass. Chiave') yCheck.checked = true;
     });
-    xSel.value = 'IPO';
-    ySel.value = 'Pass. Chiave';
+    updateDropdownLabels();
+}
+
+function getSelectedXYKeys() {
+    const xChecks = document.querySelectorAll('#xy-x-dropdown input[type=checkbox]:checked');
+    const yChecks = document.querySelectorAll('#xy-y-dropdown input[type=checkbox]:checked');
+    const xKeys = Array.from(xChecks).map(c => c.value);
+    const yKeys = Array.from(yChecks).map(c => c.value);
+    return { xKeys, yKeys };
+}
+
+function updateDropdownLabels() {
+    const { xKeys, yKeys } = getSelectedXYKeys();
+    const xLabel = xKeys.length ? xKeys.map(k => xyParamOptions.find(o => o.key === k)?.label || k).join(' + ') : 'Seleziona parametri';
+    const yLabel = yKeys.length ? yKeys.map(k => xyParamOptions.find(o => o.key === k)?.label || k).join(' + ') : 'Seleziona parametri';
+    document.getElementById('xy-x-dropdown-label').textContent = xLabel;
+    document.getElementById('xy-y-dropdown-label').textContent = yLabel;
 }
 
 function renderCustomXYChart() {
-    const xKey = document.getElementById('xy-x-selector').value;
-    const yKey = document.getElementById('xy-y-selector').value;
+    const { xKeys, yKeys } = getSelectedXYKeys();
     const filteredData = getFilteredMatches().filter(d => d["Frazione"] === "2° T");
     const frosinone = "Accademia Frosinone";
     // Per la data, serve una funzione di conversione in valore numerico progressivo
@@ -94,7 +132,6 @@ function renderCustomXYChart() {
                 return parseDateToNumber(d.Data);
             }
             if (mappedKey === 'DIFF_IPO') {
-                // Calcola la differenza IPO tra Frosinone e avversario (sommando 1°T e 2°T)
                 let ipoMe = 0, ipoOpp = 0;
                 const avv = d.Avversario;
                 ipoMe += calculateIPO(stats['1° T'] || {}, frosinone);
@@ -104,7 +141,6 @@ function renderCustomXYChart() {
                 return +(ipoMe - ipoOpp).toFixed(2);
             }
             if (mappedKey === 'DIFF_PASSCHIAVE') {
-                // Calcola la differenza Passaggi Chiave tra Frosinone e avversario (sommando 1°T e 2°T)
                 let passMe = 0, passOpp = 0;
                 const avv = d.Avversario;
                 ['1° T', '2° T'].forEach(frazione => {
@@ -166,8 +202,9 @@ function renderCustomXYChart() {
             }
             return sum;
         }
-        xVal = getVal(xKey);
-        yVal = getVal(yKey);
+        // Somma i parametri selezionati per X e Y
+        xVal = xKeys.reduce((acc, k) => acc + getVal(k), 0);
+        yVal = yKeys.reduce((acc, k) => acc + getVal(k), 0);
         let risultato = 'P';
         let golFatti = getVal('GOL');
         let golSubiti = getVal('GOL Subiti');
@@ -186,6 +223,8 @@ function renderCustomXYChart() {
     });
     if (customXYChart) customXYChart.destroy();
     const ctx = document.getElementById('customXYChart').getContext('2d');
+    // Determina se tra i parametri X è selezionata solo la data
+    const isXData = xKeys.length === 1 && xKeys[0] === 'DATA';
     customXYChart = new Chart(ctx, {
         type: 'scatter',
         data: {
@@ -210,8 +249,8 @@ function renderCustomXYChart() {
                         label: function(context) {
                             const d = context.raw;
                             let res = d.risultato === 'V' ? 'Vittoria' : d.risultato === 'S' ? 'Sconfitta' : 'Pareggio';
-                            let xVal = xKey === 'DATA' ? (d.rawDate || d.x) : d.x;
-                            if (xKey === 'DATA' && d.rawDate) {
+                            let xVal = d.x;
+                            if (isXData && d.rawDate) {
                                 xVal = d.rawDate.replace(' 00:00:00', '');
                             }
                             return `${d.label}: (${xVal}, ${d.y}) - ${res}`;
@@ -226,9 +265,7 @@ function renderCustomXYChart() {
                     font: { weight: 'bold', size: 12 },
                     color: '#222',
                     formatter: function(value, context) {
-                        // Mostra solo il nome della squadra avversaria
                         if (value.label) {
-                            // label è tipo "DATA vs Avversario"
                             const parts = value.label.split(' vs ');
                             if (parts.length > 1) {
                                 return parts[1];
@@ -240,10 +277,10 @@ function renderCustomXYChart() {
             },
             scales: {
                 x: {
-                    title: { display: true, text: xKey === 'DATA' ? 'Data Partita' : xKey },
+                    title: { display: true, text: isXData ? 'Data Partita' : xKeys.map(k => xyParamOptions.find(opt => opt.key === k)?.label || k).join(' + ') },
                     grid: { color: 'rgba(0,0,0,0.08)' },
-                    type: xKey === 'DATA' ? 'linear' : 'linear',
-                    ticks: xKey === 'DATA' ? {
+                    type: isXData ? 'linear' : 'linear',
+                    ticks: isXData ? {
                         callback: function(value, index, values) {
                             const d = data.find(pt => pt.x === value);
                             if (d && d.rawDate) {
@@ -258,7 +295,7 @@ function renderCustomXYChart() {
                     } : undefined
                 },
                 y: {
-                    title: { display: true, text: yKey },
+                    title: { display: true, text: yKeys.map(k => xyParamOptions.find(opt => opt.key === k)?.label || k).join(' + ') },
                     grid: { color: 'rgba(0,0,0,0.08)' }
                 }
             }
@@ -270,8 +307,25 @@ function renderCustomXYChart() {
 window.addEventListener('DOMContentLoaded', () => {
     populateXYSelectors();
     renderCustomXYChart();
-    document.getElementById('xy-x-selector').addEventListener('change', renderCustomXYChart);
-    document.getElementById('xy-y-selector').addEventListener('change', renderCustomXYChart);
+    // Dropdown toggle e gestione selezione
+    const xBtn = document.getElementById('xy-x-dropdown-btn');
+    const yBtn = document.getElementById('xy-y-dropdown-btn');
+    const xDropdown = document.getElementById('xy-x-dropdown');
+    const yDropdown = document.getElementById('xy-y-dropdown');
+    xBtn.addEventListener('click', () => {
+        xDropdown.classList.toggle('hidden');
+        yDropdown.classList.add('hidden');
+    });
+    yBtn.addEventListener('click', () => {
+        yDropdown.classList.toggle('hidden');
+        xDropdown.classList.add('hidden');
+    });
+    document.addEventListener('click', (e) => {
+        if (!xBtn.contains(e.target) && !xDropdown.contains(e.target)) xDropdown.classList.add('hidden');
+        if (!yBtn.contains(e.target) && !yDropdown.contains(e.target)) yDropdown.classList.add('hidden');
+    });
+    xDropdown.addEventListener('change', () => { updateDropdownLabels(); renderCustomXYChart(); });
+    yDropdown.addEventListener('change', () => { updateDropdownLabels(); renderCustomXYChart(); });
 });
 let dashboardData = null;
 let pointsChart = null;
