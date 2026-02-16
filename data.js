@@ -4885,7 +4885,7 @@ const DASHBOARD_DATA = {
                 },
                 "Cross": {
                     "Pomezia Calcio": 4.0,
-                    "Accademia Frosinone": 3.0
+                    "Accademia Frosinone": 4.0
                 },
                 "TiroDaFuori": {
                     "Pomezia Calcio": 1.0
@@ -4901,7 +4901,7 @@ const DASHBOARD_DATA = {
                     "NaN": 3.0
                 },
                 "Costr.din.att.": {
-                    "NaN": 1.0
+                    "NaN": 3.0
                 },
                 "Costr.Centr.": {
                     "NaN": 8.0
@@ -4944,13 +4944,6 @@ const DASHBOARD_DATA = {
                 }
             },
             "2° T": {
-                "Costr.din.att.": {
-                    "NaN": 2.0
-                },
-                "Cross": {
-                    "Accademia Frosinone": 1.0,
-                    "Pomezia Calcio": 11.0
-                },
                 "Pass. Chiave": {
                     "Accademia Frosinone": 5.0,
                     "Pomezia Calcio": 10.0
@@ -4966,6 +4959,9 @@ const DASHBOARD_DATA = {
                 },
                 "Dif.bassa": {
                     "NaN": 8.0
+                },
+                "Cross": {
+                    "Pomezia Calcio": 11.0
                 },
                 "TiroPiedeArea": {
                     "Pomezia Calcio": 4.0
@@ -5788,7 +5784,7 @@ const DASHBOARD_DATA = {
             "Avversario": "Pomezia Calcio",
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
-            "Minuto": 42.5,
+            "Minuto": 36.8,
             "Frazione": "1° T",
             "Casa / Trasferta": "Trasferta"
         },
@@ -5797,7 +5793,7 @@ const DASHBOARD_DATA = {
             "Avversario": "Pomezia Calcio",
             "Competizione": "Campionato",
             "Squadra": "Pomezia Calcio",
-            "Minuto": 55.9,
+            "Minuto": 38.7,
             "Frazione": "2° T",
             "Casa / Trasferta": "Trasferta"
         },
@@ -5806,7 +5802,7 @@ const DASHBOARD_DATA = {
             "Avversario": "Pomezia Calcio",
             "Competizione": "Campionato",
             "Squadra": "Accademia Frosinone",
-            "Minuto": 62.6,
+            "Minuto": 45.4,
             "Frazione": "2° T",
             "Casa / Trasferta": "Trasferta"
         }
