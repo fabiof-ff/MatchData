@@ -182,13 +182,31 @@ function renderCustomXYChart() {
                         label: function(context) {
                             const d = context.raw;
                             let res = d.risultato === 'V' ? 'Vittoria' : d.risultato === 'S' ? 'Sconfitta' : 'Pareggio';
-                            // Se X è la data, mostra la data in chiaro
                             let xVal = xKey === 'DATA' ? (d.rawDate || d.x) : d.x;
                             if (xKey === 'DATA' && d.rawDate) {
                                 xVal = d.rawDate.replace(' 00:00:00', '');
                             }
                             return `${d.label}: (${xVal}, ${d.y}) - ${res}`;
                         }
+                    }
+                },
+                datalabels: {
+                    display: true,
+                    anchor: 'end',
+                    align: 'start',
+                    offset: 8,
+                    font: { weight: 'bold', size: 12 },
+                    color: '#222',
+                    formatter: function(value, context) {
+                        // Mostra solo il nome della squadra avversaria
+                        if (value.label) {
+                            // label è tipo "DATA vs Avversario"
+                            const parts = value.label.split(' vs ');
+                            if (parts.length > 1) {
+                                return parts[1];
+                            }
+                        }
+                        return '';
                     }
                 }
             },
@@ -199,7 +217,6 @@ function renderCustomXYChart() {
                     type: xKey === 'DATA' ? 'linear' : 'linear',
                     ticks: xKey === 'DATA' ? {
                         callback: function(value, index, values) {
-                            // Mostra la data in formato leggibile
                             const d = data.find(pt => pt.x === value);
                             if (d && d.rawDate) {
                                 return d.rawDate.replace(' 00:00:00', '');
