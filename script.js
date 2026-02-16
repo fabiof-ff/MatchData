@@ -15,6 +15,7 @@ const xyParamOptions = [
     { key: 'Cross', label: 'Cross' },
     { key: 'Rigore', label: 'Rigori' },
     { key: 'Fuorigioco', label: 'Fuorigioco' },
+    { key: 'DATA', label: 'Data Partita' },
     // ...aggiungi altri parametri se servono
 ];
 
@@ -53,8 +54,23 @@ function renderCustomXYChart() {
     const yKey = document.getElementById('xy-y-selector').value;
     const filteredData = getFilteredMatches().filter(d => d["Frazione"] === "2° T");
     const frosinone = "Accademia Frosinone";
+    // Per la data, serve una funzione di conversione in valore numerico progressivo
+    function parseDateToNumber(dateStr) {
+        // Accetta sia formati DD/MM/YYYY che YYYY-MM-DD
+        if (!dateStr) return 0;
+        let d = dateStr;
+        if (d.includes(' 00:00:00')) d = d.replace(' 00:00:00', '');
+        let parts;
+        if (/^\d{4}-\d{2}-\d{2}$/.test(d)) {
+            parts = d.split('-');
+            return new Date(parts[0], parts[1] - 1, parts[2]).getTime();
+        } else if (/^\d{2}\/\d{2}\/\d{4}$/.test(d)) {
+            parts = d.split('/');
+            return new Date(parts[2], parts[1] - 1, parts[0]).getTime();
+        }
+        return Date.parse(d) || 0;
+    }
     const data = filteredData.map(d => {
-        // Calcola IPO se richiesto
         let xVal = 0, yVal = 0;
         const stats = findMatchStats(d.Data, d.Avversario);
         let fullStats = {};
@@ -69,10 +85,12 @@ function renderCustomXYChart() {
                 }
             });
         }
-        // Funzione per estrarre valore
         function getVal(key) {
             let mappedKey = xyKeyMap[key] || key;
             let sum = 0;
+            if (mappedKey === 'DATA') {
+                return parseDateToNumber(d.Data);
+            }
             if (mappedKey === 'IPO') {
                 sum += calculateIPO(stats['1° T'] || {}, frosinone);
                 sum += calculateIPO(stats['2° T'] || {}, frosinone);
@@ -122,21 +140,20 @@ function renderCustomXYChart() {
         }
         xVal = getVal(xKey);
         yVal = getVal(yKey);
-        // Determina il risultato
         let risultato = 'P';
         let golFatti = getVal('GOL');
         let golSubiti = getVal('GOL Subiti');
         if (golFatti > golSubiti) risultato = 'V';
         else if (golFatti < golSubiti) risultato = 'S';
-        // Colore in base al risultato
-        let color = risultato === 'V' ? '#22c55e' : risultato === 'S' ? '#ef4444' : '#facc15'; // giallo per pareggio
+        let color = risultato === 'V' ? '#22c55e' : risultato === 'S' ? '#ef4444' : '#facc15';
         return {
             x: xVal,
             y: yVal,
             label: `${d.Data.replace(' 00:00:00', '')} vs ${d.Avversario}`,
             backgroundColor: color,
             borderColor: color,
-            risultato: risultato
+            risultato: risultato,
+            rawDate: d.Data
         };
     });
     if (customXYChart) customXYChart.destroy();
@@ -165,15 +182,35 @@ function renderCustomXYChart() {
                         label: function(context) {
                             const d = context.raw;
                             let res = d.risultato === 'V' ? 'Vittoria' : d.risultato === 'S' ? 'Sconfitta' : 'Pareggio';
-                            return `${d.label}: (${d.x}, ${d.y}) - ${res}`;
+                            // Se X è la data, mostra la data in chiaro
+                            let xVal = xKey === 'DATA' ? (d.rawDate || d.x) : d.x;
+                            if (xKey === 'DATA' && d.rawDate) {
+                                xVal = d.rawDate.replace(' 00:00:00', '');
+                            }
+                            return `${d.label}: (${xVal}, ${d.y}) - ${res}`;
                         }
                     }
                 }
             },
             scales: {
                 x: {
-                    title: { display: true, text: xKey },
-                    grid: { color: 'rgba(0,0,0,0.08)' }
+                    title: { display: true, text: xKey === 'DATA' ? 'Data Partita' : xKey },
+                    grid: { color: 'rgba(0,0,0,0.08)' },
+                    type: xKey === 'DATA' ? 'linear' : 'linear',
+                    ticks: xKey === 'DATA' ? {
+                        callback: function(value, index, values) {
+                            // Mostra la data in formato leggibile
+                            const d = data.find(pt => pt.x === value);
+                            if (d && d.rawDate) {
+                                return d.rawDate.replace(' 00:00:00', '');
+                            }
+                            const dt = new Date(value);
+                            if (!isNaN(dt.getTime())) {
+                                return dt.toLocaleDateString('it-IT');
+                            }
+                            return value;
+                        }
+                    } : undefined
                 },
                 y: {
                     title: { display: true, text: yKey },
