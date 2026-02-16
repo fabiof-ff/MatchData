@@ -194,6 +194,23 @@
                         <canvas id="combinedDiffChart"></canvas>
                     </div>
                 </div>
+                <!-- XY Chart libero: scelta metrica X/Y -->
+                <div class="col-span-full bg-white p-6 rounded-lg shadow-md mt-6">
+                    <h3 class="text-lg font-medium mb-4 text-gray-700">Diagramma XY libero</h3>
+                    <div class="flex flex-wrap gap-4 mb-4">
+                        <div>
+                            <label for="xy-x-selector" class="block text-sm font-medium text-gray-600 mb-1">Asse X</label>
+                            <select id="xy-x-selector" class="bg-blue-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></select>
+                        </div>
+                        <div>
+                            <label for="xy-y-selector" class="block text-sm font-medium text-gray-600 mb-1">Asse Y</label>
+                            <select id="xy-y-selector" class="bg-blue-50 border border-blue-200 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></select>
+                        </div>
+                    </div>
+                    <div class="chart-container h-[600px] w-full">
+                        <canvas id="customXYChart"></canvas>
+                    </div>
+                </div>
             </div>
         </section>
 
