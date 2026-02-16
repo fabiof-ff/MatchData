@@ -440,6 +440,24 @@
             "Frazione": "2° T",
             "GOL fatti": 0,
             "GOL Subiti": 0
+        },
+        {
+            "Data": "2026-02-14 00:00:00",
+            "Avversario": "Pomezia Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "1° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 0
+        },
+        {
+            "Data": "2026-02-14 00:00:00",
+            "Avversario": "Pomezia Calcio",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Trasferta",
+            "Frazione": "2° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 1.0
         }
     ],
     "partite_dettagli": {
@@ -4856,6 +4874,146 @@
                     "Accademia Frosinone": "Casa"
                 }
             }
+        },
+        "2026-02-14 00:00:00_Pomezia Calcio": {
+            "1° T": {
+                "Prima press.alta": {
+                    "NaN": 7.0
+                },
+                "Corner": {
+                    "Pomezia Calcio": 3.0
+                },
+                "Cross": {
+                    "Pomezia Calcio": 4.0,
+                    "Accademia Frosinone": 3.0
+                },
+                "TiroDaFuori": {
+                    "Pomezia Calcio": 1.0
+                },
+                "Tran.Offen.": {
+                    "NaN": 6.0
+                },
+                "Pass. Chiave": {
+                    "Accademia Frosinone": 11.0,
+                    "Pomezia Calcio": 1.0
+                },
+                "Press. Rimessa": {
+                    "NaN": 3.0
+                },
+                "Costr.din.att.": {
+                    "NaN": 1.0
+                },
+                "Costr.Centr.": {
+                    "NaN": 8.0
+                },
+                "Tran.Dif.": {
+                    "NaN": 3.0
+                },
+                "Dif.bassa": {
+                    "NaN": 5.0
+                },
+                "Costr. fondo": {
+                    "NaN": 2.0
+                },
+                "Costr.din.basso": {
+                    "NaN": 2.0
+                },
+                "Press.din.centr.": {
+                    "NaN": 4.0
+                },
+                "Az Prom": {
+                    "Accademia Frosinone": 1.0
+                },
+                "TiroPiedeArea": {
+                    "Accademia Frosinone": 2.0
+                },
+                "TiroTestaArea": {
+                    "Accademia Frosinone": 1.0
+                },
+                "PunLat": {
+                    "Pomezia Calcio": 1.0
+                },
+                "OccGol": {
+                    "Accademia Frosinone": 1.0
+                },
+                "Gol": {
+                    "Accademia Frosinone": 1.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
+                }
+            },
+            "2° T": {
+                "Costr.din.att.": {
+                    "NaN": 2.0
+                },
+                "Cross": {
+                    "Accademia Frosinone": 1.0,
+                    "Pomezia Calcio": 11.0
+                },
+                "Pass. Chiave": {
+                    "Accademia Frosinone": 5.0,
+                    "Pomezia Calcio": 10.0
+                },
+                "Costr.din.basso": {
+                    "NaN": 3.0
+                },
+                "PunCentr": {
+                    "Pomezia Calcio": 3.0
+                },
+                "Tran.Offen.": {
+                    "NaN": 2.0
+                },
+                "Dif.bassa": {
+                    "NaN": 8.0
+                },
+                "TiroPiedeArea": {
+                    "Pomezia Calcio": 4.0
+                },
+                "Costr. fondo": {
+                    "NaN": 5.0
+                },
+                "Corner": {
+                    "Pomezia Calcio": 6.0
+                },
+                "Prima press.alta": {
+                    "NaN": 3.0
+                },
+                "Press.din.centr.": {
+                    "NaN": 4.0
+                },
+                "OccGol": {
+                    "Pomezia Calcio": 1.0
+                },
+                "TiroTestaArea": {
+                    "Accademia Frosinone": 1.0,
+                    "Pomezia Calcio": 2.0
+                },
+                "Fuorigioco": {
+                    "Accademia Frosinone": 1.0
+                },
+                "PunLat": {
+                    "Pomezia Calcio": 1.0,
+                    "Accademia Frosinone": 1.0
+                },
+                "TiroDaFuori": {
+                    "Pomezia Calcio": 1.0,
+                    "Accademia Frosinone": 1.0
+                },
+                "Az Prom": {
+                    "Pomezia Calcio": 1.0
+                },
+                "Gol": {
+                    "Pomezia Calcio": 1.0,
+                    "Accademia Frosinone": 1.0
+                },
+                "Tran.Dif.": {
+                    "NaN": 1.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Trasferta"
+                }
+            }
         }
     },
     "giocatori": [],
@@ -5624,6 +5782,33 @@
             "Minuto": 40.6,
             "Frazione": "2° T",
             "Casa / Trasferta": "Casa"
+        },
+        {
+            "Data": "2026-02-14 00:00:00",
+            "Avversario": "Pomezia Calcio",
+            "Competizione": "Campionato",
+            "Squadra": "Accademia Frosinone",
+            "Minuto": 42.5,
+            "Frazione": "1° T",
+            "Casa / Trasferta": "Trasferta"
+        },
+        {
+            "Data": "2026-02-14 00:00:00",
+            "Avversario": "Pomezia Calcio",
+            "Competizione": "Campionato",
+            "Squadra": "Pomezia Calcio",
+            "Minuto": 55.9,
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
+        },
+        {
+            "Data": "2026-02-14 00:00:00",
+            "Avversario": "Pomezia Calcio",
+            "Competizione": "Campionato",
+            "Squadra": "Accademia Frosinone",
+            "Minuto": 62.6,
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Trasferta"
         }
     ]
 }
