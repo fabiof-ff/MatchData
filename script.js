@@ -759,13 +759,21 @@ function updateSummaryHeader() {
         }
     });
 
-    document.getElementById('total-matches').textContent = totalMatches; // Total Matches
-    document.getElementById('total-goals').textContent = totalGoals; // Total Goals
-    document.getElementById('total-points').textContent = totalPoints; // Total Points
-    document.getElementById('total-conceded').textContent = totalConceded; // Total Conceded
-    document.getElementById('total-wins').textContent = totalWins; // Total Wins
-    document.getElementById('total-draws').textContent = totalDraws; // Total Draws
-    document.getElementById('total-losses').textContent = totalLosses; // Total Losses
+    // Aggiorna i box totali nella sidebar
+    const sidebarMatches = document.getElementById('sidebar-total-matches');
+    if (sidebarMatches) sidebarMatches.textContent = totalMatches;
+    const sidebarGoals = document.getElementById('sidebar-total-goals');
+    if (sidebarGoals) sidebarGoals.textContent = totalGoals;
+    const sidebarPoints = document.getElementById('sidebar-total-points');
+    if (sidebarPoints) sidebarPoints.textContent = totalPoints;
+    const sidebarConceded = document.getElementById('sidebar-total-conceded');
+    if (sidebarConceded) sidebarConceded.textContent = totalConceded;
+    const sidebarWins = document.getElementById('sidebar-total-wins');
+    if (sidebarWins) sidebarWins.textContent = totalWins;
+    const sidebarDraws = document.getElementById('sidebar-total-draws');
+    if (sidebarDraws) sidebarDraws.textContent = totalDraws;
+    const sidebarLosses = document.getElementById('sidebar-total-losses');
+    if (sidebarLosses) sidebarLosses.textContent = totalLosses;
 }
 
 function populateMatchSelector() {

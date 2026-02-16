@@ -70,44 +70,50 @@
     <main class="container mx-auto mt-8 px-4">
         
         <!-- Summary Totals Row (Full Width) -->
-        <section class="grid grid-cols-2 md:grid-cols-7 gap-4 mb-8">
-            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-600 flex flex-col justify-center">
-                <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Partite Giocate</p>
-                <p class="text-2xl font-bold text-gray-800" id="total-matches">-</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-500 flex flex-col justify-center">
-                <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Gol Segnati</p>
-                <p class="text-2xl font-bold text-gray-800" id="total-goals">-</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-yellow-500 flex flex-col justify-center">
-                <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Punti Totali</p>
-                <p class="text-2xl font-bold text-gray-800" id="total-points">-</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-red-500 flex flex-col justify-center">
-                <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Gol Subiti</p>
-                <p class="text-2xl font-bold text-gray-800" id="total-conceded">-</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-700 flex flex-col justify-center">
-                <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Vittorie</p>
-                <p class="text-2xl font-bold text-gray-800" id="total-wins">-</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-yellow-700 flex flex-col justify-center">
-                <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Pareggi</p>
-                <p class="text-2xl font-bold text-gray-800" id="total-draws">-</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-red-700 flex flex-col justify-center">
-                <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Sconfitte</p>
-                <p class="text-2xl font-bold text-gray-800" id="total-losses">-</p>
-            </div>
-        </section>
+        <!-- Sezione vuota per mantenere spaziatura -->
+        <section class="mb-8"></section>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
-            <!-- Last Results Section (Sidebar) -->
-            <div class="lg:col-span-2 bg-white p-4 rounded-lg shadow-md border-t-4 border-blue-900 flex flex-col h-[600px] w-[250px] min-w-[250px]">
-                <h2 class="text-xs font-bold mb-3 text-gray-500 uppercase tracking-wider border-b pb-2">Risultati</h2>
-                <div id="last-results-list" class="flex flex-col gap-2 overflow-y-auto pr-2 custom-scrollbar">
-                    <!-- Dynamic Content -->
-                    <div class="text-center text-gray-400 py-4 italic text-sm">Caricamento...</div>
+            <!-- Sidebar: Box Totali sopra Risultati -->
+            <div class="lg:col-span-2 flex flex-col gap-4">
+                <!-- Box Totali (tutti) -->
+                <div class="flex flex-col gap-2">
+                    <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-600 flex flex-col justify-center items-center">
+                        <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Partite Giocate</p>
+                        <p class="text-2xl font-bold text-gray-800" id="sidebar-total-matches">-</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-500 flex flex-col justify-center items-center">
+                        <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Gol Segnati</p>
+                        <p class="text-2xl font-bold text-gray-800" id="sidebar-total-goals">-</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-yellow-500 flex flex-col justify-center items-center">
+                        <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Punti Totali</p>
+                        <p class="text-2xl font-bold text-gray-800" id="sidebar-total-points">-</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-red-500 flex flex-col justify-center items-center">
+                        <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Gol Subiti</p>
+                        <p class="text-2xl font-bold text-gray-800" id="sidebar-total-conceded">-</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-700 flex flex-col justify-center items-center">
+                        <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Vittorie</p>
+                        <p class="text-2xl font-bold text-gray-800" id="sidebar-total-wins">-</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-yellow-700 flex flex-col justify-center items-center">
+                        <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Pareggi</p>
+                        <p class="text-2xl font-bold text-gray-800" id="sidebar-total-draws">-</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-red-700 flex flex-col justify-center items-center">
+                        <p class="text-xs text-gray-500 uppercase font-bold text-[10px]">Sconfitte</p>
+                        <p class="text-2xl font-bold text-gray-800" id="sidebar-total-losses">-</p>
+                    </div>
+                </div>
+                <!-- Box Risultati -->
+                <div class="bg-white p-4 rounded-lg shadow-md border-t-4 border-blue-900 flex flex-col h-[420px] w-[250px] min-w-[250px]">
+                    <h2 class="text-xs font-bold mb-3 text-gray-500 uppercase tracking-wider border-b pb-2">Risultati</h2>
+                    <div id="last-results-list" class="flex flex-col gap-2 overflow-y-auto pr-2 custom-scrollbar">
+                        <!-- Dynamic Content -->
+                        <div class="text-center text-gray-400 py-4 italic text-sm">Caricamento...</div>
+                    </div>
                 </div>
             </div>
 
