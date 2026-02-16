@@ -1745,16 +1745,20 @@ function renderMatchDetails(matchValue, shouldScroll = true) {
                     stacked: true,
                     beginAtZero: true,
                     max: 100,
-                    title: { display: false, text: '% Incidenza' },
-                    grid: { display: true }
+                    title: { display: false, text: '' },
+                    grid: { display: true },
+                    ticks: { display: false },
                 },
                 y: {
                     stacked: true,
-                    grid: { display: false }
+                    grid: { display: false },
+                    ticks: {
+                        font: { size: 9 }
+                    }
                 }
             },
             plugins: {
-                legend: { position: 'top' },
+                legend: { position: 'right' },
                 tooltip: { 
                     callbacks: {
                         label: function(context) {
@@ -1768,10 +1772,25 @@ function renderMatchDetails(matchValue, shouldScroll = true) {
                     color: '#fff',
                     anchor: 'center',
                     align: 'center',
-                    font: { weight: 'bold', size: 11 },
+                    font: { size: 9 },
                     formatter: (value, context) => {
                         const abs = context.dataset.absValues[context.dataIndex];
                         return abs > 0 ? `(${abs})` : '';
+                    }
+                },
+                annotation: {
+                    annotations: {
+                        line50: {
+                            type: 'line',
+                            xMin: 50,
+                            xMax: 50,
+                            borderColor: 'rgba(30,30,30,0.7)',
+                            borderWidth: 2,
+                            borderDash: [6, 6],
+                            label: {
+                                display: false
+                            }
+                        }
                     }
                 }
             }
