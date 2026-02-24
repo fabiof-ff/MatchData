@@ -458,6 +458,24 @@ const DASHBOARD_DATA = {
             "Frazione": "2° T",
             "GOL fatti": 1.0,
             "GOL Subiti": 1.0
+        },
+        {
+            "Data": "2026-02-21 00:00:00",
+            "Avversario": "Vigor Perconti",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "1° T",
+            "GOL fatti": 0,
+            "GOL Subiti": 0
+        },
+        {
+            "Data": "2026-02-21 00:00:00",
+            "Avversario": "Vigor Perconti",
+            "Competizione": "Campionato",
+            "Casa / Trasferta": "Casa",
+            "Frazione": "2° T",
+            "GOL fatti": 1.0,
+            "GOL Subiti": 1.0
         }
     ],
     "partite_dettagli": {
@@ -5010,6 +5028,144 @@ const DASHBOARD_DATA = {
                     "Accademia Frosinone": "Trasferta"
                 }
             }
+        },
+        "2026-02-21 00:00:00_Vigor Perconti": {
+            "1° T": {
+                "Costr.din.basso": {
+                    "NaN": 8.0
+                },
+                "TiroDaFuori": {
+                    "Vigor Perconti": 8.0,
+                    "Accademia Frosinone": 1.0
+                },
+                "Corner": {
+                    "Vigor Perconti": 4.0,
+                    "Accademia Frosinone": 3.0
+                },
+                "Prima press.alta": {
+                    "NaN": 3.0
+                },
+                "Costr.Centr.": {
+                    "NaN": 7.0
+                },
+                "Pass. Chiave": {
+                    "Accademia Frosinone": 9.0,
+                    "Vigor Perconti": 18.0
+                },
+                "Costr.din.att.": {
+                    "NaN": 4.0
+                },
+                "Cross": {
+                    "Accademia Frosinone": 2.0,
+                    "Vigor Perconti": 9.0
+                },
+                "OccGol": {
+                    "Accademia Frosinone": 1.0,
+                    "Vigor Perconti": 1.0
+                },
+                "TiroPiedeArea": {
+                    "Accademia Frosinone": 1.0,
+                    "Vigor Perconti": 5.0
+                },
+                "Press.din.centr.": {
+                    "NaN": 5.0
+                },
+                "Costr. fondo": {
+                    "NaN": 8.0
+                },
+                "Dif.bassa": {
+                    "NaN": 12.0
+                },
+                "Press. Rimessa": {
+                    "NaN": 4.0
+                },
+                "Tran.Dif.": {
+                    "NaN": 1.0
+                },
+                "Fuorigioco": {
+                    "Vigor Perconti": 1.0,
+                    "Accademia Frosinone": 1.0
+                },
+                "Tran.Offen.": {
+                    "NaN": 4.0
+                },
+                "TiroTestaArea": {
+                    "Vigor Perconti": 1.0,
+                    "Accademia Frosinone": 1.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
+                }
+            },
+            "2° T": {
+                "Tran.Offen.": {
+                    "NaN": 6.0
+                },
+                "Pass. Chiave": {
+                    "Accademia Frosinone": 8.0,
+                    "Vigor Perconti": 5.0
+                },
+                "Costr.din.att.": {
+                    "NaN": 3.0
+                },
+                "Press. Rimessa": {
+                    "NaN": 2.0
+                },
+                "Cross": {
+                    "Vigor Perconti": 7.0,
+                    "Accademia Frosinone": 1.0
+                },
+                "Corner": {
+                    "Vigor Perconti": 4.0,
+                    "Accademia Frosinone": 3.0
+                },
+                "Gol": {
+                    "Vigor Perconti": 1.0,
+                    "Accademia Frosinone": 1.0
+                },
+                "Prima press.alta": {
+                    "NaN": 2.0
+                },
+                "Tran.Dif.": {
+                    "NaN": 1.0
+                },
+                "Costr.din.basso": {
+                    "NaN": 3.0
+                },
+                "Press.din.centr.": {
+                    "NaN": 3.0
+                },
+                "Dif.bassa": {
+                    "NaN": 5.0
+                },
+                "Fuorigioco": {
+                    "Vigor Perconti": 1.0,
+                    "Accademia Frosinone": 1.0
+                },
+                "TiroPiedeArea": {
+                    "Vigor Perconti": 4.0,
+                    "Accademia Frosinone": 4.0
+                },
+                "Costr. fondo": {
+                    "NaN": 4.0
+                },
+                "TiroDaFuori": {
+                    "Accademia Frosinone": 2.0,
+                    "Vigor Perconti": 3.0
+                },
+                "Costr.Centr.": {
+                    "NaN": 2.0
+                },
+                "Az Prom": {
+                    "Accademia Frosinone": 2.0
+                },
+                "TiroTestaArea": {
+                    "Accademia Frosinone": 1.0
+                },
+                "Casa / Trasferta": {
+                    "Accademia Frosinone": "Casa"
+                }
+            }
         }
     },
     "giocatori": [],
@@ -5805,6 +5961,24 @@ const DASHBOARD_DATA = {
             "Minuto": 45.4,
             "Frazione": "2° T",
             "Casa / Trasferta": "Trasferta"
+        },
+        {
+            "Data": "2026-02-21 00:00:00",
+            "Avversario": "Vigor Perconti",
+            "Competizione": "Campionato",
+            "Squadra": "Vigor Perconti",
+            "Minuto": 1.7,
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
+        },
+        {
+            "Data": "2026-02-21 00:00:00",
+            "Avversario": "Vigor Perconti",
+            "Competizione": "Campionato",
+            "Squadra": "Accademia Frosinone",
+            "Minuto": 30.9,
+            "Frazione": "2° T",
+            "Casa / Trasferta": "Casa"
         }
     ]
 };
